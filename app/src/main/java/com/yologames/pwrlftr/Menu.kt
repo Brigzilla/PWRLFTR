@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 
 
 class Menu : Fragment() {
-    lateinit var button: Button
+    lateinit var b_onerm: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,15 +22,14 @@ class Menu : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        button = view.findViewById(R.id.button)
+        b_onerm = view.findViewById(R.id.one_rm_calc)
 
         setOnClickListeners()
         super.onViewCreated(view, savedInstanceState)
     }
 
     fun setOnClickListeners(){
-        button.setOnClickListener{
+        b_onerm.setOnClickListener{
             findNavController().navigate(R.id.action_menu_to_one_rm_calc)
         }
     }

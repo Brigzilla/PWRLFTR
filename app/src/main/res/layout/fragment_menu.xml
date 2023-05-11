@@ -11,15 +11,30 @@
         android:layout_height="match_parent">
         <!-- TODO: Update blank fragment layout -->
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/one_rm_calc"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent=".4"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="One Rep Max"
         >
 
     </Button>
+
+        <Button
+            android:id="@+id/max_calc"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent=".4"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/one_rm_calc"
+            android:text="Rep Maxes"
+            >
+
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
