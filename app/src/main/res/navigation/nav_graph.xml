@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menu">
+
+    <fragment
+        android:id="@+id/one_rm_calc"
+        android:name="com.yologames.pwrlftr.One_rm_calc"
+        android:label="fragment_one_rm_calc"
+        tools:layout="@layout/fragment_one_rm_calc" />
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.yologames.pwrlftr.Menu"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu"
+        >
+        <action
+            android:id="@+id/action_menu_to_one_rm_calc"
+            app:destination="@id/one_rm_calc" />
+    </fragment>
+</navigation>
