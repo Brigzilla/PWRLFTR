@@ -52,7 +52,7 @@ class One_rm_calc: Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_one_rm_calc, container, false)
-//gittest
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
