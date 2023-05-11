@@ -19,5 +19,13 @@
         <action
             android:id="@+id/action_menu_to_one_rm_calc"
             app:destination="@id/one_rm_calc" />
+        <action
+            android:id="@+id/action_menu_to_rep_Max_Calc"
+            app:destination="@id/rep_Max_Calc" />
     </fragment>
+    <fragment
+        android:id="@+id/rep_Max_Calc"
+        android:name="com.yologames.pwrlftr.Rep_Max_Calc"
+        android:label="fragment_rep__max__calc"
+        tools:layout="@layout/fragment_rep__max__calc" />
 </navigation>
