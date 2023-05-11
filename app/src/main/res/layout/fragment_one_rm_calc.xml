@@ -11,33 +11,31 @@
             android:id="@+id/enter_1rm_textbox"
             android:layout_width="86dp"
             android:layout_height="51dp"
-
             android:ems="10"
             android:inputType="number|numberDecimal"
-            app:layout_constraintBottom_toBottomOf="@+id/calculate_1rm_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switch1"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
             android:id="@+id/calculate_1rm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GO!"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.568" />
+            app:layout_constraintTop_toBottomOf="@id/enter_1rm_textbox" />
 
         <TextView
             android:id="@+id/output_text_view_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -45,134 +43,127 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/output_text_view_1"
-            app:layout_constraintTop_toBottomOf="@+id/output_text_view_1"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintStart_toStartOf="@id/output_text_view_1"
+            app:layout_constraintTop_toBottomOf="@id/output_text_view_1"
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_1"
+            android:gravity="center"
+
+            />
 
         <TextView
             android:id="@+id/output_text_view_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/output_text_view_2"
-            app:layout_constraintTop_toBottomOf="@+id/output_text_view_2"
-            app:layout_constraintVertical_bias="0.026" />
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/output_text_view_2"
+            app:layout_constraintTop_toBottomOf="@id/output_text_view_2"
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_2"
+             />
 
         <TextView
             android:id="@+id/output_text_view_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/output_text_view_3"
-            app:layout_constraintTop_toBottomOf="@+id/output_text_view_3"
-            app:layout_constraintVertical_bias="0.026" />
+            android:gravity="center"
+
+            app:layout_constraintStart_toStartOf="@id/output_text_view_3"
+            app:layout_constraintTop_toBottomOf="@id/output_text_view_3"
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_3"
+             />
 
         <TextView
             android:id="@+id/output_text_view_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/output_text_view_4"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_4"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_4"
+             />
 
         <TextView
             android:id="@+id/output_text_view_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
+
             app:layout_constraintStart_toStartOf="@+id/output_text_view_5"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_5"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_5"
+             />
 
         <TextView
             android:id="@+id/output_text_view_7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/output_text_view_6"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_6"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_6"
+            />
 
         <TextView
             android:id="@+id/output_text_view_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/output_text_view_7"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_7"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_7"
+            />
 
         <TextView
             android:id="@+id/output_text_view_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/output_text_view_8"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_8"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_8"
+             />
 
         <TextView
             android:id="@+id/output_text_view_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/output_text_view_9"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_9"
-            app:layout_constraintVertical_bias="0.026" />
+
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_9"
+             />
 
         <TextView
             android:id="@+id/output_text_view_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/output_text_view_10"
             app:layout_constraintTop_toBottomOf="@+id/output_text_view_10"
-            app:layout_constraintVertical_bias="0.026" />
+            app:layout_constraintEnd_toEndOf="@id/output_text_view_10"
+             />
 
         <TextView
             android:id="@+id/OneRMTextExplain"
-            android:layout_width="135dp"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="sans-serif-light"
-            android:text="Enter One Rep Max"
+            android:text="One Rep Max"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textStyle="italic"
             android:typeface="normal"
             app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="@id/enter_1rm_textbox"
             app:layout_constraintStart_toStartOf="@+id/enter_1rm_textbox" />
 
         <TextView
@@ -186,9 +177,9 @@
             android:textAllCaps="false"
             android:textStyle="italic"
             android:typeface="normal"
-            app:layout_constraintBottom_toTopOf="@+id/overrideTextInput"
-            app:layout_constraintEnd_toEndOf="@+id/OneRMTextExplain"
-            app:layout_constraintStart_toStartOf="@+id/OneRMTextExplain" />
+            app:layout_constraintTop_toTopOf="@id/OneRMTextExplain"
+            app:layout_constraintStart_toStartOf="@id/overrideTextInput"
+            app:layout_constraintEnd_toEndOf="@id/overrideTextInput"/>
 
         <Switch
             android:id="@+id/switch1"
@@ -196,19 +187,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Override"
-            app:layout_constraintBottom_toTopOf="@+id/calculate_1rm_button"
-            app:layout_constraintEnd_toEndOf="@+id/calculate_1rm_button"
-            app:layout_constraintStart_toStartOf="@+id/calculate_1rm_button" />
+            app:layout_constraintStart_toEndOf="@id/enter_1rm_textbox"
+            app:layout_constraintBottom_toBottomOf="@id/enter_1rm_textbox"
+            app:layout_constraintTop_toTopOf="@id/enter_1rm_textbox"
+            app:layout_constraintEnd_toStartOf="@id/overrideTextInput"/>
 
         <EditText
             android:id="@+id/overrideTextInput"
             android:layout_width="86dp"
             android:layout_height="51dp"
-            android:layout_marginBottom="52dp"
             android:ems="10"
             android:inputType="numberSigned|number|numberDecimal"
-            app:layout_constraintBottom_toTopOf="@+id/enter_1rm_textbox"
-            app:layout_constraintEnd_toEndOf="@+id/enter_1rm_textbox" />
+            app:layout_constraintStart_toEndOf="@id/switch1"
+            app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/enter_1rm_textbox" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

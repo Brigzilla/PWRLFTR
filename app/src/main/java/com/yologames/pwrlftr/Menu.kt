@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 
 class Menu : Fragment() {
     lateinit var b_onerm: Button
+    lateinit var r_repmx: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +24,7 @@ class Menu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         b_onerm = view.findViewById(R.id.one_rm_calc)
+        r_repmx = view.findViewById(R.id.rep_max_calc)
 
         setOnClickListeners()
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +33,9 @@ class Menu : Fragment() {
     fun setOnClickListeners(){
         b_onerm.setOnClickListener{
             findNavController().navigate(R.id.action_menu_to_one_rm_calc)
+        }
+        r_repmx.setOnClickListener{
+            findNavController().navigate(R.id.action_menu_to_rep_Max_Calc)
         }
     }
 

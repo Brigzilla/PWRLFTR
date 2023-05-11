@@ -64,9 +64,12 @@ class One_rm_calc: Fragment() {
 
         overrideSwitch = view.findViewById(R.id.switch1)
         overrideExplainTextBox = view.findViewById(R.id.overrideTextExplain)
-        overrideExplainTextBox.isVisible = false
+        overrideExplainTextBox.visibility = View.INVISIBLE
+            //overrideTextInputBox.isVisible = false
+
         overrideTextInputBox = view.findViewById(R.id.overrideTextInput)
-        overrideTextInputBox.isVisible = false
+        overrideTextInputBox.visibility = View.INVISIBLE
+//        overrideTextInputBox.isVisible = false
 
 
 
@@ -139,15 +142,20 @@ class One_rm_calc: Fragment() {
     fun ToggleOverride()
     {
         if (!overrideSwitch.isChecked) {
-            overrideExplainTextBox.isVisible = false
-            overrideTextInputBox.isVisible = false
+            //overrideExplainTextBox.isVisible = false
+            overrideExplainTextBox.visibility = View.INVISIBLE
+            //overrideTextInputBox.isVisible = false
+            overrideTextInputBox.visibility = View.INVISIBLE
             offsetValue = 0.0
 
         }
 
         if (overrideSwitch.isChecked) {
-            overrideExplainTextBox.isVisible = true
-            overrideTextInputBox.isVisible = true
+//            overrideExplainTextBox.isVisible = true
+//            overrideTextInputBox.isVisible = true
+            overrideExplainTextBox.visibility = View.VISIBLE
+            //overrideTextInputBox.isVisible = false
+            overrideTextInputBox.visibility = View.VISIBLE
             if (overrideTextInputBox.text.isNotEmpty()) {
                 overrideString = overrideTextInputBox.text.toString()
                 offsetValue = overrideString.toDouble()/100
