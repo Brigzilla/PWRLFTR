@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
@@ -158,16 +159,6 @@ class One_rm_calc: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //title = "PWRLFTR"
-        // this.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        //Below is the ghetto way to hide notification bar
-        // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-
-
-
-
-
-
     }
 
 
@@ -175,22 +166,22 @@ class One_rm_calc: Fragment() {
     fun calculateMax()
     {
 
-//        if (inputMaxBox.text.toString().toFloat() > 3000) {
-//            string_02 = inputMaxBox.text.toString()
-//            // outputBox_01.text = " (Error) \n Please use a number < 3000"
-//            Toast.makeText(this@MainActivity, "Error 001\n Value cannot exceed 3000", Toast.LENGTH_SHORT).show()
-//
-//            // outputBox_01.visibility = View.VISIBLE
-//            setAllInVisible()
-//        }
-//
-//        if (offsetValue > 0.05|| offsetValue < -0.05)
-//        {
-//            //outputBox_01.text = " (Error) \n Offset cannot exceed 5%"
-//            Toast.makeText(this@MainActivity, "Error 002\n Offset cannot exceed 5%", Toast.LENGTH_SHORT).show()
-//            //outputBox_01.visibility = View.VISIBLE
-//            setAllInVisible()
-//        }
+        if (inputMaxBox.text.toString().toFloat() > 3000) {
+            string_02 = inputMaxBox.text.toString()
+            // outputBox_01.text = " (Error) \n Please use a number < 3000"
+            Toast.makeText(requireContext(), "Error 1\n Value cannot exceed 3000", Toast.LENGTH_SHORT).show()
+
+            // outputBox_01.visibility = View.VISIBLE
+            setAllInVisible()
+        }
+
+        if (offsetValue > 0.05|| offsetValue < -0.05)
+        {
+            //outputBox_01.text = " (Error) \n Offset cannot exceed 5%"
+            Toast.makeText(requireContext(), "Error 2\n Offset cannot exceed 5%", Toast.LENGTH_SHORT).show()
+            //outputBox_01.visibility = View.VISIBLE
+            setAllInVisible()
+        }
 
         if (inputMaxBox.text.toString().toFloat() <= 3000)
         {

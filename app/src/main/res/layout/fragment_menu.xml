@@ -16,8 +16,8 @@
         app:layout_constraintWidth_percent=".4"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/max_calc"
         android:text="One Rep Max"
         >
 
@@ -28,9 +28,9 @@
             android:layout_width="0dp"
             app:layout_constraintWidth_percent=".4"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/one_rm_calc"
+            app:layout_constraintStart_toEndOf="@id/one_rm_calc"
+            app:layout_constraintTop_toTopOf="parent"
             android:text="Rep Maxes"
             >
 
