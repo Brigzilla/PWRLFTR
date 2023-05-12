@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class Rep_Max_Calc : Fragment() {
 
@@ -79,19 +80,31 @@ class Rep_Max_Calc : Fragment() {
 
 
     fun calculateOneRepMax(weight: Float, reps: Float): Float{
+        if (reps > 12)
+        {
+            throwError()
+            return 0.0f
+        }
+        else {
         var one_rm: Float = weight
         var t_reps = reps
         var offset : Float = 0.0f
-        var multiplier: Float = 0.97f
+        var multiplier: Float = 0.95f
         while (t_reps > 1)
         {
             multiplier -= offset
             one_rm /= multiplier
-            offset -= 0.00001f
+            offset -= 0.00085f
             t_reps--
         }
         output_text_view.visibility = View.VISIBLE
        return one_rm
+        }
+    }
+
+    fun throwError(){
+
+        Toast.makeText(requireContext(), "Error 3 - I do not have the facilities for that big man", Toast.LENGTH_SHORT).show()
     }
 }
 // Prev *.97

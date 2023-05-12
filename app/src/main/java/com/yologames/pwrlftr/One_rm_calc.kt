@@ -113,8 +113,8 @@ class One_rm_calc: Fragment() {
 
 
 
-        inputMaxBox.setOnKeyListener(View.OnKeyListener({v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN){
+        inputMaxBox.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 if (inputMaxBox.text.isNotEmpty()) {
                     calculateMax()
                 }
@@ -122,10 +122,10 @@ class One_rm_calc: Fragment() {
                 return@OnKeyListener true
             }
             false
-        }))
+        })
 
-        overrideTextInputBox.setOnKeyListener(View.OnKeyListener({v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN){
+        overrideTextInputBox.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 if (overrideTextInputBox.text.isNotEmpty()) {
                     calculateMax()
                 }
@@ -136,7 +136,7 @@ class One_rm_calc: Fragment() {
                 return@OnKeyListener true
             }
             false
-        }))
+        })
     }
 
     fun ToggleOverride()
