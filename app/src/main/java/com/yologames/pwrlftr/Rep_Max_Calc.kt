@@ -2,13 +2,16 @@ package com.yologames.pwrlftr
 
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class Rep_Max_Calc : Fragment() {
 
@@ -18,8 +21,13 @@ class Rep_Max_Calc : Fragment() {
     lateinit var output_text_view: TextView
     lateinit var calculate_button: Button
 
+
+    val results_list = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        results_list.add("test")
+        results_list.add("icles")
 
     }
 
@@ -40,6 +48,10 @@ class Rep_Max_Calc : Fragment() {
         output_text_view = view.findViewById(R.id.output_text_view_1)
 
         output_text_view.visibility = View.INVISIBLE
+
+//
+
+
 
         calculate_button.setOnClickListener{
             if (input_weight_box.text.isNotEmpty() || input_reps_box.text.isNotEmpty()) {
