@@ -86,17 +86,22 @@ class Rep_Max_Calc : Fragment() {
             return 0.0f
         }
         else {
-        var one_rm: Float = weight
-        var t_reps = reps
-        var offset : Float = 0.0f
-        var multiplier: Float = 0.95f
-        while (t_reps > 1)
-        {
-            multiplier -= offset
-            one_rm /= multiplier
-            offset -= 0.00085f
-            t_reps--
-        }
+            //below is my top G formula
+            //Mat - 12/5/2023
+//        var one_rm: Float = weight
+//        var t_reps = reps
+//        var offset : Float = 0.0f
+//        var multiplier: Float = 0.95f
+//        while (t_reps > 1)
+//        {
+//            multiplier -= offset
+//            one_rm /= multiplier
+//            offset -= 0.00085f
+//            t_reps--
+//        }
+            //Matt Brzycki's formula
+            var one_rm: Float = weight/(1.0278f - 0.0278f * reps)
+
         output_text_view.visibility = View.VISIBLE
        return one_rm
         }

@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.core.view.isVisible
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kotlin.math.roundToLong
 
 class One_rm_calc: Fragment() {
 
@@ -193,22 +194,21 @@ class One_rm_calc: Fragment() {
 
         if (inputMaxBox.text.toString().toFloat() <= 3000)
         {
-
+            var weight: Float = inputMaxBox.text.toString().toFloat()
             ToggleOverride()
             if (offsetValue <= 0.05 && offsetValue > -0.05){
-                string_02 = inputMaxBox.text.toString()
-
-                outputBox_01.text = " 1 Rep Max - "+(string_02).toString()
-                outputBox_02.text = " 2 Rep Max - "+(BigDecimal(string_02.toDouble()*0.95f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_03.text = " 3 Rep Max - "+(BigDecimal(string_02.toDouble()*0.92f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_04.text = " 4 Rep Max - "+(BigDecimal(string_02.toDouble()*0.90f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_05.text = " 5 Rep Max - "+(BigDecimal(string_02.toDouble()*0.86f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_06.text = " 6 Rep Max - "+(BigDecimal(string_02.toDouble()*0.84f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_07.text = " 7 Rep Max - "+(BigDecimal(string_02.toDouble()*0.82f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_08.text = " 8 Rep Max - "+(BigDecimal(string_02.toDouble()*0.80f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_09.text = " 9 Rep Max - "+(BigDecimal(string_02.toDouble()*0.775f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_10.text = "10 Rep Max - "+(BigDecimal(string_02.toDouble()*0.75f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
-                outputBox_12.text = "12 Rep Max - "+(BigDecimal(string_02.toDouble()*0.69f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                //(BigDecimal(string_02.toDouble()*0.95f*(1+offsetValue)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_01.text = " 1 Rep Max - "+(weight).toString()
+                outputBox_02.text = " 2 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 2)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_03.text = " 3 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 3)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_04.text = " 4 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 4)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_05.text = " 5 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 5)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_06.text = " 6 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 6)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_07.text = " 7 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 7)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_08.text = " 8 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 8)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_09.text = " 9 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 9)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_10.text = "10 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 10)).setScale(2, RoundingMode.HALF_EVEN)).toString()
+                outputBox_12.text = "12 Rep Max - "+(BigDecimal(weight.toDouble()*(1.0278f - 0.0278f * 12)).setScale(2, RoundingMode.HALF_EVEN)).toString()
 
                 setAllVisible()
             }
