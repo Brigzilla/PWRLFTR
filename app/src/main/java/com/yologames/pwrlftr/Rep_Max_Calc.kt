@@ -23,7 +23,6 @@ class Rep_Max_Calc : Fragment() {
 
 
     val results_list = ArrayList<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         results_list.add("test")
