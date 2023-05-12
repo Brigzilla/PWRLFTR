@@ -33,6 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:ems="10"
+            android:text="0"
         android:inputType="number|numberDecimal" />
 
         <TextView
@@ -59,6 +60,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:ems="10"
+            android:text="0"
             android:inputType="number|numberDecimal" />
 
         <TextView
