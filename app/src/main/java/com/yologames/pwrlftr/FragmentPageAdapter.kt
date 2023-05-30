@@ -11,16 +11,21 @@ class FragmentPageAdapter (
     lifecycle: Lifecycle
         ): FragmentStateAdapter(fragmentManager, lifecycle){
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
     override fun createFragment(position: Int): Fragment {
-        return if (position ==0)
+        if (position ==0)
         {
-            One_rm_calc()
+            return  One_rm_calc()
         }
-        else {
-            Rep_Max_Calc()
+        if (position ==1)
+        {
+            return  Rep_Max_Calc()
+        }
+        else
+        {
+            return Rep_Max_Calc()
         }
     }
 

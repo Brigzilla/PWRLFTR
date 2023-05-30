@@ -41,6 +41,7 @@ class Menu : Fragment() {
         adapter = FragmentPageAdapter(requireActivity().supportFragmentManager, lifecycle)
         tabLayout.addTab(tabLayout.newTab().setText("One Rep Max"))
         tabLayout.addTab(tabLayout.newTab().setText("Rep Maxes"))
+        tabLayout.addTab(tabLayout.newTab().setText("Program Generator"))
         viewpager.adapter = adapter
 
         tabLayout.addOnTabSelectedListener(object  : TabLayout.OnTabSelectedListener{
