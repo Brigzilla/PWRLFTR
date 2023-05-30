@@ -28,9 +28,4 @@
         android:name="com.yologames.pwrlftr.Rep_Max_Calc"
         android:label="fragment_rep__max__calc"
         tools:layout="@layout/fragment_rep__max__calc" />
-    <fragment
-        android:id="@+id/program_generator"
-        android:name="com.yologames.pwrlftr.program_generator"
-        android:label="fragment_program_generator"
-        tools:layout="@layout/fragment_program_generator" />
 </navigation>
