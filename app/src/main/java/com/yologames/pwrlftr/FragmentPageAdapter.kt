@@ -24,7 +24,7 @@ class FragmentPageAdapter (
         }
         else
         {
-            return Rep_Max_Calc()
+            return ProgramGenerator()
         }
     }
 }
