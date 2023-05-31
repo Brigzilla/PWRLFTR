@@ -14,12 +14,12 @@ data class Session (
     var exercise: String,
 
     @ColumnInfo(name = "sets")
-    var sets: String,
+    var sets: Int,
 
     @ColumnInfo(name = "reps")
-    var reps: String,
+    var reps: Int,
 
     @ColumnInfo(name = "weight")
-    var weight: String
+    var weight: Int
 
     )

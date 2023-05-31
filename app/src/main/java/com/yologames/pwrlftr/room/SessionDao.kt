@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr.room
 
+import android.os.FileObserver.DELETE
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -19,4 +20,10 @@ interface SessionDao {
 
     @Delete
     suspend fun deleteSession(session: Session)
+
+    @Query("DELETE FROM session_table WHERE id = :id")
+    suspend fun deleteByID(id: Int)
+
+
+
 }
