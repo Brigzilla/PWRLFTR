@@ -13,8 +13,9 @@ class PCardViewHolder(
     {
         cardCellBinding.title.text = pCard.title
         cardCellBinding.exercise.text = pCard.exercise
-        cardCellBinding.sets.text = pCard.sets
-        cardCellBinding.reps.text = pCard.reps
+        cardCellBinding.sets.text = pCard.sets.toString()
+        cardCellBinding.reps.text = pCard.reps.toString()
+        cardCellBinding.weight.text = pCard.weight.toString()
 
 //        cardCellBinding.cardView.setOnClickListener {
 //            // D_MOD_SELECTED = dCard.moduleID

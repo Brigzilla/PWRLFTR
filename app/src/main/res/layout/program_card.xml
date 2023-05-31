@@ -82,6 +82,16 @@
                     android:layout_marginLeft="2dp"
                     ></TextView>
 
+                <TextView
+                    android:id="@+id/weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@id/reps"
+                    app:layout_constraintStart_toStartOf="@id/reps"
+                    android:layout_marginLeft="1dp"
+                    ></TextView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

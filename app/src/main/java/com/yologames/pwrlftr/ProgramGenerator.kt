@@ -1,18 +1,14 @@
 package com.yologames.pwrlftr
 
-import android.content.Context
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
@@ -28,7 +24,10 @@ import kotlinx.coroutines.launch
 
 private lateinit var binding: FragmentProgramGeneratorBinding
 
+var _Database_size = 1
+
 private lateinit var sessionDao: SessionDao
+//some test sessions. Can probably safely delete but will save time later
 val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
 val sesh2 = Session(1, "Week 2", "Bench", 3, 4, 125)
 val sesh3 = Session(2, "Week 3", "Bench", 2, 4, 130)
@@ -56,7 +55,12 @@ class ProgramGenerator : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        PopulateCards()
+        lifecycleScope.launch(Dispatchers.IO) {
+
+            //clearDatabase()
+            PopulateCards()
+        }
+
         InitRecycler()
     }
 
@@ -66,19 +70,33 @@ class ProgramGenerator : Fragment() {
             SessionDatabase::class.java, "session_database"
         ).build()
         sessionDao = database.sessionDao()
-        testDB()
+        //testDB()
+        queryDatabaseSize()
     }
 
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
     //Use below function to call Database Test functionality. It will always be called directly after Build, but remove any functionality that shouldnt exist when not in use
     private fun testDB() {
 
+addToTestDatabase()
+    }
 
+    fun queryDatabaseSize(){
+        lifecycleScope.launch(Dispatchers.IO) {
+            val i = sessionDao.getAllSessions().size
+            if (i > _Database_size)
+            {
+                _Database_size = i
+            }
+        }
+        Dispatchers.IO.cancel()
     }
 
     fun addToTestDatabase() {
         lifecycleScope.launch(Dispatchers.IO) {
             sessionDao.insertSession(sesh)
+            sessionDao.insertSession(sesh2)
+            sessionDao.insertSession(sesh3)
             val sessions = sessionDao.getAllSessions()
             Log.d("SDAO", "${sessions.size} Sessions Total")
         }
@@ -112,14 +130,24 @@ class ProgramGenerator : Fragment() {
 
     private fun PopulateCards() {
         ClearCards()
+
         var i = 0
-        while (i<100)
+        while (i< _Database_size)
         {
+//            val cardToAdd = PCard(
+//                "TITLE" + i,
+//                "EXERCISE",
+//                "SETS"+i,
+//                "REPS",
+//                i
+//            )
+            val session = sessionDao.getAllSessions()
             val cardToAdd = PCard(
-                "TITLE" + i,
-                "EXERCISE",
-                "SETS"+i,
-                "REPS",
+                session[i].title,
+                session[i].exercise,
+                session[i].sets,
+                session[i].reps,
+                session[i].weight,
                 i
             )
             PCardList.add(cardToAdd)
@@ -127,7 +155,10 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-    private fun ClearCards() {
+
+
+
+private fun ClearCards() {
         PCardList.clear()
     }
 
