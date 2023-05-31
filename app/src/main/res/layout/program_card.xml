@@ -7,12 +7,14 @@
 
 
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="2dp"
         app:cardUseCompatPadding="true"
+        app:strokeColor="@android:color/darker_gray"
+        app:strokeWidth="1dp"
         >
 
 
@@ -85,7 +87,7 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>
 

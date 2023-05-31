@@ -13,7 +13,10 @@ import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
 import com.yologames.pwrlftr.recyclerview.PCardAdapter
 import com.yologames.pwrlftr.recyclerview.PCardList
+
+
 private lateinit var binding: FragmentProgramGeneratorBinding
+
 class ProgramGenerator : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
