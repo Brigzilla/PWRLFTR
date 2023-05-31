@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--https://stackoverflow.com/questions/9127013/include-a-textview-and-override-the-text-->
+
+
+    <data>
+        <variable
+            name = "cardTitle"
+            type = "String" />
+        <variable
+            name = "cardDescription"
+            type = "String" />
+        <variable
+            name = "cardDate"
+            type = "String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:background="?attr/colorBackgroundFloating"
+            android:orientation="vertical"
+
+
+            android:shadowColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp">
+
+                <ImageView
+                    android:id="@+id/bannerIv"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="16dp"
+                    android:padding="16dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/titleTv"></ImageView>
+
+                <TextView
+                    android:id="@+id/titleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@{cardTitle}"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/bannerIv"
+                    app:layout_constraintStart_toStartOf="@+id/bannerIv"
+                    app:layout_constraintTop_toTopOf="@id/bannerIv"></TextView>
+
+                <TextView
+                    android:id="@+id/descriptionTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:minLines="3"
+                    android:text="@{cardDescription}"
+                    app:layout_constraintEnd_toEndOf="@+id/bannerIv"
+                    app:layout_constraintStart_toStartOf="@+id/bannerIv"
+                    app:layout_constraintTop_toBottomOf="@+id/silhouetteIv"></TextView>
+
+                <TextView
+                    android:id="@+id/dateTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="8dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toEndOf="@id/titleTv"
+                    app:layout_constraintStart_toStartOf="@id/titleTv"
+                    app:layout_constraintTop_toBottomOf="@id/descriptionTv"></TextView>
+
+                <ImageView
+                    android:id="@+id/silhouetteIv"
+                    android:layout_width="400dp"
+                    android:layout_height="128dp"
+                    android:padding="16dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></ImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+
+    <!--    https://stackoverflow.com/questions/9127013/include-a-textview-and-override-the-text-->
