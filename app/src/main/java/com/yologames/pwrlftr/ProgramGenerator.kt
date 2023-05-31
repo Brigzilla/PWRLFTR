@@ -55,11 +55,7 @@ class ProgramGenerator : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch(Dispatchers.IO) {
 
-            //clearDatabase()
-            PopulateCards()
-        }
 
         InitRecycler()
     }
@@ -77,8 +73,9 @@ class ProgramGenerator : Fragment() {
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
     //Use below function to call Database Test functionality. It will always be called directly after Build, but remove any functionality that shouldnt exist when not in use
     private fun testDB() {
-
-addToTestDatabase()
+        //addToTestDatabase(sesh2)
+        //clearDatabase()
+        //addToTestDatabase()
     }
 
     fun queryDatabaseSize(){
@@ -88,19 +85,20 @@ addToTestDatabase()
             {
                 _Database_size = i
             }
+
+            if (_Database_size > 0)
+            {
+                PopulateCards()
+            }
         }
-        Dispatchers.IO.cancel()
+        //Dispatchers.IO.cancel()
     }
 
-    fun addToTestDatabase() {
+    fun addToTestDatabase(s : Session) {
         lifecycleScope.launch(Dispatchers.IO) {
-            sessionDao.insertSession(sesh)
-            sessionDao.insertSession(sesh2)
-            sessionDao.insertSession(sesh3)
-            val sessions = sessionDao.getAllSessions()
-            Log.d("SDAO", "${sessions.size} Sessions Total")
+            sessionDao.insertSession(s)
+
         }
-        Dispatchers.IO.cancel()
 
     }
 
@@ -131,8 +129,8 @@ addToTestDatabase()
     private fun PopulateCards() {
         ClearCards()
 
-        var i = 0
-        while (i< _Database_size)
+        var i = _Database_size-1
+        while (i> 0)
         {
 //            val cardToAdd = PCard(
 //                "TITLE" + i,
@@ -142,16 +140,17 @@ addToTestDatabase()
 //                i
 //            )
             val session = sessionDao.getAllSessions()
+            val tempSession = session[i]
             val cardToAdd = PCard(
-                session[i].title,
-                session[i].exercise,
-                session[i].sets,
-                session[i].reps,
-                session[i].weight,
+                tempSession.title,
+                tempSession.exercise,
+                tempSession.sets,
+                tempSession.reps,
+                tempSession.weight,
                 i
             )
             PCardList.add(cardToAdd)
-            i++
+            i--
         }
     }
 
