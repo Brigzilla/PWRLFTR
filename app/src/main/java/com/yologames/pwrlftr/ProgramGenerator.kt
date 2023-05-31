@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
 import com.yologames.pwrlftr.recyclerview.PCardAdapter
 import com.yologames.pwrlftr.recyclerview.PCardList
-lateinit var recycler : RecyclerView
+private lateinit var binding: FragmentProgramGeneratorBinding
 class ProgramGenerator : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,11 +21,14 @@ class ProgramGenerator : Fragment() {
     }
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_program_generator, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_program_generator, container, false)
+        return binding.root
 
     }
 
@@ -36,32 +41,26 @@ class ProgramGenerator : Fragment() {
 
 
     fun InitRecycler(){
-        recycler = requireView().findViewById(R.id.recycler_view)
-        recycler.apply {
+        binding.recyclerView.apply {
             layoutManager = GridLayoutManager(this.context, 1)
             adapter = PCardAdapter(PCardList)
         }
-//        recycler.adapter = PCardAdapter(
-//            PCardList
-//        )
     }
 
     private fun PopulateCards() {
         ClearCards()
         var i = 0
-        while (i<10)
+        while (i<100)
         {
             val cardToAdd = PCard(
-                "TITLE",
+                "TITLE" + i,
                 "EXERCISE",
-                "SETS",
+                "SETS"+i,
                 "REPS",
                 i
             )
-
             PCardList.add(cardToAdd)
             i++
-            Log.d("PGR", i.toString())
         }
     }
 

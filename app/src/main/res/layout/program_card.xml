@@ -6,26 +6,13 @@
     <!--https://stackoverflow.com/questions/9127013/include-a-textview-and-override-the-text-->
 
 
-    <data>
-        <variable
-            name = "cardTitle"
-            type = "String" />
-        <variable
-            name = "cardDescription"
-            type = "String" />
-        <variable
-            name = "cardDate"
-            type = "String" />
-    </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="2dp"
-        app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
-
         >
 
 
@@ -49,7 +36,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{cardTitle}"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +49,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center"
-                    android:textSize="14sp"
-                    android:text="@{cardDescription}"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/title"
                     android:layout_marginLeft="8dp"
@@ -80,7 +65,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/exercise"
                     android:layout_marginLeft="4dp"
@@ -90,7 +75,7 @@
                     android:id="@+id/reps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="6sp"
+                    android:textSize="12sp"
                     app:layout_constraintTop_toBottomOf="@id/sets"
                     app:layout_constraintStart_toStartOf="@id/sets"
                     android:layout_marginLeft="2dp"

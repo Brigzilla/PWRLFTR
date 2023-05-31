@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr.recyclerview
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
@@ -7,6 +8,7 @@ import com.yologames.pwrlftr.databinding.ProgramCardBinding
 class PCardViewHolder(
     private val cardCellBinding: ProgramCardBinding,
 ):RecyclerView.ViewHolder(cardCellBinding.root) {
+
     fun bindCards(pCard: PCard)
     {
         cardCellBinding.title.text = pCard.title

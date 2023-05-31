@@ -19,8 +19,7 @@ class PCardAdapter(private val PCards: List<PCard>):RecyclerView.Adapter<PCardVi
     override fun onBindViewHolder(holder: PCardViewHolder, position: Int) {
 
         holder.bindCards(PCardList[position])
-
-        //val pCard = PCardList[position]
+        val pCard = PCardList[position]
     }
 
     override fun getItemCount(): Int = PCards.size
