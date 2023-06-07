@@ -29,14 +29,75 @@ var _Database_size = 1
 private lateinit var sessionDao: SessionDao
 //some test sessions. Can probably safely delete but will save time later
 val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
-val sesh2 = Session(1, "Week 2", "Bench", 3, 4, 125)
-val sesh3 = Session(2, "Week 3", "Bench", 2, 4, 130)
+val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
+val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
+var can_init: Boolean  = false
 
 class ProgramGenerator : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         BuildDatabase()
         super.onCreate(savedInstanceState)
+    }
 
+    fun BuildDatabase(){
+        val database = Room.databaseBuilder(
+            requireContext(),
+            SessionDatabase::class.java, "session_database"
+        ).build()
+        sessionDao = database.sessionDao()
+        testDB()
+        queryDatabaseSize()
+        can_init = true
+    }
+
+    //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
+    //Use below function to call Database Test functionality. It will always be called directly after Build, but remove any functionality that shouldnt exist when not in use
+    private fun testDB() {
+        //addToTestDatabase(sesh)
+        //clearDatabase()
+        //addToTestDatabase()
+    }
+
+    fun queryDatabaseSize(){
+        lifecycleScope.launch(Dispatchers.IO) {
+            val i = sessionDao.getAllSessions().size
+            if (i > _Database_size)
+            {
+                _Database_size = i
+            }
+
+            if (_Database_size > 0)
+            {
+                PopulateCards()
+            }
+
+            Log.d("SDAO", "${_Database_size} Sessions Total")
+        }
+
+        //Dispatchers.IO.cancel()
+    }
+
+    private fun PopulateCards() {
+
+        ClearCards()
+
+        var i = 0
+        while (i< _Database_size-1)
+        {
+            val session = sessionDao.getAllSessions()
+            val tempSession = session[i]
+            val cardToAdd = PCard(
+                tempSession.title + (session[i].id).toString(),
+                tempSession.exercise,
+                tempSession.sets,
+                tempSession.reps,
+                tempSession.weight,
+                i
+            )
+            PCardList.add(cardToAdd)
+            i++
+           // binding.recyclerView.adapter!!.notifyDataSetChanged()
+        }
 
     }
 
@@ -56,49 +117,72 @@ class ProgramGenerator : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-
-        InitRecycler()
+        if (can_init) InitRecycler()
+        setOnClickListeners()
+        //InitRecycler()
     }
 
-    fun BuildDatabase(){
-        val database = Room.databaseBuilder(
-            requireContext(),
-            SessionDatabase::class.java, "session_database"
-        ).build()
-        sessionDao = database.sessionDao()
-        //testDB()
-        queryDatabaseSize()
-    }
-
-    //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
-    //Use below function to call Database Test functionality. It will always be called directly after Build, but remove any functionality that shouldnt exist when not in use
-    private fun testDB() {
-        //addToTestDatabase(sesh2)
-        //clearDatabase()
-        //addToTestDatabase()
-    }
-
-    fun queryDatabaseSize(){
-        lifecycleScope.launch(Dispatchers.IO) {
-            val i = sessionDao.getAllSessions().size
-            if (i > _Database_size)
-            {
-                _Database_size = i
-            }
-
-            if (_Database_size > 0)
-            {
-                PopulateCards()
-            }
+    fun InitRecycler(){
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(this.context, 3)
+            adapter = PCardAdapter(PCardList)
         }
-        //Dispatchers.IO.cancel()
     }
 
-    fun addToTestDatabase(s : Session) {
+    fun AddElementToRecycler(){
         lifecycleScope.launch(Dispatchers.IO) {
-            sessionDao.insertSession(s)
+            val session = sessionDao.getAllSessions()
+            val tempSession = session[session.lastIndex]
+            val cardToAdd = PCard(
+                tempSession.title + (sessionDao.getAllSessions().last().id).toString(),
+                tempSession.exercise,
+                tempSession.sets,
+                tempSession.reps,
+                tempSession.weight,
+
+                )
+            PCardList.add(cardToAdd)
 
         }
+        binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
+    }
+
+    fun RemoveElementFromDatabase(){
+        var t : Int = 0
+        lifecycleScope.launch(Dispatchers.IO) {
+
+                sessionDao.deleteByID(sessionDao.getAllSessions().last().id)
+//            Log.d("SDAO", "${sessionDao.getAllSessions().last().id} Sessions Total")
+        }
+        PCardList.removeAt(PCardList.size-1)
+        binding.recyclerView.adapter!!.notifyItemRemoved(PCardList.size)
+
+    }
+
+    fun setOnClickListeners(){
+        binding.addTestButton.setOnClickListener{
+            addToTestDatabase(sesh)
+        }
+
+        binding.addSecondaryTestButton.setOnClickListener{
+            addToTestDatabase(sesh2)
+        }
+
+        binding.removeTestButton.setOnClickListener{
+            //clearDatabase()
+            RemoveElementFromDatabase()
+
+        }
+    }
+
+
+    fun addToTestDatabase(_local_session : Session) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            sessionDao.insertSession(_local_session)
+
+
+        }
+        AddElementToRecycler()
 
     }
 
@@ -113,46 +197,22 @@ class ProgramGenerator : Fragment() {
 
             Log.d("SDAO", "${sessionsB.size} SessionsB Total - Post Delete")
         }
-        Dispatchers.IO.cancel()
-    }
-
-    }
-
-
-    fun InitRecycler(){
-        binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(this.context, 1)
-            adapter = PCardAdapter(PCardList)
-        }
-    }
-
-    private fun PopulateCards() {
-        ClearCards()
-
-        var i = _Database_size-1
-        while (i> 0)
+        var i = _Database_size
+        while (i > 0)
         {
-//            val cardToAdd = PCard(
-//                "TITLE" + i,
-//                "EXERCISE",
-//                "SETS"+i,
-//                "REPS",
-//                i
-//            )
-            val session = sessionDao.getAllSessions()
-            val tempSession = session[i]
-            val cardToAdd = PCard(
-                tempSession.title,
-                tempSession.exercise,
-                tempSession.sets,
-                tempSession.reps,
-                tempSession.weight,
-                i
-            )
-            PCardList.add(cardToAdd)
+            binding.recyclerView.adapter!!.notifyItemRemoved(i-1)
             i--
         }
+
+        binding.recyclerView.adapter!!.notifyDataSetChanged()
     }
+
+    }
+
+
+
+
+
 
 
 
