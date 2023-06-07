@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
@@ -34,7 +35,11 @@ val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
 var can_init: Boolean  = false
 
 class ProgramGenerator : Fragment() {
+
+    private val viewModel: ProgramGeneratorViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        viewModel.BuildDatabase()
         BuildDatabase()
         super.onCreate(savedInstanceState)
     }
