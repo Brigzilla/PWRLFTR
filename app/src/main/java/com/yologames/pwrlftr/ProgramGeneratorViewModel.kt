@@ -23,6 +23,8 @@ class ProgramGeneratorViewModel : ViewModel() {
 //    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
     val trainingProgram = ArrayList<Session>()
     var multiplier : Double = 1.00
+    var passesComplete : Int = 0
+    var passedExpected : Int = 1
     var increment : Double = 2.5
 
 
@@ -51,7 +53,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         sessionAspect.add("\nBack-off Set: ${rounded(_1rms[1]*.80)} * 5 reps")
         sessionAspect.add("\nBack-off Set: ${rounded(_1rms[1]*.75)} * 5 reps")
         return Session(0,
-            "Week ${1}, Day 1",
+            "Week ${passesComplete + 1}, Day 1",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
     }
@@ -69,7 +71,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         sessionAspect.add("\nSet 3: ${rounded(_1rms[1]*.70)} * 5 reps")
         sessionAspect.add("\nSet 4: ${rounded(_1rms[1]*.75)} * 5 reps")
         return Session(0,
-            "Week ${1}, Day 3",
+            "Week ${passesComplete + 1}, Day 3",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
     }
@@ -85,7 +87,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         sessionAspect.add("\nBack-off Set: ${rounded(_1rms[2]*.80)} * 5 reps")
         sessionAspect.add("\nBack-off Set: ${rounded(_1rms[2]*.75)} * 5 reps")
         return Session(0,
-            "Week ${1}, Day 5",
+            "Week ${passesComplete + 1}, Day 5",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
     }
@@ -94,10 +96,22 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     fun createAlphaProgram(): ArrayList<Session>{
         trainingProgram.clear()
+
+            trainingProgram.add(Alpha_Session_1())
+            trainingProgram.add(Alpha_Session_2())
+            trainingProgram.add(Alpha_Session_3())
+            passesComplete += 1
+             trainingProgram.add(Alpha_Session_1())
+            trainingProgram.add(Alpha_Session_2())
+             trainingProgram.add(Alpha_Session_3())
+        passesComplete += 1
         trainingProgram.add(Alpha_Session_1())
         trainingProgram.add(Alpha_Session_2())
         trainingProgram.add(Alpha_Session_3())
+
+
         return trainingProgram
+
     }
 
 
@@ -106,19 +120,19 @@ class ProgramGeneratorViewModel : ViewModel() {
     fun rounded(f: Double): BigDecimal
     {
         val bd = BigDecimal(f).round(MathContext(3))
-        return applyMultiplier(bd)
+        return bd
     }
 
     fun applyMultiplier(f: BigDecimal) : BigDecimal
     {
 
         val bd = f * (BigDecimal(multiplier))
-        return applyIncrement(f)
+        return applyIncrement(bd)
     }
 
     fun applyIncrement(bd: BigDecimal) : BigDecimal
     {
-        return bd + BigDecimal(increment)
+        return bd + BigDecimal(increment * passesComplete)
     }
 
 }

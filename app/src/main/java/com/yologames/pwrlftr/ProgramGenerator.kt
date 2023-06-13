@@ -85,7 +85,7 @@ class ProgramGenerator : Fragment() {
         if (sessionDao.getAllSessions().isNotEmpty())
         {
 
-        while (i< _Database_size)
+        while (i< sessionDao.getAllSessions().size)
         {
             val session = sessionDao.getAllSessions().sortedBy { it.title }
             val tempSession = session[i]
@@ -270,8 +270,11 @@ class ProgramGenerator : Fragment() {
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
             val temp = viewModel.createAlphaProgram()
+            lifecycleScope.launch { Dispatchers.IO
+
             addArrayToDatabase(temp)
             hideInitialElements()
+                }
         }
 
 
