@@ -1,7 +1,10 @@
 package com.yologames.pwrlftr
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +24,7 @@ import com.yologames.pwrlftr.room.SessionDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 private lateinit var binding: FragmentProgramGeneratorBinding
@@ -29,9 +33,9 @@ var _Database_size = 1
 
 private lateinit var sessionDao: SessionDao
 //some test sessions. Can probably safely delete but will save time later
-val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
-val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
-val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
+//val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
+//val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
+//val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
 var can_init: Boolean  = false
 
 class ProgramGenerator : Fragment() {
@@ -39,7 +43,7 @@ class ProgramGenerator : Fragment() {
     private val viewModel: ProgramGeneratorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        viewModel.BuildDatabase()
+
         BuildDatabase()
         super.onCreate(savedInstanceState)
     }
@@ -50,19 +54,11 @@ class ProgramGenerator : Fragment() {
             SessionDatabase::class.java, "session_database"
         ).build()
         sessionDao = database.sessionDao()
-        testDB()
         queryDatabaseSize()
         can_init = true
     }
 
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
-    //Use below function to call Database Test functionality. It will always be called directly after Build, but remove any functionality that shouldnt exist when not in use
-    private fun testDB() {
-        //addToTestDatabase(sesh)
-        //clearDatabase()
-        //addToTestDatabase()
-    }
-
     fun queryDatabaseSize(){
         lifecycleScope.launch(Dispatchers.IO) {
             val i = sessionDao.getAllSessions().size
@@ -75,24 +71,24 @@ class ProgramGenerator : Fragment() {
             {
                 PopulateCards()
             }
-
-//            Log.d("SDAO", "${_Database_size} Sessions Total")
         }
-
-        //Dispatchers.IO.cancel()
     }
 
     private fun PopulateCards() {
 
+        lifecycleScope.launch(Dispatchers.IO){
         ClearCards()
 
         var i = 0
-        while (i< _Database_size-1)
+        if (sessionDao.getAllSessions().isNotEmpty())
         {
-            val session = sessionDao.getAllSessions()
+
+        while (i< _Database_size)
+        {
+            val session = sessionDao.getAllSessions().sortedBy { it.title }
             val tempSession = session[i]
             val cardToAdd = PCard(
-                tempSession.title + (session[i].id).toString(),
+                tempSession.title,
                 tempSession.exercise,
                 tempSession.sets,
                 tempSession.reps,
@@ -101,11 +97,14 @@ class ProgramGenerator : Fragment() {
             )
             PCardList.add(cardToAdd)
             i++
-           // binding.recyclerView.adapter!!.notifyDataSetChanged()
+        }
+        }
         }
 
 
     }
+
+
 
     override fun onCreateView(
 
@@ -125,55 +124,139 @@ class ProgramGenerator : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        if (can_init) InitRecycler()
-        setOnClickListeners()
+       if (can_init) {
+           InitRecycler()
+
+           lifecycleScope.launch(Dispatchers.IO)
+           {
+
+               if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
+           }
+       }
+           setOnClickListeners()
+
         //InitRecycler()
     }
 
-    fun InitRecycler(){
-        binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(this.context, 3)
-            adapter = PCardAdapter(PCardList)
+    private fun updateRecyclerViewData() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val sessionList = sessionDao.getAllSessions().sortedBy { it.title }
+            val newPCardList = ArrayList<PCard>()
+
+            for (session in sessionList) {
+                val cardToAdd = PCard(
+                    session.title,
+                    session.exercise,
+                    session.sets,
+                    session.reps,
+                    session.weight,
+                    session.id
+                )
+                newPCardList.add(cardToAdd)
+            }
+
+            withContext(Dispatchers.Main) {
+                PCardList.clear()
+                PCardList.addAll(newPCardList)
+                binding.recyclerView.adapter?.notifyDataSetChanged()
+            }
         }
     }
+
+
+    fun InitRecycler(){
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(this.context, 1)
+            adapter = PCardAdapter(PCardList)
+        }
+
+        updateDataset()
+    }
+//
+//    fun addViewModelElements(){
+//        //addToTestDatabase(viewModel.createAlphaSession()) //THIS IS WHERE YOU NEED TO FETCH THE VIEWMODEL TRAINING PROGRAM
+//
+//    }
+
+
 
     fun AddElementToRecycler(){
         lifecycleScope.launch(Dispatchers.IO) {
             val session = sessionDao.getAllSessions()
-            val tempSession = session[session.lastIndex]
-            val cardToAdd = PCard(
-                tempSession.title + (sessionDao.getAllSessions().last().id).toString(),
-                tempSession.exercise,
-                tempSession.sets,
-                tempSession.reps,
-                tempSession.weight,
+            if (sessionDao.getAllSessions().isNotEmpty()) {
+                val tempSession = session.last()
 
-                )
-            PCardList.add(cardToAdd)
+                val cardToAdd = PCard(
+                    tempSession.title,
+                    tempSession.exercise,
+                    tempSession.sets,
+                    tempSession.reps,
+                    tempSession.weight,
+                    session.size-1
 
+                    )
+                PCardList.add(cardToAdd)
+                withContext(Dispatchers.Main)
+                {
+                    binding.recyclerView.adapter!!.notifyDataSetChanged()
+                }
+            }
         }
-        binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
+
+        //binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size-1 )
     }
 
     fun RemoveElementFromDatabase(){
         var t : Int = 0
         lifecycleScope.launch(Dispatchers.IO) {
 
+            if (sessionDao.getAllSessions().isNotEmpty()) {
                 sessionDao.deleteByID(sessionDao.getAllSessions().last().id)
-//            Log.d("SDAO", "${sessionDao.getAllSessions().last().id} Sessions Total")
+            }
         }
-        PCardList.removeAt(PCardList.size-1)
-        binding.recyclerView.adapter!!.notifyItemRemoved(PCardList.size)
+        if (PCardList.size > 0) {
+            PCardList.removeAt(PCardList.size - 1)
+
+            binding.recyclerView.adapter!!.notifyItemRemoved(PCardList.size)
+        }
 
     }
 
     fun setOnClickListeners(){
+
+
+        binding.enter1rmTextbox.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                if (binding.enter1rmTextbox.text.isNotEmpty())
+                {
+                    addArrayToDatabase(viewModel.createAlphaProgram())
+                    updateDataset()
+                    hideInitialElements()
+                }
+
+                    return@OnKeyListener true
+            }
+            false
+        })
+
+
+
         binding.addTestButton.setOnClickListener{
-            addToTestDatabase(sesh)
+            viewModel._1rms[0] = binding.enter1rmTextbox.text.toString().toFloat()
+            addArrayToDatabase(viewModel.createAlphaProgram())
+
+
+//                queryDatabaseSize()
+//                InitRecycler()
+ //               hideInitialElements()
+//                AddElementToRecycler()
+ //               updateRecyclerViewData()
+                //updateDataset()
+
         }
 
         binding.addSecondaryTestButton.setOnClickListener{
-            addToTestDatabase(sesh2)
+            //addToTestDatabase(sesh2)
         }
 
         binding.removeTestButton.setOnClickListener{
@@ -183,15 +266,42 @@ class ProgramGenerator : Fragment() {
         }
     }
 
+    private fun reloadFragment() {
+        val fragmentManager = requireFragmentManager()
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        val currentFragment = fragmentManager.findFragmentByTag("ProgramGenerator")
+        fragmentTransaction.remove(currentFragment!!)
+        fragmentTransaction.add(R.id.nav_host_fragment, ProgramGenerator(), "ProgramGenerator")
+        fragmentTransaction.commit()
+    }
+
+    fun addArrayToDatabase(list : ArrayList<Session>){
+        var i = 0
+        while (i < list.size)
+        {
+            addToTestDatabase(list[i])
+            i++
+        }
+    }
+
 
     fun addToTestDatabase(_local_session : Session) {
         lifecycleScope.launch(Dispatchers.IO) {
-            sessionDao.insertSession(_local_session)
-
-
+                sessionDao.insertSession(_local_session)
         }
-        AddElementToRecycler()
 
+        AddElementToRecycler()
+        updateDataset()
+    }
+
+    fun hideInitialElements(){
+        binding.enter1rmTextbox.visibility = View.GONE
+        binding.addTestButton.visibility = View.GONE
+        //binding.removeTestButton.visibility  =View.GONE
+
+        //maybe remove bottom two from here for own function
+        binding.scrollView.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.VISIBLE
     }
 
     fun clearDatabase(){
@@ -203,7 +313,7 @@ class ProgramGenerator : Fragment() {
             }
             val sessionsB = sessionDao.getAllSessions()
 
-            Log.d("SDAO", "${sessionsB.size} SessionsB Total - Post Delete")
+           // Log.d("SDAO", "${sessionsB.size} SessionsB Total - Post Delete")
         }
         var i = _Database_size
         while (i > 0)

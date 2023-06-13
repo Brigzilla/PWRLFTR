@@ -16,69 +16,84 @@ import kotlinx.coroutines.launch
 
 class ProgramGeneratorViewModel : ViewModel() {
 
-    var _Database_size = 1
-    private lateinit var sessionDao: SessionDao
+    var _1rms = ArrayList<Float>()
+//    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
+    val trainingProgram = ArrayList<Session>()
 
-    //some test sessions. Can probably safely delete but will save time later
-    var can_init: Boolean = false
 
     init {
-
-        BuildDatabase()
-        fetchData()
+        _1rms.add( 300.0f) //Squat
+        _1rms.add( 230.0f) //Bench
+        _1rms.add( 300.0f) //Deadlift
     }
 
-    private fun fetchData() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
+    fun Alpha_Session_1(): Session{
+        val sessionAspect  = ArrayList<String>()
+        sessionAspect.add("Squat")
+        sessionAspect.add("\nSet 1: ${_1rms[0]*.7} * 5 reps")
+        sessionAspect.add("\nSet 2: ${_1rms[0]*.75} * 3 reps")
+        sessionAspect.add("\nSet 3: ${_1rms[0]*.80} * 2 reps")
+        sessionAspect.add("\nSet 4: ${_1rms[0]*.85} * 1 rep")
+        sessionAspect.add("\nSet 5: ${_1rms[0]*.90} * 1 rep")
+        sessionAspect.add("\nBack-off Set: ${_1rms[0]*.80} * 5 reps")
+        sessionAspect.add("\nBack-off Set: ${_1rms[0]*.75} * 5 reps")
+        sessionAspect.add("\nBench")
+        sessionAspect.add("\nSet 1: ${_1rms[1]*.7} * 5 reps")
+        sessionAspect.add("\nSet 2: ${_1rms[1]*.75} * 3 reps")
+        sessionAspect.add("\nSet 3: ${_1rms[1]*.80} * 2 reps")
+        sessionAspect.add("\nSet 4: ${_1rms[1]*.85} * 1 rep")
+        sessionAspect.add("\nSet 5: ${_1rms[1]*.90} * 1 rep")
+        sessionAspect.add("\nBack-off Set: ${_1rms[1]*.80} * 5 reps")
+        sessionAspect.add("\nBack-off Set: ${_1rms[1]*.75} * 5 reps")
+        return Session(0,
+            "Week ${1}, Day 1",
+            sessionAspect.toString().substringAfter("[").substringBefore("]"),
+            0, 0, 0)
     }
 
-    fun BuildDatabase() {
-//        //viewModelScope.launch(Dispatchers.IO) {
-//            val database = Room.databaseBuilder(
-//                context,
-//                SessionDatabase::class.java, "session_database"
-//            ).build()
-//            sessionDao = database.sessionDao()
-//            testDB()
-//            queryDatabaseSize()
-//        Log.d("VMDB", "Database retrieved with ${sessionDao.getAllSessions().size} elements")
-//            can_init = true
-//       // }
+    private fun Alpha_Session_2(): Session {
+        val sessionAspect  = ArrayList<String>()
+        sessionAspect.add("Squat")
+        sessionAspect.add("\nSet 1: ${_1rms[0]*.6} * 5 reps")
+        sessionAspect.add("\nSet 2: ${_1rms[0]*.65} * 5 reps")
+        sessionAspect.add("\nSet 3: ${_1rms[0]*.70} * 5 reps")
+        sessionAspect.add("\nSet 4: ${_1rms[0]*.75} * 5 reps")
+        sessionAspect.add("\nBench")
+        sessionAspect.add("\nSet 1: ${_1rms[1]*.60} * 5 reps")
+        sessionAspect.add("\nSet 2: ${_1rms[1]*.65} * 5 reps")
+        sessionAspect.add("\nSet 3: ${_1rms[1]*.70} * 5 reps")
+        sessionAspect.add("\nSet 4: ${_1rms[1]*.75} * 5 reps")
+        return Session(0,
+            "Week ${1}, Day 3",
+            sessionAspect.toString().substringAfter("[").substringBefore("]"),
+            0, 0, 0)
     }
 
-    private fun testDB() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
+    private fun Alpha_Session_3(): Session {
+        val sessionAspect  = ArrayList<String>()
+        sessionAspect.add("Deadlift")
+        sessionAspect.add("\nSet 1: ${_1rms[2]*.65} * 5 reps")
+        sessionAspect.add("\nSet 2: ${_1rms[2]*.75} * 5 reps")
+        sessionAspect.add("\nSet 3: ${_1rms[2]*.85} * 3 reps")
+        sessionAspect.add("\nSet 4: ${_1rms[2]*.90} * 1 rep")
+        sessionAspect.add("\nSet 5: ${_1rms[2]*.95} * 1 rep")
+        sessionAspect.add("\nBack-off Set: ${_1rms[2]*.80} * 5 reps")
+        sessionAspect.add("\nBack-off Set: ${_1rms[2]*.75} * 5 reps")
+        return Session(0,
+            "Week ${1}, Day 5",
+            sessionAspect.toString().substringAfter("[").substringBefore("]"),
+            0, 0, 0)
     }
 
-    fun queryDatabaseSize() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-
-        //Dispatchers.IO.cancel()
+    fun createAlphaProgram(): ArrayList<Session>{
+        trainingProgram.clear()
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+        return trainingProgram
     }
 
-    fun AddElementToRecycler() {
-        viewModelScope.launch(Dispatchers.IO) {
 
-        }
-    }
 
-    fun RemoveElementFromDatabase() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-
-    }
-
-    fun clearDatabase() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
 
 }

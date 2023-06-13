@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="wrap_content"
             android:background="?attr/colorBackgroundFloating"
             android:orientation="vertical"
 
@@ -29,7 +29,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="260dp">
+                android:layout_height="wrap_content">
 
 
 
@@ -70,6 +70,7 @@
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/exercise"
                     android:layout_marginLeft="4dp"
+                    android:visibility="gone"
                     ></TextView>
 
                 <TextView
@@ -80,6 +81,7 @@
                     app:layout_constraintTop_toBottomOf="@id/sets"
                     app:layout_constraintStart_toStartOf="@id/sets"
                     android:layout_marginLeft="2dp"
+                    android:visibility="gone"
                     ></TextView>
 
                 <TextView
@@ -90,6 +92,7 @@
                     app:layout_constraintTop_toBottomOf="@id/reps"
                     app:layout_constraintStart_toStartOf="@id/reps"
                     android:layout_marginLeft="1dp"
+                    android:visibility="gone"
                     ></TextView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
