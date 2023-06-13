@@ -13,12 +13,16 @@ import com.yologames.pwrlftr.room.SessionDao
 import com.yologames.pwrlftr.room.SessionDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
+import java.math.MathContext
+import kotlin.math.round
 
 class ProgramGeneratorViewModel : ViewModel() {
 
     var _1rms = ArrayList<Float>()
 //    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
     val trainingProgram = ArrayList<Session>()
+    var multiplier : Double = 1.000
 
 
     init {
@@ -30,21 +34,21 @@ class ProgramGeneratorViewModel : ViewModel() {
     fun Alpha_Session_1(): Session{
         val sessionAspect  = ArrayList<String>()
         sessionAspect.add("Squat")
-        sessionAspect.add("\nSet 1: ${_1rms[0]*.7} * 5 reps")
-        sessionAspect.add("\nSet 2: ${_1rms[0]*.75} * 3 reps")
-        sessionAspect.add("\nSet 3: ${_1rms[0]*.80} * 2 reps")
-        sessionAspect.add("\nSet 4: ${_1rms[0]*.85} * 1 rep")
-        sessionAspect.add("\nSet 5: ${_1rms[0]*.90} * 1 rep")
-        sessionAspect.add("\nBack-off Set: ${_1rms[0]*.80} * 5 reps")
-        sessionAspect.add("\nBack-off Set: ${_1rms[0]*.75} * 5 reps")
+        sessionAspect.add("\nSet 1: ${rounded(_1rms[0]*.7)} * 5 reps")
+        sessionAspect.add("\nSet 2: ${rounded( _1rms[0]*.75)} * 3 reps")
+        sessionAspect.add("\nSet 3: ${rounded(_1rms[0]*.80)} * 2 reps")
+        sessionAspect.add("\nSet 4: ${rounded(_1rms[0]*.85)} * 1 rep")
+        sessionAspect.add("\nSet 5: ${rounded(_1rms[0]*.90)} * 1 rep")
+        sessionAspect.add("\nBack-off Set: ${rounded(_1rms[0]*.80)} * 5 reps")
+        sessionAspect.add("\nBack-off Set: ${rounded(_1rms[0]*.75)} * 5 reps")
         sessionAspect.add("\nBench")
-        sessionAspect.add("\nSet 1: ${_1rms[1]*.7} * 5 reps")
-        sessionAspect.add("\nSet 2: ${_1rms[1]*.75} * 3 reps")
-        sessionAspect.add("\nSet 3: ${_1rms[1]*.80} * 2 reps")
-        sessionAspect.add("\nSet 4: ${_1rms[1]*.85} * 1 rep")
-        sessionAspect.add("\nSet 5: ${_1rms[1]*.90} * 1 rep")
-        sessionAspect.add("\nBack-off Set: ${_1rms[1]*.80} * 5 reps")
-        sessionAspect.add("\nBack-off Set: ${_1rms[1]*.75} * 5 reps")
+        sessionAspect.add("\nSet 1: ${rounded(_1rms[1]*.7)} * 5 reps")
+        sessionAspect.add("\nSet 2: ${rounded(_1rms[1]*.75)} * 3 reps")
+        sessionAspect.add("\nSet 3: ${rounded(_1rms[1]*.80)} * 2 reps")
+        sessionAspect.add("\nSet 4: ${rounded(_1rms[1]*.85)} * 1 rep")
+        sessionAspect.add("\nSet 5: ${rounded(_1rms[1]*.90)} * 1 rep")
+        sessionAspect.add("\nBack-off Set: ${rounded(_1rms[1]*.80)} * 5 reps")
+        sessionAspect.add("\nBack-off Set: ${rounded(_1rms[1]*.75)} * 5 reps")
         return Session(0,
             "Week ${1}, Day 1",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
@@ -54,15 +58,15 @@ class ProgramGeneratorViewModel : ViewModel() {
     private fun Alpha_Session_2(): Session {
         val sessionAspect  = ArrayList<String>()
         sessionAspect.add("Squat")
-        sessionAspect.add("\nSet 1: ${_1rms[0]*.6} * 5 reps")
-        sessionAspect.add("\nSet 2: ${_1rms[0]*.65} * 5 reps")
-        sessionAspect.add("\nSet 3: ${_1rms[0]*.70} * 5 reps")
-        sessionAspect.add("\nSet 4: ${_1rms[0]*.75} * 5 reps")
+        sessionAspect.add("\nSet 1: ${rounded(_1rms[0]*.6)} * 5 reps")
+        sessionAspect.add("\nSet 2: ${rounded(_1rms[0]*.65)} * 5 reps")
+        sessionAspect.add("\nSet 3: ${rounded(_1rms[0]*.70)} * 5 reps")
+        sessionAspect.add("\nSet 4: ${rounded(_1rms[0]*.75)} * 5 reps")
         sessionAspect.add("\nBench")
-        sessionAspect.add("\nSet 1: ${_1rms[1]*.60} * 5 reps")
-        sessionAspect.add("\nSet 2: ${_1rms[1]*.65} * 5 reps")
-        sessionAspect.add("\nSet 3: ${_1rms[1]*.70} * 5 reps")
-        sessionAspect.add("\nSet 4: ${_1rms[1]*.75} * 5 reps")
+        sessionAspect.add("\nSet 1: ${rounded(_1rms[1]*.60)} * 5 reps")
+        sessionAspect.add("\nSet 2: ${rounded(_1rms[1]*.65)} * 5 reps")
+        sessionAspect.add("\nSet 3: ${rounded(_1rms[1]*.70)} * 5 reps")
+        sessionAspect.add("\nSet 4: ${rounded(_1rms[1]*.75)} * 5 reps")
         return Session(0,
             "Week ${1}, Day 3",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
@@ -72,18 +76,20 @@ class ProgramGeneratorViewModel : ViewModel() {
     private fun Alpha_Session_3(): Session {
         val sessionAspect  = ArrayList<String>()
         sessionAspect.add("Deadlift")
-        sessionAspect.add("\nSet 1: ${_1rms[2]*.65} * 5 reps")
-        sessionAspect.add("\nSet 2: ${_1rms[2]*.75} * 5 reps")
-        sessionAspect.add("\nSet 3: ${_1rms[2]*.85} * 3 reps")
-        sessionAspect.add("\nSet 4: ${_1rms[2]*.90} * 1 rep")
-        sessionAspect.add("\nSet 5: ${_1rms[2]*.95} * 1 rep")
-        sessionAspect.add("\nBack-off Set: ${_1rms[2]*.80} * 5 reps")
-        sessionAspect.add("\nBack-off Set: ${_1rms[2]*.75} * 5 reps")
+        sessionAspect.add("\nSet 1: ${rounded(_1rms[2]*.65)} * 5 reps")
+        sessionAspect.add("\nSet 2: ${rounded(_1rms[2]*.75)} * 5 reps")
+        sessionAspect.add("\nSet 3: ${rounded(_1rms[2]*.85)} * 3 reps")
+        sessionAspect.add("\nSet 4: ${rounded(_1rms[2]*.90)} * 1 rep")
+        sessionAspect.add("\nSet 5: ${rounded(_1rms[2]*.95)} * 1 rep")
+        sessionAspect.add("\nBack-off Set: ${rounded(_1rms[2]*.80)} * 5 reps")
+        sessionAspect.add("\nBack-off Set: ${rounded(_1rms[2]*.75)} * 5 reps")
         return Session(0,
             "Week ${1}, Day 5",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
     }
+
+
 
     fun createAlphaProgram(): ArrayList<Session>{
         trainingProgram.clear()
@@ -95,5 +101,16 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
 
+    //Math stuff
+    fun rounded(f: Double): BigDecimal
+    {
+        val bd = BigDecimal(f).round(MathContext(3))
+        return applyMultiplier(bd)
+    }
+
+    fun applyMultiplier(bd: BigDecimal) : BigDecimal
+    {
+        return bd * (BigDecimal(multiplier))
+    }
 
 }

@@ -176,31 +176,31 @@ class ProgramGenerator : Fragment() {
 
 
 
-//    fun AddElementToRecycler(){
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val session = sessionDao.getAllSessions()
-//            if (sessionDao.getAllSessions().isNotEmpty()) {
-//                val tempSession = session.last()
-//
-//                val cardToAdd = PCard(
-//                    tempSession.title,
-//                    tempSession.exercise,
-//                    tempSession.sets,
-//                    tempSession.reps,
-//                    tempSession.weight,
-//                    session.size-1
-//
-//                    )
-//                PCardList.add(cardToAdd)
-//               // withContext(Dispatchers.Main)
-//               // {
-//                    binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
-//                //}
-//            }
-//        }
-//
-//        //binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size-1 )
-//    }
+    fun AddElementToRecycler(){
+        lifecycleScope.launch(Dispatchers.IO) {
+            val session = sessionDao.getAllSessions()
+            if (sessionDao.getAllSessions().isNotEmpty()) {
+                val tempSession = session.last()
+
+                val cardToAdd = PCard(
+                    tempSession.title,
+                    tempSession.exercise,
+                    tempSession.sets,
+                    tempSession.reps,
+                    tempSession.weight,
+                    session.size-1
+
+                    )
+                PCardList.add(cardToAdd)
+               // withContext(Dispatchers.Main)
+               // {
+                    binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
+                //}
+            }
+        }
+
+        //binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size-1 )
+    }
 
     fun RemoveElementFromDatabase(){
         var t : Int = 0
@@ -281,7 +281,11 @@ class ProgramGenerator : Fragment() {
 
         binding.removeTestButton.setOnClickListener{
             //clearDatabase()
-            RemoveElementFromDatabase()
+//            while (PCardList.size > 0) {
+//                RemoveElementFromDatabase()
+//            }
+            clearDatabase()
+            reloadFragment()
 
         }
     }
