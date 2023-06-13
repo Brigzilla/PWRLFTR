@@ -22,7 +22,8 @@ class ProgramGeneratorViewModel : ViewModel() {
     var _1rms = ArrayList<Float>()
 //    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
     val trainingProgram = ArrayList<Session>()
-    var multiplier : Double = 1.000
+    var multiplier : Double = 1.00
+    var increment : Double = 2.5
 
 
     init {
@@ -108,9 +109,16 @@ class ProgramGeneratorViewModel : ViewModel() {
         return applyMultiplier(bd)
     }
 
-    fun applyMultiplier(bd: BigDecimal) : BigDecimal
+    fun applyMultiplier(f: BigDecimal) : BigDecimal
     {
-        return bd * (BigDecimal(multiplier))
+
+        val bd = f * (BigDecimal(multiplier))
+        return applyIncrement(f)
+    }
+
+    fun applyIncrement(bd: BigDecimal) : BigDecimal
+    {
+        return bd + BigDecimal(increment)
     }
 
 }
