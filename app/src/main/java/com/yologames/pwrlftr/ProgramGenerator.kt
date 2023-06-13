@@ -76,7 +76,7 @@ class ProgramGenerator : Fragment() {
                 PopulateCards()
             }
 
-            Log.d("SDAO", "${_Database_size} Sessions Total")
+//            Log.d("SDAO", "${_Database_size} Sessions Total")
         }
 
         //Dispatchers.IO.cancel()
@@ -104,6 +104,7 @@ class ProgramGenerator : Fragment() {
            // binding.recyclerView.adapter!!.notifyDataSetChanged()
         }
 
+
     }
 
     override fun onCreateView(
@@ -115,6 +116,8 @@ class ProgramGenerator : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_program_generator, container, false)
         return binding.root
+
+        updateDataset()
 
     }
 
@@ -209,9 +212,13 @@ class ProgramGenerator : Fragment() {
             i--
         }
 
-        binding.recyclerView.adapter!!.notifyDataSetChanged()
+        updateDataset()
     }
 
+    }
+
+    fun updateDataset(){
+        binding.recyclerView.adapter!!.notifyDataSetChanged()
     }
 
 
