@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/menu">
+    app:startDestination="@id/programGenerator">
 
     <fragment
         android:id="@+id/one_rm_calc"
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_menu_to_rep_Max_Calc"
             app:destination="@id/rep_Max_Calc" />
+        <action
+            android:id="@+id/action_menu_to_programGenerator"
+            app:destination="@id/programGenerator" />
     </fragment>
     <fragment
         android:id="@+id/rep_Max_Calc"
@@ -32,5 +35,10 @@
         android:id="@+id/programGenerator"
         android:name="com.yologames.pwrlftr.ProgramGenerator"
         android:label="fragment_program_generator"
-        tools:layout="@layout/fragment_program_generator" />
+        tools:layout="@layout/fragment_program_generator" >
+        <action
+            android:id="@+id/action_programGenerator_self"
+            app:destination="@id/programGenerator"
+            app:launchSingleTop="true"/>
+    </fragment>
 </navigation>
