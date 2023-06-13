@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -127,11 +128,11 @@ class ProgramGenerator : Fragment() {
        if (can_init) {
            InitRecycler()
 
-//           lifecycleScope.launch(Dispatchers.IO)
-//           {
+           lifecycleScope.launch(Dispatchers.IO)
+           {
 
-               if (_Database_size >0) hideInitialElements()
-          // }
+               if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
+           }
        }
            setOnClickListeners()
 
@@ -284,14 +285,14 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-    private fun reloadFragment() {
-        val fragmentManager = requireFragmentManager()
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        val currentFragment = fragmentManager.findFragmentByTag("ProgramGenerator")
-        fragmentTransaction.remove(currentFragment!!)
-        fragmentTransaction.add(R.id.nav_host_fragment, ProgramGenerator(), "ProgramGenerator")
-        fragmentTransaction.commit()
-    }
+//    private fun reloadFragment() {
+//        val fragmentManager = requireFragmentManager()
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        val currentFragment = fragmentManager.findFragmentByTag("ProgramGenerator")
+//        fragmentTransaction.remove(currentFragment!!)
+//        fragmentTransaction.add(R.id.nav_host_fragment, ProgramGenerator(), "ProgramGenerator")
+//        fragmentTransaction.commit()
+//    }
 
     fun addArrayToDatabase(list : ArrayList<Session>){
         var i = 0
@@ -311,6 +312,16 @@ class ProgramGenerator : Fragment() {
         AddElementToRecycler()
         updateDataset()
         PopulateCards()
+        reloadFragment()
+    }
+
+    fun reloadFragment(){
+        val ft: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        //ft.remove(holder())
+        ft.remove(ProgramGenerator())
+//                    ft.add(android.R.id.content, DictionaryFragment())
+        ft.add(android.R.id.content, Menu())
+        ft.commitNow()
     }
 
     fun hideInitialElements(){
@@ -348,6 +359,8 @@ class ProgramGenerator : Fragment() {
 
         updateDataset()
     }
+
+
 
     }
 
