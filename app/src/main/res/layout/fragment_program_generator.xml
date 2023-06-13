@@ -13,9 +13,9 @@
         android:layout_height="56dp"
         android:id="@+id/add_test_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/remove_test_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enter_1rm_squat"
         app:layout_constraintWidth_percent="0.45"
         app:strokeWidth="1dp"
         android:text="Generate Program">
@@ -23,14 +23,70 @@
     </com.google.android.material.button.MaterialButton>
 
     <EditText
-        android:id="@+id/enter_1rm_textbox"
+        android:id="@+id/enter_1rm_squat"
         android:layout_width="86dp"
         android:layout_height="51dp"
         android:ems="10"
         android:inputType="number|numberDecimal"
-        app:layout_constraintStart_toEndOf="@id/add_test_button"
-        app:layout_constraintTop_toTopOf="@id/add_test_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/enter_1rm_bench"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_squat"
+        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_squat"
+        app:layout_constraintEnd_toStartOf="@id/enter_1rm_squat"
+        app:layout_constraintTop_toTopOf="@id/enter_1rm_squat"
+        android:text="Squat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/enter_1rm_bench"
+        android:layout_width="86dp"
+        android:layout_height="51dp"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/enter_1rm_squat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/enter_1rm_dead"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_bench"
+        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_bench"
+        app:layout_constraintEnd_toStartOf="@id/enter_1rm_bench"
+        app:layout_constraintTop_toTopOf="@id/enter_1rm_bench"
+        android:text="Bench"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/enter_1rm_dead"
+        android:layout_width="86dp"
+        android:layout_height="51dp"
+        android:ems="10"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/enter_1rm_bench"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_test_button"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_dead"
+        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_dead"
+        app:layout_constraintEnd_toStartOf="@id/enter_1rm_dead"
+        app:layout_constraintTop_toTopOf="@id/enter_1rm_dead"
+        android:text="Deadlift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="0dp"
@@ -51,8 +107,8 @@
         android:layout_height="56dp"
         android:id="@+id/remove_test_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/add_test_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.45"
         app:strokeWidth="1dp"
         android:text="Remove Element">

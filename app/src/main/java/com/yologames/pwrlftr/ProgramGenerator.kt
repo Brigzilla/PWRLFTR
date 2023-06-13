@@ -127,11 +127,11 @@ class ProgramGenerator : Fragment() {
        if (can_init) {
            InitRecycler()
 
-           lifecycleScope.launch(Dispatchers.IO)
-           {
+//           lifecycleScope.launch(Dispatchers.IO)
+//           {
 
-               if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
-           }
+               if (_Database_size >0) hideInitialElements()
+          // }
        }
            setOnClickListeners()
 
@@ -163,7 +163,6 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-
     fun InitRecycler(){
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(this.context, 1)
@@ -172,11 +171,6 @@ class ProgramGenerator : Fragment() {
 
         updateDataset()
     }
-//
-//    fun addViewModelElements(){
-//        //addToTestDatabase(viewModel.createAlphaSession()) //THIS IS WHERE YOU NEED TO FETCH THE VIEWMODEL TRAINING PROGRAM
-//
-//    }
 
 
 
@@ -196,10 +190,10 @@ class ProgramGenerator : Fragment() {
 
                     )
                 PCardList.add(cardToAdd)
-                withContext(Dispatchers.Main)
-                {
-                    binding.recyclerView.adapter!!.notifyDataSetChanged()
-                }
+               // withContext(Dispatchers.Main)
+               // {
+                    binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
+                //}
             }
         }
 
@@ -225,9 +219,9 @@ class ProgramGenerator : Fragment() {
     fun setOnClickListeners(){
 
 
-        binding.enter1rmTextbox.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+        binding.enter1rmSquat.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                if (binding.enter1rmTextbox.text.isNotEmpty())
+                if (binding.enter1rmSquat.text.isNotEmpty() || binding.enter1rmBench.text.isNotEmpty() || binding.enter1rmDead.text.isNotEmpty())
                 {
                     addArrayToDatabase(viewModel.createAlphaProgram())
                     updateDataset()
@@ -239,21 +233,45 @@ class ProgramGenerator : Fragment() {
             false
         })
 
+        binding.enter1rmBench.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                if (binding.enter1rmSquat.text.isNotEmpty() || binding.enter1rmBench.text.isNotEmpty() || binding.enter1rmDead.text.isNotEmpty())
+                {
+                    addArrayToDatabase(viewModel.createAlphaProgram())
+                    updateDataset()
+                    hideInitialElements()
+                }
+
+                return@OnKeyListener true
+            }
+            false
+        })
+
+        binding.enter1rmDead.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                if (binding.enter1rmSquat.text.isNotEmpty() || binding.enter1rmBench.text.isNotEmpty() || binding.enter1rmDead.text.isNotEmpty())
+                {
+                    addArrayToDatabase(viewModel.createAlphaProgram())
+                    updateDataset()
+                    hideInitialElements()
+                }
+
+                return@OnKeyListener true
+            }
+            false
+        })
 
 
-        binding.addTestButton.setOnClickListener{
-            viewModel._1rms[0] = binding.enter1rmTextbox.text.toString().toFloat()
-            addArrayToDatabase(viewModel.createAlphaProgram())
 
-
-//                queryDatabaseSize()
-//                InitRecycler()
- //               hideInitialElements()
-//                AddElementToRecycler()
- //               updateRecyclerViewData()
-                //updateDataset()
-
+        binding.addTestButton.setOnClickListener {
+            viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
+            viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
+            viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
+            val temp = viewModel.createAlphaProgram()
+            addArrayToDatabase(temp)
+            hideInitialElements()
         }
+
 
         binding.addSecondaryTestButton.setOnClickListener{
             //addToTestDatabase(sesh2)
@@ -292,11 +310,17 @@ class ProgramGenerator : Fragment() {
 
         AddElementToRecycler()
         updateDataset()
+        PopulateCards()
     }
 
     fun hideInitialElements(){
-        binding.enter1rmTextbox.visibility = View.GONE
+        binding.enter1rmSquat.visibility = View.GONE
+        binding.enter1rmBench.visibility = View.GONE
+        binding.enter1rmDead.visibility = View.GONE
         binding.addTestButton.visibility = View.GONE
+        binding.textSquat.visibility = View.GONE
+        binding.textBench.visibility = View.GONE
+        binding.textDead.visibility = View.GONE
         //binding.removeTestButton.visibility  =View.GONE
 
         //maybe remove bottom two from here for own function
@@ -331,15 +355,7 @@ class ProgramGenerator : Fragment() {
         binding.recyclerView.adapter!!.notifyDataSetChanged()
     }
 
-
-
-
-
-
-
-
-
-private fun ClearCards() {
+    private fun ClearCards() {
         PCardList.clear()
     }
 
