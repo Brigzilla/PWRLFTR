@@ -50,8 +50,38 @@
                     android:ellipsize="end"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/title"></TextView>
+
+                <TextView
+                    android:id="@+id/header_sets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Sets"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0"
+                    app:layout_constraintTop_toBottomOf="@id/exercise"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/header_reps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Reps"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintStart_toEndOf="@id/header_sets"
+                    app:layout_constraintTop_toBottomOf="@id/exercise"
+                    ></TextView>
 
                 <TextView
                     android:id="@+id/aspect_0"
@@ -64,7 +94,7 @@
                     android:text=""
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/header_sets"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_1"

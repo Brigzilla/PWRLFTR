@@ -36,6 +36,7 @@ var sessionsInCard = ArrayList<String>(40)
 //val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
 //val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
 //val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
+var weight_measurement = "KG"
 var can_init: Boolean  = false
 
 class ProgramGenerator : Fragment() {
@@ -96,7 +97,7 @@ class ProgramGenerator : Fragment() {
                     var j = 0
                     while (j< tempTitles.size)
                     {
-                        sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}KG")
+                        sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement")
                         j++
                     }
                     addPCard(tempTitles[0])
