@@ -81,7 +81,7 @@ class ProgramGenerator : Fragment() {
     private fun PopulateCardsNew(){
         lifecycleScope.launch(Dispatchers.IO) {
             ClearCards()
-            val sessionsInCard = arrayListOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",)
+            val sessionsInCard = arrayListOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",)
 
             val session = sessionDao.getAllSessions().sortedBy { it.title }
             if (sessionDao.getAllSessions().isNotEmpty())

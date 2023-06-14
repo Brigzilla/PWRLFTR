@@ -13,11 +13,13 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
     var multiplier : Double = 1.00
+
+    var increment : Double = 2.5
+
     var passesComplete : Int = 0
     var passedExpected : Int = 5
-    var increment : Double = 2.5
     var day: Int = 1
-    var dayExpected = 3
+    var dayExpected = 4
 
 
     init {
@@ -29,8 +31,6 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
     private fun Beta_Session_1(): Session{
-
-
         return Session(0,
         "\"Week ${passesComplete + 1}, Day $day",
         "Squat",
@@ -38,13 +38,23 @@ class ProgramGeneratorViewModel : ViewModel() {
         5,
             rounded(_1rms[0]*.7).toInt())
     }
+    private fun Beta_Session_2(): Session{
+        return Session(0,
+            "\"Week ${passesComplete + 1}, Day $day",
+            "Squat",
+            1,
+            3,
+            rounded(_1rms[0]*.75).toInt())
+    }
 
     fun createBetaProgram(): ArrayList<Session>{
         while (passesComplete < passedExpected) {
             trainingProgram.add(Beta_Session_1())
-            day ++
-
-            if (day > dayExpected){
+            trainingProgram.add(Beta_Session_2())
+            if (day < dayExpected) {
+                day++
+            }
+            if (day >= dayExpected){
                 passesComplete ++
                 day = 1
             }
