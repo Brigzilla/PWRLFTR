@@ -107,9 +107,10 @@
         android:layout_height="56dp"
         android:id="@+id/remove_test_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha=".5"
         app:layout_constraintWidth_percent="0.45"
+        android:visibility="gone"
         app:strokeWidth="1dp"
         android:text="Remove Element">
 

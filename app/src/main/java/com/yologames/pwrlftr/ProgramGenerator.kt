@@ -287,6 +287,7 @@ class ProgramGenerator : Fragment() {
 //            while (PCardList.size > 0) {
 //                RemoveElementFromDatabase()
 //            }
+            binding.removeTestButton.visibility = View.GONE
             clearDatabase()
             reloadFragment()
 
@@ -341,6 +342,7 @@ class ProgramGenerator : Fragment() {
         binding.textSquat.visibility = View.GONE
         binding.textBench.visibility = View.GONE
         binding.textDead.visibility = View.GONE
+        binding.removeTestButton.visibility = View.VISIBLE
         //binding.removeTestButton.visibility  =View.GONE
 
         //maybe remove bottom two from here for own function

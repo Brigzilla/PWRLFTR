@@ -109,7 +109,12 @@ class ProgramGeneratorViewModel : ViewModel() {
         trainingProgram.add(Alpha_Session_2())
         trainingProgram.add(Alpha_Session_3())
 
+        passesComplete += 1
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
 
+120
         return trainingProgram
 
     }
@@ -120,7 +125,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     fun rounded(f: Double): BigDecimal
     {
         val bd = BigDecimal(f).round(MathContext(3))
-        return bd
+        return applyIncrement(bd)
     }
 
     fun applyMultiplier(f: BigDecimal) : BigDecimal
