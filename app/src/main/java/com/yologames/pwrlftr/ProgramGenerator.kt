@@ -88,11 +88,19 @@ class ProgramGenerator : Fragment() {
             {
 
                 var i = 0
-                
-                while (i < session.size) {
 
+                while (i < session.size) {
+                    sessionsInCard = arrayListOf("_","_", "_", "_", "_", "_", "_", "_", "_", "_")
                     val tempTitles = sessionDao.getByTitle(session[i].title)
-                    Log.d("FATAL", "SIZE ${tempTitles.size} ${tempTitles[0]} ${tempTitles[1]}")
+
+                    var j = 0
+
+                    while (j< tempTitles.size)
+                    {
+                        sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}KG")
+                        j++
+                    }
+                    addPCard(tempTitles[0], i)
                     i++
                 }
             }
@@ -105,18 +113,18 @@ class ProgramGenerator : Fragment() {
             tempSession.title,
             tempSession.exercise,
             sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
-            sessionsInCard[0],
+            sessionsInCard[1],
+            sessionsInCard[2],
+            sessionsInCard[3],
+            sessionsInCard[4],
+            sessionsInCard[5],
+            sessionsInCard[6],
+            sessionsInCard[7],
+            sessionsInCard[8],
+            sessionsInCard[9],
             i
         )
-        PCardList.add(cardToAdd)
+        if (!PCardList.contains(cardToAdd)) PCardList.add(cardToAdd)
     }
 
 
