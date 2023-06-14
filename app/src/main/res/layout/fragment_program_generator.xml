@@ -31,6 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/enter_1rm_bench"
+        android:text="100"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
@@ -49,6 +50,7 @@
         android:layout_width="86dp"
         android:layout_height="51dp"
         android:ems="10"
+        android:text="100"
         android:inputType="number|numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/enter_1rm_squat"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +63,7 @@
         app:layout_constraintEnd_toStartOf="@id/enter_1rm_bench"
         app:layout_constraintTop_toTopOf="@id/enter_1rm_bench"
         android:text="Bench"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -71,6 +74,7 @@
         android:layout_width="86dp"
         android:layout_height="51dp"
         android:ems="10"
+        android:text="100"
         android:inputType="number|numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/enter_1rm_bench"
         app:layout_constraintStart_toStartOf="parent"

@@ -81,8 +81,6 @@ class ProgramGenerator : Fragment() {
     private fun PopulateCardsNew(){
         //lifecycleScope.launch(Dispatchers.IO) {
             ClearCards()
-
-
             val session = sessionDao.getAllSessions().sortedBy { it.title }
             if (sessionDao.getAllSessions().isNotEmpty())
             {
@@ -102,7 +100,7 @@ class ProgramGenerator : Fragment() {
                         j++
                     }
                     addPCard(tempTitles[0])
-                    i+= tempTitles.size+1
+                    i+= tempTitles.size
                 }
             }
            // }
