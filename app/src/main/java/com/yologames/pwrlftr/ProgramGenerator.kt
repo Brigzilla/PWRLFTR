@@ -63,6 +63,8 @@ class ProgramGenerator : Fragment() {
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
     fun queryDatabaseSize(){
         lifecycleScope.launch(Dispatchers.IO) {
+            if (sessionDao.getAllSessions().isNotEmpty())
+            {
             val i = sessionDao.getAllSessions().size
             if (i > _Database_size)
             {
@@ -72,6 +74,7 @@ class ProgramGenerator : Fragment() {
             if (_Database_size > 0)
             {
                 PopulateCards()
+            }
             }
         }
     }
@@ -94,7 +97,7 @@ class ProgramGenerator : Fragment() {
                 tempSession.exercise,
                 tempSession.sets,
                 tempSession.reps,
-                tempSession.weight,
+                tempSession.weight.toString().toInt(),
                 i
             )
             PCardList.add(cardToAdd)
@@ -151,7 +154,7 @@ class ProgramGenerator : Fragment() {
                     session.exercise,
                     session.sets,
                     session.reps,
-                    session.weight,
+                    session.weight.toString().toInt(),
                     session.id
                 )
                 newPCardList.add(cardToAdd)
@@ -187,7 +190,7 @@ class ProgramGenerator : Fragment() {
                     tempSession.exercise,
                     tempSession.sets,
                     tempSession.reps,
-                    tempSession.weight,
+                    tempSession.weight.toString().toInt(),
                     session.size-1
 
                     )
@@ -269,7 +272,7 @@ class ProgramGenerator : Fragment() {
             viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-            val temp = viewModel.createAlphaProgram()
+            val temp = viewModel.createBetaProgram()
             lifecycleScope.launch { Dispatchers.IO
 
             addArrayToDatabase(temp)

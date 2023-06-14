@@ -1,31 +1,23 @@
 package com.yologames.pwrlftr
 
-import android.content.Context
-import android.os.Build
-import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.*
-import androidx.room.Room
-import com.yologames.pwrlftr.recyclerview.PCard
-import com.yologames.pwrlftr.recyclerview.PCardList
 import com.yologames.pwrlftr.room.Session
-import com.yologames.pwrlftr.room.SessionDao
-import com.yologames.pwrlftr.room.SessionDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import java.math.MathContext
-import kotlin.math.round
 
 class ProgramGeneratorViewModel : ViewModel() {
 
     var _1rms = ArrayList<Float>()
 //    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
     val trainingProgram = ArrayList<Session>()
+
+
     var multiplier : Double = 1.00
     var passesComplete : Int = 0
-    var passedExpected : Int = 1
+    var passedExpected : Int = 5
     var increment : Double = 2.5
+    var day: Int = 1
+    var dayExpected = 3
 
 
     init {
@@ -56,6 +48,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Week ${passesComplete + 1}, Day 1",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
+
     }
 
     private fun Alpha_Session_2(): Session {
@@ -92,29 +85,51 @@ class ProgramGeneratorViewModel : ViewModel() {
             0, 0, 0)
     }
 
+    private fun Beta_Session_1(): Session{
+
+
+        return Session(0,
+        "\"Week ${passesComplete + 1}, $day",
+        "Squat",
+        1,
+        5,
+            rounded(_1rms[0]*.7).toInt())
+    }
+
+    fun createBetaProgram(): ArrayList<Session>{
+        while (passesComplete < passedExpected) {
+            trainingProgram.add(Beta_Session_1())
+            day ++
+
+            if (day > dayExpected){
+                passesComplete ++
+                day = 1
+            }
+        }
+        return trainingProgram
+    }
+
 
 
     fun createAlphaProgram(): ArrayList<Session>{
         trainingProgram.clear()
-
-            trainingProgram.add(Alpha_Session_1())
-            trainingProgram.add(Alpha_Session_2())
-            trainingProgram.add(Alpha_Session_3())
-            passesComplete += 1
-             trainingProgram.add(Alpha_Session_1())
-            trainingProgram.add(Alpha_Session_2())
-             trainingProgram.add(Alpha_Session_3())
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+        passesComplete += 1
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+        passesComplete += 1
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
         passesComplete += 1
         trainingProgram.add(Alpha_Session_1())
         trainingProgram.add(Alpha_Session_2())
         trainingProgram.add(Alpha_Session_3())
 
-        passesComplete += 1
-        trainingProgram.add(Alpha_Session_1())
-        trainingProgram.add(Alpha_Session_2())
-        trainingProgram.add(Alpha_Session_3())
 
-120
         return trainingProgram
 
     }

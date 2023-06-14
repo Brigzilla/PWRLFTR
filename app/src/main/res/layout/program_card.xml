@@ -48,7 +48,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:paddingBottom="16dp"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/title"
@@ -59,37 +58,64 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_margin="8dp"
+                    app:layout_goneMarginLeft="12dp"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/exercise"
-                    android:layout_marginLeft="4dp"
-                    android:visibility="gone"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/sets_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=" * "
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/sets"
+                    app:layout_constraintStart_toEndOf="@id/sets"
                     ></TextView>
 
                 <TextView
                     android:id="@+id/reps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    app:layout_constraintTop_toBottomOf="@id/sets"
-                    app:layout_constraintStart_toStartOf="@id/sets"
-                    android:layout_marginLeft="2dp"
-                    android:visibility="gone"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/sets_title"
+                    app:layout_constraintBottom_toBottomOf="@id/sets_title"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/reps_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text=" at "
+                    app:layout_constraintStart_toEndOf="@id/reps"
+                    app:layout_constraintBottom_toBottomOf="@id/reps"
                     ></TextView>
 
                 <TextView
                     android:id="@+id/weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    app:layout_constraintTop_toBottomOf="@id/reps"
-                    app:layout_constraintStart_toStartOf="@id/reps"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/reps_title"
+                    app:layout_constraintBottom_toBottomOf="@id/reps_title"
                     android:layout_marginLeft="1dp"
-                    android:visibility="gone"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/weight_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="KG"
+                    app:layout_constraintStart_toEndOf="@id/weight"
+                    app:layout_constraintBottom_toBottomOf="@id/weight"
                     ></TextView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
