@@ -1,16 +1,12 @@
 package com.yologames.pwrlftr
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -24,9 +20,7 @@ import com.yologames.pwrlftr.room.Session
 import com.yologames.pwrlftr.room.SessionDao
 import com.yologames.pwrlftr.room.SessionDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 private lateinit var binding: FragmentProgramGeneratorBinding
@@ -95,9 +89,8 @@ class ProgramGenerator : Fragment() {
             val cardToAdd = PCard(
                 tempSession.title,
                 tempSession.exercise,
-                tempSession.sets,
-                tempSession.reps,
-                tempSession.weight.toString().toInt(),
+                tempSession.sets.toString() + " * "+ tempSession.reps +" at "+ tempSession.weight + "KG",
+                "","","","","","","","","",
                 i
             )
             PCardList.add(cardToAdd)
@@ -153,31 +146,31 @@ class ProgramGenerator : Fragment() {
 
 
 
-    fun AddElementToRecycler(){
-        lifecycleScope.launch(Dispatchers.IO) {
-            val session = sessionDao.getAllSessions()
-            if (sessionDao.getAllSessions().isNotEmpty()) {
-                val tempSession = session.last()
-
-                val cardToAdd = PCard(
-                    tempSession.title,
-                    tempSession.exercise,
-                    tempSession.sets,
-                    tempSession.reps,
-                    tempSession.weight.toString().toInt(),
-                    session.size-1
-
-                    )
-                PCardList.add(cardToAdd)
-               // withContext(Dispatchers.Main)
-               // {
-                    binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
-                //}
-            }
-        }
-
-        //binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size-1 )
-    }
+//    fun AddElementToRecycler(){
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            val session = sessionDao.getAllSessions()
+//            if (sessionDao.getAllSessions().isNotEmpty()) {
+//                val tempSession = session.last()
+//
+//                val cardToAdd = PCard(
+//                    tempSession.title,
+//                    tempSession.exercise,
+//                    tempSession.sets,
+//                    tempSession.reps,
+//                    tempSession.weight.toString().toInt(),
+//                    session.size-1
+//
+//                    )
+//                PCardList.add(cardToAdd)
+//               // withContext(Dispatchers.Main)
+//               // {
+//                    binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
+//                //}
+//            }
+//        }
+//
+//        //binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size-1 )
+//    }
 
     fun RemoveElementFromDatabase(){
         var t : Int = 0
