@@ -92,17 +92,17 @@ class ProgramGenerator : Fragment() {
                 while (i < session.size) {
                     sessionsInCard = arrayListOf("_","_", "_", "_", "_", "_", "_", "_", "_", "_")
                     val tempTitles = sessionDao.getByTitle(session[i].title)
+                    //val tempTitles = sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise)
+                    //Log.d("FATAL", sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise).toString())
+                   // Log.d("FATAL",tempTitles.size.toString())
                     var j = 0
                     while (j< tempTitles.size)
                     {
                         sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}KG")
                         j++
                     }
-
-
                     addPCard(tempTitles[0])
-
-                    i+= tempTitles.size
+                    i+= tempTitles.size+1
                 }
             }
            // }
@@ -131,7 +131,7 @@ class ProgramGenerator : Fragment() {
             sessionsInCard[9],
             0
         )
-        Log.d("FATAL", cardToAdd.title)
+        //Log.d("FATAL", cardToAdd.title)
         PCardList.add(cardToAdd)
 
 
@@ -328,24 +328,13 @@ class ProgramGenerator : Fragment() {
 //                RemoveElementFromDatabase()
 //            }
             binding.removeTestButton.visibility = View.GONE
-            clearDatabase()
-            reloadFragment()
+            lifecycleScope.launch(Dispatchers.Main)
+            {
+                clearDatabase()
+
+            }
 
         }
-    }
-
-//    private fun reloadFragment() {
-//        val fragmentManager = requireFragmentManager()
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        val currentFragment = fragmentManager.findFragmentByTag("ProgramGenerator")
-//        fragmentTransaction.remove(currentFragment!!)
-//        fragmentTransaction.add(R.id.nav_host_fragment, ProgramGenerator(), "ProgramGenerator")
-//        fragmentTransaction.commit()
-//    }
-
-    fun parseArray(listOfList: ArrayList<ArrayList<Session>>){
-
-
     }
 
     fun addArrayToDatabase(list : ArrayList<Session>){
@@ -371,12 +360,6 @@ class ProgramGenerator : Fragment() {
     }
 
     fun reloadFragment(){
-//        val ft: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-//        //ft.remove(holder())
-//        ft.remove(ProgramGenerator())
-////                    ft.add(android.R.id.content, DictionaryFragment())
-//        ft.add(android.R.id.content, Menu())
-//        ft.commitNow()
         findNavController().navigate(R.id.action_programGenerator_self)
     }
 
@@ -405,16 +388,16 @@ class ProgramGenerator : Fragment() {
             }
             val sessionsB = sessionDao.getAllSessions()
 
-           // Log.d("SDAO", "${sessionsB.size} SessionsB Total - Post Delete")
         }
         var i = _Database_size
         while (i > 0)
         {
-            binding.recyclerView.adapter!!.notifyItemRemoved(i-1)
+            binding.recyclerView.adapter!!.notifyItemRemoved(i)
             i--
         }
 
         updateDataset()
+        reloadFragment()
     }
 
 

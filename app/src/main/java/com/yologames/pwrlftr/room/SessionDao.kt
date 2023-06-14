@@ -27,6 +27,10 @@ interface SessionDao {
     @Query("SELECT * FROM session_table WHERE title = :title")
     fun getByTitle(title: String): List<Session>
 
+    @Query("SELECT * FROM session_table WHERE title = :title AND exercise = :exercise")
+    fun getByTitleAndExercise(title: String, exercise: String): List<Session>
+
+
 
 
 }
