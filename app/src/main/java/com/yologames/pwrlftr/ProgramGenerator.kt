@@ -81,26 +81,20 @@ class ProgramGenerator : Fragment() {
     private fun PopulateCardsNew(){
         lifecycleScope.launch(Dispatchers.IO) {
             ClearCards()
-            val sessionsInCard = ArrayList<String>(10)
+            val sessionsInCard = arrayListOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",)
 
             val session = sessionDao.getAllSessions().sortedBy { it.title }
             if (sessionDao.getAllSessions().isNotEmpty())
             {
                 var i = 0
-               // val session_size = sessionDao.getAllSessions().size
-               //val session_list_sorted = sessionDao.getAllSessions().sortedBy { it.title }
-
                 while (i < session.size)
                 {
-                sessionsInCard.clear()
                 val tempSession = session[i]
-//                sessionsInCard[0] = (session[i].sets.toString())
-//                sessionsInCard[1] = (session[i].reps.toString())
-//                sessionsInCard[2] = (session[i].weight.toString())
+                sessionsInCard[0] = (session[i].sets.toString())
                 val cardToAdd = PCard(
                 tempSession.title,
                 tempSession.exercise,
-                "sessionsInCard[0]",
+                sessionsInCard[i],
                     "sessionsInCard[0]",
                     "sessionsInCard[0]",
                     "sessionsInCard[0]",
