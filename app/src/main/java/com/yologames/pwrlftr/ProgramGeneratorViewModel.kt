@@ -30,7 +30,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
 
-    private fun Beta_Session_1(): Session{
+    private fun Beta_Set_1(): Session{
         return Session(0,
         "\"Week ${passesComplete + 1}, Day $day",
         "Squat",
@@ -38,7 +38,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         5,
             rounded(_1rms[0]*.7).toInt())
     }
-    private fun Beta_Session_2(): Session{
+    private fun Beta_Set_2(): Session{
         return Session(0,
             "\"Week ${passesComplete + 1}, Day $day",
             "Squat",
@@ -46,11 +46,59 @@ class ProgramGeneratorViewModel : ViewModel() {
             3,
             rounded(_1rms[0]*.75).toInt())
     }
+    private fun Beta_Set_3(): Session{
+        return Session(0,
+            "\"Week ${passesComplete + 1}, Day $day",
+            "Squat",
+            1,
+            2,
+            rounded(_1rms[0]*.80).toInt())
+    }
+
+    private fun Beta_Set_4(): Session{
+        return Session(0,
+            "\"Week ${passesComplete + 1}, Day $day",
+            "Squat",
+            1,
+            1,
+            rounded(_1rms[0]*.85).toInt())
+    }
+
+    private fun Beta_Set_5(): Session{
+        return Session(0,
+            "\"Week ${passesComplete + 1}, Day $day",
+            "Squat",
+            1,
+            1,
+            rounded(_1rms[0]*.90).toInt())
+    }
+
+    private fun Beta_Set_6(): Session{
+        return Session(0,
+            "\"Week ${passesComplete + 1}, Day $day",
+            "Squat",
+            1,
+            5,
+            rounded(_1rms[0]*.80).toInt())
+    }
+    private fun Beta_Set_7(): Session{
+        return Session(0,
+            "\"Week ${passesComplete + 1}, Day $day",
+            "Squat",
+            1,
+            5,
+            rounded(_1rms[0]*.75).toInt())
+    }
 
     fun createBetaProgram(): ArrayList<Session>{
         while (passesComplete < passedExpected) {
-            trainingProgram.add(Beta_Session_1())
-            trainingProgram.add(Beta_Session_2())
+            trainingProgram.add(Beta_Set_1())
+            trainingProgram.add(Beta_Set_2())
+            trainingProgram.add(Beta_Set_3())
+            trainingProgram.add(Beta_Set_4())
+            trainingProgram.add(Beta_Set_5())
+            trainingProgram.add(Beta_Set_6())
+            trainingProgram.add(Beta_Set_7())
             if (day <= dayExpected) {
                 day++
             }
@@ -86,7 +134,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     }
 
 //**
-    //TODO: Below is the Alpha approach where the program is generated as a string. It works well, but functionally it won't scale. Use the program and create that above
+    //TODO: Below is the Alpha approach where the program is generated as a string. It works well, but functionally it won't scale. Use the program outlined below and create that above
     //Mat - 14/6/2023
     //**
 

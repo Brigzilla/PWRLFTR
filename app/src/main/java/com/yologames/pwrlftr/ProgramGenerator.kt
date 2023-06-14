@@ -79,7 +79,7 @@ class ProgramGenerator : Fragment() {
     }
 
     private fun PopulateCardsNew(){
-        lifecycleScope.launch(Dispatchers.IO) {
+        //lifecycleScope.launch(Dispatchers.IO) {
             ClearCards()
 
 
@@ -105,7 +105,7 @@ class ProgramGenerator : Fragment() {
                     i+= tempTitles.size
                 }
             }
-            }
+           // }
         updateRecyclerView()
         }
 
