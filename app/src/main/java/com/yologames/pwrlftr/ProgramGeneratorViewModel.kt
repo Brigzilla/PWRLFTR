@@ -26,6 +26,84 @@ class ProgramGeneratorViewModel : ViewModel() {
         _1rms.add( 300.0f) //Deadlift
     }
 
+
+
+    private fun Beta_Session_1(): Session{
+
+
+        return Session(0,
+        "\"Week ${passesComplete + 1}, $day",
+        "Squat",
+        1,
+        5,
+            rounded(_1rms[0]*.7).toInt())
+    }
+
+    fun createBetaProgram(): ArrayList<Session>{
+        while (passesComplete < passedExpected) {
+            trainingProgram.add(Beta_Session_1())
+            day ++
+
+            if (day > dayExpected){
+                passesComplete ++
+                day = 1
+            }
+        }
+        return trainingProgram
+    }
+
+
+
+
+
+    //Math stuff
+    fun rounded(f: Double): BigDecimal
+    {
+        val bd = BigDecimal(f).round(MathContext(3))
+        return applyIncrement(bd)
+    }
+
+    fun applyMultiplier(f: BigDecimal) : BigDecimal
+    {
+
+        val bd = f * (BigDecimal(multiplier))
+        return applyIncrement(bd)
+    }
+
+    fun applyIncrement(bd: BigDecimal) : BigDecimal
+    {
+        return bd + BigDecimal(increment * passesComplete)
+    }
+
+//**
+    //TODO: Below is the Alpha approach where the program is generated as a string. It works well, but functionally it won't scale. Use the program and create that above
+    //Mat - 14/6/2023
+    //**
+
+
+    fun createAlphaProgram(): ArrayList<Session>{
+        trainingProgram.clear()
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+        passesComplete += 1
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+        passesComplete += 1
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+        passesComplete += 1
+        trainingProgram.add(Alpha_Session_1())
+        trainingProgram.add(Alpha_Session_2())
+        trainingProgram.add(Alpha_Session_3())
+
+
+        return trainingProgram
+
+    }
+
     fun Alpha_Session_1(): Session{
         val sessionAspect  = ArrayList<String>()
         sessionAspect.add("Squat")
@@ -83,76 +161,6 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Week ${passesComplete + 1}, Day 5",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
-    }
-
-    private fun Beta_Session_1(): Session{
-
-
-        return Session(0,
-        "\"Week ${passesComplete + 1}, $day",
-        "Squat",
-        1,
-        5,
-            rounded(_1rms[0]*.7).toInt())
-    }
-
-    fun createBetaProgram(): ArrayList<Session>{
-        while (passesComplete < passedExpected) {
-            trainingProgram.add(Beta_Session_1())
-            day ++
-
-            if (day > dayExpected){
-                passesComplete ++
-                day = 1
-            }
-        }
-        return trainingProgram
-    }
-
-
-
-    fun createAlphaProgram(): ArrayList<Session>{
-        trainingProgram.clear()
-        trainingProgram.add(Alpha_Session_1())
-        trainingProgram.add(Alpha_Session_2())
-        trainingProgram.add(Alpha_Session_3())
-        passesComplete += 1
-        trainingProgram.add(Alpha_Session_1())
-        trainingProgram.add(Alpha_Session_2())
-        trainingProgram.add(Alpha_Session_3())
-        passesComplete += 1
-        trainingProgram.add(Alpha_Session_1())
-        trainingProgram.add(Alpha_Session_2())
-        trainingProgram.add(Alpha_Session_3())
-        passesComplete += 1
-        trainingProgram.add(Alpha_Session_1())
-        trainingProgram.add(Alpha_Session_2())
-        trainingProgram.add(Alpha_Session_3())
-
-
-        return trainingProgram
-
-    }
-
-
-
-    //Math stuff
-    fun rounded(f: Double): BigDecimal
-    {
-        val bd = BigDecimal(f).round(MathContext(3))
-        return applyIncrement(bd)
-    }
-
-    fun applyMultiplier(f: BigDecimal) : BigDecimal
-    {
-
-        val bd = f * (BigDecimal(multiplier))
-        return applyIncrement(bd)
-    }
-
-    fun applyIncrement(bd: BigDecimal) : BigDecimal
-    {
-        return bd + BigDecimal(increment * passesComplete)
     }
 
 }
