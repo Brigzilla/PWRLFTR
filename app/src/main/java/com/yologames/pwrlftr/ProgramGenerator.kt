@@ -86,21 +86,13 @@ class ProgramGenerator : Fragment() {
             val session = sessionDao.getAllSessions().sortedBy { it.title }
             if (sessionDao.getAllSessions().isNotEmpty())
             {
+
                 var i = 0
                 
                 while (i < session.size) {
-                    sessionsInCard = arrayListOf("_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_",)
-                    if (i != session.size-1)
-                    {
-                        if (session[i].title == session[i+1].title)
-                        {
-                            if (!sessionsInCard.contains(session[i].exercise+session[i].sets+session[i].reps+session[i].weight))
-                            {
 
-                                addPCard(session[i], i)
-                            }
-                        }
-                    }
+                    val tempTitles = sessionDao.getByTitle(session[i].title)
+                    Log.d("FATAL", "SIZE ${tempTitles.size} ${tempTitles[0]} ${tempTitles[1]}")
                     i++
                 }
             }
