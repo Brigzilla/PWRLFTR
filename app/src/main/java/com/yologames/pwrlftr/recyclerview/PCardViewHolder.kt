@@ -24,9 +24,30 @@ class PCardViewHolder(
         cardCellBinding.aspect8.text = pCard.aspect8.toString()
         cardCellBinding.aspect9.text = pCard.aspect9.toString()
 
+        if (pCard.aspect0 != "_" ) cardCellBinding.aspect0.visibility = View.VISIBLE
+        if (pCard.aspect0 == "_" ) cardCellBinding.aspect0.visibility = View.GONE
+        if (pCard.aspect1 != "_" ) cardCellBinding.aspect1.visibility = View.VISIBLE
+        if (pCard.aspect1 == "_" ) cardCellBinding.aspect1.visibility = View.GONE
+        if (pCard.aspect2 != "_" ) cardCellBinding.aspect2.visibility = View.VISIBLE
+        if (pCard.aspect2 == "_" ) cardCellBinding.aspect2.visibility = View.GONE
+        if (pCard.aspect3 != "_" ) cardCellBinding.aspect3.visibility = View.VISIBLE
+        if (pCard.aspect3 == "_" ) cardCellBinding.aspect3.visibility = View.GONE
+        if (pCard.aspect4 != "_" ) cardCellBinding.aspect4.visibility = View.VISIBLE
+        if (pCard.aspect4 == "_" ) cardCellBinding.aspect4.visibility = View.GONE
+        if (pCard.aspect5 != "_" ) cardCellBinding.aspect5.visibility = View.VISIBLE
+        if (pCard.aspect5 == "_" ) cardCellBinding.aspect5.visibility = View.GONE
+        if (pCard.aspect6 != "_" ) cardCellBinding.aspect6.visibility = View.VISIBLE
+        if (pCard.aspect6 == "_" ) cardCellBinding.aspect6.visibility = View.GONE
+        if (pCard.aspect7 != "_" ) cardCellBinding.aspect7.visibility = View.VISIBLE
+        if (pCard.aspect7 == "_" ) cardCellBinding.aspect7.visibility = View.GONE
+        if (pCard.aspect8 != "_" ) cardCellBinding.aspect8.visibility = View.VISIBLE
+        if (pCard.aspect8 == "_" ) cardCellBinding.aspect8.visibility = View.GONE
+        if (pCard.aspect9 != "_" ) cardCellBinding.aspect9.visibility = View.VISIBLE
+        if (pCard.aspect0 == "_" ) cardCellBinding.aspect9.visibility = View.GONE
+
 //        cardCellBinding.cardView.setOnClickListener {
 //            // D_MOD_SELECTED = dCard.moduleID
 //        }
-        }
-
     }
+
+}

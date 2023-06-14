@@ -31,7 +31,7 @@ var _Database_size = 1
 private lateinit var sessionDao: SessionDao
 
 
-
+var sessionsInCard = ArrayList<String>(40)
 //some test sessions. Can probably safely delete but will save time later
 //val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
 //val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
@@ -81,40 +81,52 @@ class ProgramGenerator : Fragment() {
     private fun PopulateCardsNew(){
         lifecycleScope.launch(Dispatchers.IO) {
             ClearCards()
-            val sessionsInCard = arrayListOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",)
+
 
             val session = sessionDao.getAllSessions().sortedBy { it.title }
             if (sessionDao.getAllSessions().isNotEmpty())
             {
                 var i = 0
-                while (i < session.size)
-                {
-                val tempSession = session[i]
-                sessionsInCard[0] = (session[i].sets.toString())
-                val cardToAdd = PCard(
-                tempSession.title,
-                tempSession.exercise,
-                sessionsInCard[i],
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                    "sessionsInCard[0]",
-                i
-            )
-            PCardList.add(cardToAdd)
+                
+                while (i < session.size) {
+                    sessionsInCard = arrayListOf("_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_",)
+                    if (i != session.size-1)
+                    {
+                        if (session[i].title == session[i+1].title)
+                        {
+                            if (!sessionsInCard.contains(session[i].exercise+session[i].sets+session[i].reps+session[i].weight))
+                            {
 
-
-                i++
+                                addPCard(session[i], i)
+                            }
+                        }
+                    }
+                    i++
+                }
             }
             }
 
         }
+    fun addPCard(session: Session, i: Int){
+        val tempSession = session
+        val cardToAdd = PCard(
+            tempSession.title,
+            tempSession.exercise,
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            sessionsInCard[0],
+            i
+        )
+        PCardList.add(cardToAdd)
     }
+
 
 //    private fun PopulateCards() {
 //
