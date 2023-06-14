@@ -19,7 +19,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     var passesComplete : Int = 0
     var passedExpected : Int = 5
     var day: Int = 1
-    var dayExpected = 4
+    var dayExpected = 3
 
 
     init {
@@ -51,10 +51,10 @@ class ProgramGeneratorViewModel : ViewModel() {
         while (passesComplete < passedExpected) {
             trainingProgram.add(Beta_Session_1())
             trainingProgram.add(Beta_Session_2())
-            if (day < dayExpected) {
+            if (day <= dayExpected) {
                 day++
             }
-            if (day >= dayExpected){
+            if (day > dayExpected){
                 passesComplete ++
                 day = 1
             }

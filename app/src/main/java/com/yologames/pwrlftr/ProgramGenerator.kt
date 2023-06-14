@@ -92,26 +92,33 @@ class ProgramGenerator : Fragment() {
                 while (i < session.size) {
                     sessionsInCard = arrayListOf("_","_", "_", "_", "_", "_", "_", "_", "_", "_")
                     val tempTitles = sessionDao.getByTitle(session[i].title)
-
                     var j = 0
-
                     while (j< tempTitles.size)
                     {
                         sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}KG")
                         j++
                     }
-                    addPCard(tempTitles[0], i)
-                    i++
+
+
+                    addPCard(tempTitles[0])
+
+                    i+= tempTitles.size
                 }
             }
             }
-
+        updateRecyclerView()
         }
-    fun addPCard(session: Session, i: Int){
-        val tempSession = session
+
+    private fun updateRecyclerView() {
+        requireActivity().runOnUiThread {
+            binding.recyclerView.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    private fun addPCard(session: Session) {
         val cardToAdd = PCard(
-            tempSession.title,
-            tempSession.exercise,
+            session.title,
+            session.exercise,
             sessionsInCard[0],
             sessionsInCard[1],
             sessionsInCard[2],
@@ -122,9 +129,12 @@ class ProgramGenerator : Fragment() {
             sessionsInCard[7],
             sessionsInCard[8],
             sessionsInCard[9],
-            i
+            0
         )
-        if (!PCardList.contains(cardToAdd)) PCardList.add(cardToAdd)
+        Log.d("FATAL", cardToAdd.title)
+        PCardList.add(cardToAdd)
+
+
     }
 
 
@@ -297,11 +307,13 @@ class ProgramGenerator : Fragment() {
             viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-            val temp = viewModel.createBetaProgram()
-            lifecycleScope.launch { Dispatchers.IO
 
+            lifecycleScope.launch { Dispatchers.IO
+                val temp = viewModel.createBetaProgram()
             addArrayToDatabase(temp)
             hideInitialElements()
+                updateRecyclerView()
+                reloadFragment()
                 }
         }
 
@@ -355,7 +367,7 @@ class ProgramGenerator : Fragment() {
         updateDataset()
         //PopulateCards()
         PopulateCardsNew()
-        reloadFragment()
+
     }
 
     fun reloadFragment(){
