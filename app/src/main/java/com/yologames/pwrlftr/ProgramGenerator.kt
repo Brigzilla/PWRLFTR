@@ -1,6 +1,7 @@
 package com.yologames.pwrlftr
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,6 +29,9 @@ private lateinit var binding: FragmentProgramGeneratorBinding
 var _Database_size = 1
 
 private lateinit var sessionDao: SessionDao
+
+
+
 //some test sessions. Can probably safely delete but will save time later
 //val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
 //val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
@@ -48,7 +52,7 @@ class ProgramGenerator : Fragment() {
         val database = Room.databaseBuilder(
             requireContext(),
             SessionDatabase::class.java, "session_database"
-        ).build()
+        ).allowMainThreadQueries().build()
         sessionDao = database.sessionDao()
         queryDatabaseSize()
         can_init = true
@@ -67,7 +71,8 @@ class ProgramGenerator : Fragment() {
 
             if (_Database_size > 0)
             {
-                PopulateCards()
+                //PopulateCards()
+                PopulateCardsNew()
             }
             }
         }
@@ -76,56 +81,78 @@ class ProgramGenerator : Fragment() {
     private fun PopulateCardsNew(){
         lifecycleScope.launch(Dispatchers.IO) {
             ClearCards()
-            var i = 0
+            val sessionsInCard = ArrayList<String>(10)
+
+            val session = sessionDao.getAllSessions().sortedBy { it.title }
             if (sessionDao.getAllSessions().isNotEmpty())
             {
-                val sL = sessionDao.getAllSessions().size
-                val session = sessionDao.getAllSessions().sortedBy { it.title }
-                while (i < sL-1)
+                var i = 0
+               // val session_size = sessionDao.getAllSessions().size
+               //val session_list_sorted = sessionDao.getAllSessions().sortedBy { it.title }
+
+                while (i < session.size)
                 {
-                    if (session[i].title == session[i+1].title)
-                    {
-                        //create a list of the aspects in each session and add them to a new list of things which is assigned to the adapter.
-                        //this is really stupid but it works in my head
-                    }
-                    i++
-                }
-            }
-
-        }
-    }
-
-    private fun PopulateCards() {
-
-        lifecycleScope.launch(Dispatchers.IO){
-        ClearCards()
-
-        var i = 0
-        if (sessionDao.getAllSessions().isNotEmpty())
-        {
-
-        while (i< sessionDao.getAllSessions().size)
-        {
-            val session = sessionDao.getAllSessions().sortedBy { it.title }
-            for (Session in session) {
-
-            }
-            val tempSession = session[i]
-            val cardToAdd = PCard(
+                sessionsInCard.clear()
+                val tempSession = session[i]
+//                sessionsInCard[0] = (session[i].sets.toString())
+//                sessionsInCard[1] = (session[i].reps.toString())
+//                sessionsInCard[2] = (session[i].weight.toString())
+                val cardToAdd = PCard(
                 tempSession.title,
                 tempSession.exercise,
-                tempSession.sets.toString() + " * "+ tempSession.reps +" at "+ tempSession.weight + "KG",
-                "","","","","","","","","",
+                "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
+                    "sessionsInCard[0]",
                 i
             )
             PCardList.add(cardToAdd)
-            i++
-        }
-        }
-        }
 
 
+                i++
+            }
+            }
+
+        }
     }
+
+//    private fun PopulateCards() {
+//
+//        lifecycleScope.launch(Dispatchers.IO){
+//        ClearCards()
+//
+//        var i = 0
+//        if (sessionDao.getAllSessions().isNotEmpty())
+//        {
+//
+//        while (i< sessionDao.getAllSessions().size)
+//        {
+//            val session = sessionDao.getAllSessions().sortedBy { it.title }
+//            for (Session in session) {
+//
+//            }
+//            val tempSession = session[i]
+//            val cardToAdd = PCard(
+//                tempSession.title,
+//                tempSession.exercise,
+//                tempSession.sets.toString() + " * "+ tempSession.reps +" at "+ tempSession.weight + "KG",
+//                "","","","","","","","","",
+//                i
+//            )
+//            PCardList.add(cardToAdd)
+//            i++
+//        }
+//        }
+//        }
+//
+//
+//    }
 
 
 
@@ -150,7 +177,7 @@ class ProgramGenerator : Fragment() {
        if (can_init) {
            InitRecycler()
 
-           lifecycleScope.launch(Dispatchers.IO)
+           lifecycleScope.launch(Dispatchers.Main)
            {
 
                if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
@@ -320,7 +347,8 @@ class ProgramGenerator : Fragment() {
 
         //AddElementToRecycler()
         updateDataset()
-        PopulateCards()
+        //PopulateCards()
+        PopulateCardsNew()
         reloadFragment()
     }
 

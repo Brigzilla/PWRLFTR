@@ -11,6 +11,8 @@ data class Session(
     var id: Int,
     var title: String,
 
+
+
     @ColumnInfo(name = "exercise")
     var exercise: String,
 
