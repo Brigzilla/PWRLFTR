@@ -32,7 +32,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
         return Session(0,
-        "\"Week ${passesComplete + 1}, $day",
+        "\"Week ${passesComplete + 1}, Day $day",
         "Squat",
         1,
         5,

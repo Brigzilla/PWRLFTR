@@ -54,7 +54,7 @@
                     app:layout_constraintTop_toBottomOf="@id/title"></TextView>
 
                 <TextView
-                    android:id="@+id/sets"
+                    android:id="@+id/aspect_0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -67,56 +67,132 @@
                     app:layout_constraintTop_toBottomOf="@id/exercise"
                     ></TextView>
                 <TextView
-                    android:id="@+id/sets_title"
+                    android:id="@+id/aspect_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     app:layout_goneMarginLeft="12dp"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
-                    android:text=" * "
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/sets"
-                    app:layout_constraintStart_toEndOf="@id/sets"
-                    ></TextView>
-
-                <TextView
-                    android:id="@+id/reps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:text=""
                     android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/sets_title"
-                    app:layout_constraintBottom_toBottomOf="@id/sets_title"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_0"
                     ></TextView>
                 <TextView
-                    android:id="@+id/reps_title"
+                    android:id="@+id/aspect_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:text=" at "
-                    app:layout_constraintStart_toEndOf="@id/reps"
-                    app:layout_constraintBottom_toBottomOf="@id/reps"
-                    ></TextView>
-
-                <TextView
-                    android:id="@+id/weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
                     android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@id/reps_title"
-                    app:layout_constraintBottom_toBottomOf="@id/reps_title"
-                    android:layout_marginLeft="1dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_1"
                     ></TextView>
-
                 <TextView
-                    android:id="@+id/weight_title"
+                    android:id="@+id/aspect_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:text="KG"
-                    app:layout_constraintStart_toEndOf="@id/weight"
-                    app:layout_constraintBottom_toBottomOf="@id/weight"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_2"
                     ></TextView>
+                <TextView
+                    android:id="@+id/aspect_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_3"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/aspect_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_4"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/aspect_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_5"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/aspect_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_6"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/aspect_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_7"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/aspect_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_goneMarginLeft="12dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_8"
+                    ></TextView>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

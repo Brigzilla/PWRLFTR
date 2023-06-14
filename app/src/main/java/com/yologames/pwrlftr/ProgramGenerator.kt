@@ -140,32 +140,6 @@ class ProgramGenerator : Fragment() {
        }
            setOnClickListeners()
 
-        //InitRecycler()
-    }
-
-    private fun updateRecyclerViewData() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val sessionList = sessionDao.getAllSessions().sortedBy { it.title }
-            val newPCardList = ArrayList<PCard>()
-
-            for (session in sessionList) {
-                val cardToAdd = PCard(
-                    session.title,
-                    session.exercise,
-                    session.sets,
-                    session.reps,
-                    session.weight.toString().toInt(),
-                    session.id
-                )
-                newPCardList.add(cardToAdd)
-            }
-
-            withContext(Dispatchers.Main) {
-                PCardList.clear()
-                PCardList.addAll(newPCardList)
-                binding.recyclerView.adapter?.notifyDataSetChanged()
-            }
-        }
     }
 
     fun InitRecycler(){
@@ -305,6 +279,11 @@ class ProgramGenerator : Fragment() {
 //        fragmentTransaction.add(R.id.nav_host_fragment, ProgramGenerator(), "ProgramGenerator")
 //        fragmentTransaction.commit()
 //    }
+
+    fun parseArray(listOfList: ArrayList<ArrayList<Session>>){
+
+
+    }
 
     fun addArrayToDatabase(list : ArrayList<Session>){
         var i = 0
