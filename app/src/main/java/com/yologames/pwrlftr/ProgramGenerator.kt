@@ -73,6 +73,28 @@ class ProgramGenerator : Fragment() {
         }
     }
 
+    private fun PopulateCardsNew(){
+        lifecycleScope.launch(Dispatchers.IO) {
+            ClearCards()
+            var i = 0
+            if (sessionDao.getAllSessions().isNotEmpty())
+            {
+                val sL = sessionDao.getAllSessions().size
+                val session = sessionDao.getAllSessions().sortedBy { it.title }
+                while (i < sL-1)
+                {
+                    if (session[i].title == session[i+1].title)
+                    {
+                        //create a list of the aspects in each session and add them to a new list of things which is assigned to the adapter.
+                        //this is really stupid but it works in my head
+                    }
+                    i++
+                }
+            }
+
+        }
+    }
+
     private fun PopulateCards() {
 
         lifecycleScope.launch(Dispatchers.IO){
@@ -85,6 +107,9 @@ class ProgramGenerator : Fragment() {
         while (i< sessionDao.getAllSessions().size)
         {
             val session = sessionDao.getAllSessions().sortedBy { it.title }
+            for (Session in session) {
+
+            }
             val tempSession = session[i]
             val cardToAdd = PCard(
                 tempSession.title,
