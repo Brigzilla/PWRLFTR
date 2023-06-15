@@ -33,6 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,35 +47,39 @@
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintTop_toBottomOf="@id/title" />
-
-                <TextView
-                    android:id="@+id/header_sets"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="8dp"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical"
-                    android:text="Sets"
-                    android:textColor="@color/grey"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@id/header_reps"
-                    app:layout_constraintTop_toBottomOf="@id/exercise" />
 
                 <TextView
                     android:id="@+id/header_reps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginStart="16dp"
                     android:drawablePadding="4dp"
+                    android:fontFamily="@font/roboto"
                     android:gravity="center_vertical"
-                    android:text="Reps"
+                    android:text="Reps/Sets"
+
                     android:textColor="@color/grey"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/exercise"
+                    app:layout_constraintTop_toBottomOf="@id/exercise" />
+
+                <TextView
+                    android:id="@+id/header_sets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical"
+                    android:text="Sets"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:layout_marginStart="2dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/header_reps"
                     app:layout_constraintTop_toBottomOf="@id/exercise" />
 
                 <TextView
@@ -82,15 +87,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="0dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
                     android:text=""
-
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/header_sets" />
+                    app:layout_constraintTop_toBottomOf="@id/header_reps" />
 
                 <TextView
                     android:id="@+id/aspect_1"
@@ -104,6 +109,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_0"
                     ></TextView>
@@ -119,6 +125,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_1"
                     ></TextView>
@@ -134,6 +141,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_2"
                     ></TextView>
@@ -149,6 +157,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_3"
                     ></TextView>
@@ -164,6 +173,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_4"
                     ></TextView>
@@ -179,6 +189,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_5"
                     ></TextView>
@@ -194,6 +205,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_6"
                     ></TextView>
@@ -209,6 +221,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_7"
                     ></TextView>
@@ -224,6 +237,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
+                    android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_8"
                     ></TextView>
