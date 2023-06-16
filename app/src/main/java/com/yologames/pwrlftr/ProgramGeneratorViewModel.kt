@@ -336,7 +336,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             5,
-            rounded(_1rms[1]*.65).toInt())
+            rounded(_1rms[2]*.65).toInt())
     }
 
     private fun Beta_Set_24(): Session{
@@ -345,7 +345,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             5,
-            rounded(_1rms[1]*.75).toInt())
+            rounded(_1rms[2]*.75).toInt())
     }
 
     private fun Beta_Set_25(): Session{
@@ -354,7 +354,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             3,
-            rounded(_1rms[1]*.85).toInt())
+            rounded(_1rms[2]*.85).toInt())
     }
 
     private fun Beta_Set_26(): Session{
@@ -363,7 +363,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             1,
-            rounded(_1rms[1]*.90).toInt())
+            rounded(_1rms[2]*.90).toInt())
     }
 
     private fun Beta_Set_27(): Session{
@@ -372,7 +372,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             1,
-            rounded(_1rms[1]*.95).toInt())
+            rounded(_1rms[2]*.95).toInt())
     }
 
     private fun Beta_Set_28(): Session{
@@ -381,7 +381,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             5,
-            rounded(_1rms[1]*.80).toInt())
+            rounded(_1rms[2]*.80).toInt())
     }
 
     private fun Beta_Set_29(): Session{
@@ -390,7 +390,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Deadlift",
             1,
             5,
-            rounded(_1rms[1]*.75).toInt())
+            rounded(_1rms[2]*.75).toInt())
     }
 
 
