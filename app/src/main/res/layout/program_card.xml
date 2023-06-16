@@ -83,6 +83,22 @@
                     app:layout_constraintTop_toBottomOf="@id/exercise" />
 
                 <TextView
+                    android:id="@+id/difficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical"
+                    android:text="Difficulty"
+                    android:visibility="gone"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintTop_toTopOf="@id/header_reps"/>
+
+                <TextView
                     android:id="@+id/aspect_0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,6 +112,128 @@
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/header_reps" />
+
+                <SeekBar
+                    android:id="@+id/aspect_0_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="0dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/aspect_0"
+                    app:layout_constraintTop_toTopOf="@id/aspect_0"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_0" />
+
+                <SeekBar
+                    android:id="@+id/aspect_1_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_1" />
+
+                <SeekBar
+                    android:id="@+id/aspect_2_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_2" />
+
+                <SeekBar
+                    android:id="@+id/aspect_3_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_3" />
+
+                <SeekBar
+                    android:id="@+id/aspect_4_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_4" />
+
+                <SeekBar
+                    android:id="@+id/aspect_5_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_5" />
+
+                <SeekBar
+                    android:id="@+id/aspect_6_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_6" />
+
+                <SeekBar
+                    android:id="@+id/aspect_7_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_7" />
+
+                <SeekBar
+                    android:id="@+id/aspect_8_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:max="5"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_8" />
+
+                <SeekBar
+                    android:id="@+id/aspect_9_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    android:max="5"
+                    app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
+                    app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_9" />
+
 
                 <TextView
                     android:id="@+id/aspect_1"
@@ -241,6 +379,35 @@
                     app:layout_constraintStart_toStartOf="@id/exercise"
                     app:layout_constraintTop_toBottomOf="@id/aspect_8"
                     ></TextView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    app:layout_constraintWidth_percent=".5"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/review_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_9"
+                    app:layout_constraintStart_toEndOf="@id/aspect_9"
+                    android:text="Review Session"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/roboto"
+                    >
+                </com.google.android.material.button.MaterialButton>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    app:layout_constraintWidth_percent=".5"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/commit_review"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_9"
+                    app:layout_constraintStart_toEndOf="@id/aspect_9"
+                    android:text="Finished"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/roboto"
+                    >
+                </com.google.android.material.button.MaterialButton>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

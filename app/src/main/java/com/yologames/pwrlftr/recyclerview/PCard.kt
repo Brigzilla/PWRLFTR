@@ -16,4 +16,5 @@ class PCard(
     var aspect9: String,
     var id: Int? = PCardList.size
 ) {
+    var reviewingSession : Boolean = false
 }
