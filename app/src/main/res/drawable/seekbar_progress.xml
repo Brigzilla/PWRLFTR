@@ -3,6 +3,9 @@
     <item android:id="@android:id/background">
         <shape>
             <solid android:color="@color/green" />
+            <corners android:radius="10dp"></corners>
+            <size android:height="2dp"></size>
+
         </shape>
     </item>
     <!-- Color of the progress indicator -->
@@ -10,6 +13,8 @@
         <clip>
             <shape>
                 <solid android:color="@color/red" />
+                <corners android:radius="10dp"></corners>
+                <size android:height="2dp"></size>
             </shape>
         </clip>
     </item>

@@ -119,15 +119,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/aspect_0"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_0"
+                    app:layout_constraintTop_toTopOf="@id/aspect_0"
                     android:progressDrawable="@drawable/seekbar_progress"
-                    android:thumb="@drawable/seekbar_thumb"
 
-                    /> <!-- Set a custom thumb drawable -->
+                    android:thumb="@drawable/seekbar_thumb">
+
+                </SeekBar>
 
 
                 <SeekBar
@@ -136,11 +139,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_1"
+                    app:layout_constraintTop_toTopOf="@id/aspect_1"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -150,11 +155,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_2"
+                    app:layout_constraintTop_toTopOf="@id/aspect_2"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -164,11 +171,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_3"
+                    app:layout_constraintTop_toTopOf="@id/aspect_3"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -178,11 +187,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_4"
+                    app:layout_constraintTop_toTopOf="@id/aspect_4"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -192,11 +203,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_5"
+                    app:layout_constraintTop_toTopOf="@id/aspect_5"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -206,11 +219,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_6"
+                    app:layout_constraintTop_toTopOf="@id/aspect_6"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -220,11 +235,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_7"
+                    app:layout_constraintTop_toTopOf="@id/aspect_7"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -234,11 +251,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
                     android:visibility="gone"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_8"
+                    app:layout_constraintTop_toTopOf="@id/aspect_8"
                     android:progressDrawable="@drawable/seekbar_progress"
                     android:thumb="@drawable/seekbar_thumb" />
 
@@ -249,11 +268,14 @@
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"
-                    android:max="5"
+                    android:maxHeight="@dimen/seek_bar_height"
+                    android:max="100"
+                    android:progress="50"
                     app:layout_constraintEnd_toEndOf="@id/aspect_0_seekbar"
                     app:layout_constraintStart_toStartOf="@id/aspect_0_seekbar"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_9"
+                    app:layout_constraintTop_toTopOf="@id/aspect_9"
                     android:progressDrawable="@drawable/seekbar_progress"
+
                     android:thumb="@drawable/seekbar_thumb" />
 
 
@@ -262,7 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -271,14 +293,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_0_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_0"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -287,14 +309,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_1_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_1"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -303,14 +325,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_2_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_2"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -319,14 +341,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_3_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_3"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -335,14 +357,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_4_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_4"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -351,14 +373,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_5_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_5"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -367,14 +389,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_6_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_6"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -383,14 +405,14 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_7_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_7"
                     ></TextView>
                 <TextView
                     android:id="@+id/aspect_9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/default_padding"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
@@ -399,7 +421,7 @@
                     android:visibility="gone"
                     android:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="@id/exercise"
-                    app:layout_constraintTop_toBottomOf="@id/aspect_8_seekbar"
+                    app:layout_constraintTop_toBottomOf="@id/aspect_8"
                     ></TextView>
 
                 <com.google.android.material.button.MaterialButton
