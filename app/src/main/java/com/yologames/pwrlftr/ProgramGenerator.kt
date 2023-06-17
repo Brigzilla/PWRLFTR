@@ -200,6 +200,7 @@ class ProgramGenerator : Fragment() {
            {
 
                if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
+               if (sessionDao.getAllSessions().isEmpty())showInitialElements()
            }
        }
            setOnClickListeners()
@@ -332,6 +333,16 @@ class ProgramGenerator : Fragment() {
 
     fun reloadFragment(){
         findNavController().navigate(R.id.action_programGenerator_self)
+    }
+
+    fun showInitialElements(){
+        binding.enter1rmSquat.visibility = View.VISIBLE
+        binding.enter1rmBench.visibility = View.VISIBLE
+        binding.enter1rmDead.visibility = View.VISIBLE
+        binding.addTestButton.visibility = View.VISIBLE
+        binding.textSquat.visibility = View.VISIBLE
+        binding.textBench.visibility = View.VISIBLE
+        binding.textDead.visibility = View.VISIBLE
     }
 
     fun hideInitialElements(){
