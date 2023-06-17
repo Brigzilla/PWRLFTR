@@ -10,4 +10,8 @@
     <color name="light_grey">#D3D3D3</color>
     <color name="dark_grey">#A9A9A9</color>
     <color name="grey">#808080</color>
+    <color name="red">#AC0000</color>
+    <color name="orange">#FF8D00</color>
+    <color name="yellow">#FFAB04</color>
+    <color name="green">#47FF04</color>
 </resources>

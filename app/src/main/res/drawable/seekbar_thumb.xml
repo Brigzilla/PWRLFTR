@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/orange" /> <!-- Color of the thumb (slider) -->
+            <size android:width="24dp" android:height="24dp" /> <!-- Size of the thumb (slider) -->
+        </shape>
+    </item>
+    <item android:drawable="@android:color/transparent" /> <!-- Transparent background -->
+</layer-list>

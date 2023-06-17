@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color of the progress indicator -->
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="@color/green" />
+        </shape>
+    </item>
+    <!-- Color of the progress indicator -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="@color/red" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>
