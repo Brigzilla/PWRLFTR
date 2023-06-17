@@ -225,6 +225,7 @@ fun InitRecycler() {
         binding.removeTestButton.setOnClickListener{
 
             binding.removeTestButton.visibility = View.GONE
+            _session_feedback_left.clear()
             lifecycleScope.launch(Dispatchers.Main)
             {
                 clearDatabase()
