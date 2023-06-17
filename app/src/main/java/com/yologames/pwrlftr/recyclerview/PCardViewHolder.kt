@@ -13,6 +13,7 @@ class PCardViewHolder(
     fun bindCards(pCard: PCard)
     {
         val reviewingSession = pCard.reviewingSession
+        val completedReview = pCard.completedReview
 
         cardCellBinding.title.text = pCard.title
         cardCellBinding.exercise.text = pCard.exercise
@@ -33,17 +34,20 @@ class PCardViewHolder(
         }
 
         cardCellBinding.commitReview.setOnClickListener{
-            pCard.reviewingSession = false
+//            pCard.reviewingSession = false
+            disableSeekBars()
+            cardCellBinding.reviewButton.visibility = View.INVISIBLE
             cardCellBinding.commitReview.visibility = View.INVISIBLE
+            pCard.completedReview =! completedReview
             bindCards(pCard)
         }
 
-        if (reviewingSession) {
+        if (reviewingSession && !completedReview) {
             cardCellBinding.difficulty.visibility = View.VISIBLE
             cardCellBinding.commitReview.visibility = View.VISIBLE
             cardCellBinding.reviewButton.visibility = View.GONE
         }
-        if (!reviewingSession) cardCellBinding.difficulty.visibility = View.GONE
+        if (!reviewingSession && !completedReview) cardCellBinding.difficulty.visibility = View.GONE
 
 
         if (pCard.aspect0 != "_" ) {
@@ -140,6 +144,19 @@ class PCardViewHolder(
 //        cardCellBinding.cardView.setOnClickListener {
 //            // D_MOD_SELECTED = dCard.moduleID
 //        }
+    }
+
+    private fun disableSeekBars(){
+        cardCellBinding.aspect0Seekbar.isEnabled = false
+        cardCellBinding.aspect1Seekbar.isEnabled = false
+        cardCellBinding.aspect2Seekbar.isEnabled = false
+        cardCellBinding.aspect3Seekbar.isEnabled = false
+        cardCellBinding.aspect4Seekbar.isEnabled = false
+        cardCellBinding.aspect5Seekbar.isEnabled = false
+        cardCellBinding.aspect6Seekbar.isEnabled = false
+        cardCellBinding.aspect7Seekbar.isEnabled = false
+        cardCellBinding.aspect8Seekbar.isEnabled = false
+        cardCellBinding.aspect9Seekbar.isEnabled = false
     }
 
 }
