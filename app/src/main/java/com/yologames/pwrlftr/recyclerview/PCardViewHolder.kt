@@ -54,7 +54,7 @@ class PCardViewHolder(
 //            pCard.reviewingSession = false
             disableSeekBars()
             cardCellBinding.reviewButton.visibility = View.GONE
-            cardCellBinding.commitReview.visibility = View.GONE
+            cardCellBinding.commitReview.visibility = View.INVISIBLE
             _sessions_reviewed += 1
             pCard.completedReview =! completedReview
             bindCards(pCard)
@@ -73,106 +73,127 @@ class PCardViewHolder(
 
         if (!reviewingSession && !completedReview ) cardCellBinding.difficulty.visibility = View.GONE
 
+        if (completedReview){
+            compressAll() //don't bind cards it breaks everything
+        }
 
+        if (!completedReview) {
+            if (pCard.aspect0 != "_") {
+                cardCellBinding.aspect0.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect0 == "_") {
+                cardCellBinding.aspect0.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect1 != "_") {
+                cardCellBinding.aspect1.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect1Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect1Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect1 == "_") {
+                cardCellBinding.aspect1.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect1Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect2 != "_") {
+                cardCellBinding.aspect2.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect2Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect2Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect2 == "_") {
+                cardCellBinding.aspect2.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect2Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect3 != "_") {
+                cardCellBinding.aspect3.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect3Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect3Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect3 == "_") {
+                cardCellBinding.aspect3.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect3Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect4 != "_") {
+                cardCellBinding.aspect4.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect4Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect4Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect4 == "_") {
+                cardCellBinding.aspect4.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect4Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect5 != "_") {
+                cardCellBinding.aspect5.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect5Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect5Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect5 == "_") {
+                cardCellBinding.aspect5.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect5Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect6 != "_") {
+                cardCellBinding.aspect6.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect6Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect6Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect6 == "_") {
+                cardCellBinding.aspect6.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect6Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect7 != "_") {
+                cardCellBinding.aspect7.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect7Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect7Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect7 == "_") {
+                cardCellBinding.aspect7.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect7Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect8 != "_") {
+                cardCellBinding.aspect8.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect8Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect8Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect8 == "_") {
+                cardCellBinding.aspect8.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect8Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect9 != "_") {
+                cardCellBinding.aspect9.visibility = View.VISIBLE
+                if (reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.VISIBLE
+                if (!reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.GONE
+            }
+            if (pCard.aspect9 == "_") {
+                cardCellBinding.aspect9.visibility = View.GONE
+                if (!reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.GONE
 
-
-        if (pCard.aspect0 != "_") {
-            cardCellBinding.aspect0.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.GONE
+            }
         }
-        if (pCard.aspect0 == "_") {
-            cardCellBinding.aspect0.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect1 != "_") {
-            cardCellBinding.aspect1.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect1Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect1Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect1 == "_") {
-            cardCellBinding.aspect1.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect1Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect2 != "_") {
-            cardCellBinding.aspect2.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect2Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect2Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect2 == "_") {
-            cardCellBinding.aspect2.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect2Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect3 != "_") {
-            cardCellBinding.aspect3.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect3Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect3Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect3 == "_") {
-            cardCellBinding.aspect3.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect3Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect4 != "_") {
-            cardCellBinding.aspect4.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect4Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect4Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect4 == "_") {
-            cardCellBinding.aspect4.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect4Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect5 != "_") {
-            cardCellBinding.aspect5.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect5Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect5Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect5 == "_") {
-            cardCellBinding.aspect5.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect5Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect6 != "_") {
-            cardCellBinding.aspect6.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect6Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect6Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect6 == "_") {
-            cardCellBinding.aspect6.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect6Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect7 != "_") {
-            cardCellBinding.aspect7.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect7Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect7Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect7 == "_") {
-            cardCellBinding.aspect7.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect7Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect8 != "_") {
-            cardCellBinding.aspect8.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect8Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect8Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect8 == "_") {
-            cardCellBinding.aspect8.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect8Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect9 != "_") {
-            cardCellBinding.aspect9.visibility = View.VISIBLE
-            if (reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.VISIBLE
-            if (!reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.GONE
-        }
-        if (pCard.aspect9 == "_") {
-            cardCellBinding.aspect9.visibility = View.GONE
-            if (!reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.GONE
-
     }
 
-
-
-//        cardCellBinding.cardView.setOnClickListener {
-//            // D_MOD_SELECTED = dCard.moduleID
-//        }
+    private fun compressAll()
+    {
+        cardCellBinding.aspect0.visibility = View.GONE
+        cardCellBinding.aspect0Seekbar.visibility = View.GONE
+        cardCellBinding.aspect1.visibility = View.GONE
+        cardCellBinding.aspect1Seekbar.visibility = View.GONE
+        cardCellBinding.aspect2.visibility = View.GONE
+        cardCellBinding.aspect2Seekbar.visibility = View.GONE
+        cardCellBinding.aspect3.visibility = View.GONE
+        cardCellBinding.aspect3Seekbar.visibility = View.GONE
+        cardCellBinding.aspect4.visibility = View.GONE
+        cardCellBinding.aspect4Seekbar.visibility = View.GONE
+        cardCellBinding.aspect5.visibility = View.GONE
+        cardCellBinding.aspect5Seekbar.visibility = View.GONE
+        cardCellBinding.aspect6.visibility = View.GONE
+        cardCellBinding.aspect6Seekbar.visibility = View.GONE
+        cardCellBinding.aspect7.visibility = View.GONE
+        cardCellBinding.aspect7Seekbar.visibility = View.GONE
+        cardCellBinding.aspect8.visibility = View.GONE
+        cardCellBinding.aspect8Seekbar.visibility = View.GONE
+        cardCellBinding.aspect9.visibility = View.GONE
+        cardCellBinding.aspect9Seekbar.visibility = View.GONE
     }
 
     private fun disableSeekBars(){
