@@ -53,7 +53,7 @@ class ProgramGenerator : Fragment() {
         val database = Room.databaseBuilder(
             requireContext(),
             SessionDatabase::class.java, "session_database"
-        ).allowMainThreadQueries().build()
+        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
         sessionDao = database.sessionDao()
         queryDatabaseSize()
         can_init = true
