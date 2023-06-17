@@ -8,7 +8,6 @@ import java.math.MathContext
 class ProgramGeneratorViewModel : ViewModel() {
 
     var _1rms = ArrayList<Float>()
-    //    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
     val trainingProgram = ArrayList<Session>()
 
     var multiplier : Double = 1.00
@@ -40,7 +39,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
     fun createBetaProgram(): ArrayList<Session>{
-
+        passesComplete = _weeks
         while (passesComplete < _passesAllowable) {
             if (day == 1) {
 //                createDay_1()
@@ -98,61 +97,13 @@ class ProgramGeneratorViewModel : ViewModel() {
             }
             if (day > dayExpected){
                     passesComplete++
-
+                _weeks = passesComplete
                 day = 1
             }
         }
+
         return trainingProgram
     }
-
-    private fun createDay_1(){
-
-        //Squat
-
-        trainingProgram.add(Beta_Set_1())
-        trainingProgram.add(Beta_Set_2())
-        trainingProgram.add(Beta_Set_3())
-        trainingProgram.add(Beta_Set_4())
-        trainingProgram.add(Beta_Set_5())
-        trainingProgram.add(Beta_Set_6())
-        trainingProgram.add(Beta_Set_7())
-
-        //Bench
-        trainingProgram.add(Beta_Set_8())
-        trainingProgram.add(Beta_Set_9())
-        trainingProgram.add(Beta_Set_10())
-        trainingProgram.add(Beta_Set_11())
-        trainingProgram.add(Beta_Set_12())
-        trainingProgram.add(Beta_Set_13())
-        trainingProgram.add(Beta_Set_14())
-    }
-
-    private fun createDay_2() {
-        //Squat
-        trainingProgram.add(Beta_Set_15())
-        trainingProgram.add(Beta_Set_16())
-        trainingProgram.add(Beta_Set_17())
-        trainingProgram.add(Beta_Set_18())
-
-        //Bench
-        trainingProgram.add(Beta_Set_19())
-        trainingProgram.add(Beta_Set_20())
-        trainingProgram.add(Beta_Set_21())
-        trainingProgram.add(Beta_Set_22())
-
-    }
-    private fun createDay_3() {
-        //Deadlift
-        trainingProgram.add(Beta_Set_23())
-        trainingProgram.add(Beta_Set_24())
-        trainingProgram.add(Beta_Set_25())
-        trainingProgram.add(Beta_Set_26())
-        trainingProgram.add(Beta_Set_27())
-        trainingProgram.add(Beta_Set_28())
-        trainingProgram.add(Beta_Set_29())
-    }
-
-
 
     private fun Beta_Set_1(): Session{
         return Session(0,
@@ -520,6 +471,53 @@ class ProgramGeneratorViewModel : ViewModel() {
             "Week ${passesComplete + 1}, Day 5",
             sessionAspect.toString().substringAfter("[").substringBefore("]"),
             0, 0, 0)
+    }
+
+    private fun createDay_1(){
+
+        //Squat
+
+        trainingProgram.add(Beta_Set_1())
+        trainingProgram.add(Beta_Set_2())
+        trainingProgram.add(Beta_Set_3())
+        trainingProgram.add(Beta_Set_4())
+        trainingProgram.add(Beta_Set_5())
+        trainingProgram.add(Beta_Set_6())
+        trainingProgram.add(Beta_Set_7())
+
+        //Bench
+        trainingProgram.add(Beta_Set_8())
+        trainingProgram.add(Beta_Set_9())
+        trainingProgram.add(Beta_Set_10())
+        trainingProgram.add(Beta_Set_11())
+        trainingProgram.add(Beta_Set_12())
+        trainingProgram.add(Beta_Set_13())
+        trainingProgram.add(Beta_Set_14())
+    }
+
+    private fun createDay_2() {
+        //Squat
+        trainingProgram.add(Beta_Set_15())
+        trainingProgram.add(Beta_Set_16())
+        trainingProgram.add(Beta_Set_17())
+        trainingProgram.add(Beta_Set_18())
+
+        //Bench
+        trainingProgram.add(Beta_Set_19())
+        trainingProgram.add(Beta_Set_20())
+        trainingProgram.add(Beta_Set_21())
+        trainingProgram.add(Beta_Set_22())
+
+    }
+    private fun createDay_3() {
+        //Deadlift
+        trainingProgram.add(Beta_Set_23())
+        trainingProgram.add(Beta_Set_24())
+        trainingProgram.add(Beta_Set_25())
+        trainingProgram.add(Beta_Set_26())
+        trainingProgram.add(Beta_Set_27())
+        trainingProgram.add(Beta_Set_28())
+        trainingProgram.add(Beta_Set_29())
     }
 
 }
