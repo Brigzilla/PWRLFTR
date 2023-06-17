@@ -13,12 +13,9 @@
         android:layout_height="56dp"
         android:id="@+id/add_test_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/enter_1rm_squat"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.45"
         app:strokeWidth="1dp"
-        android:visibility="invisible"
         android:text="Generate Program">
 
     </com.google.android.material.button.MaterialButton>

@@ -16,7 +16,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     var increment : Double = 2.5
 
     var passesComplete : Int = 0
-    var passedExpected : Int = 5
+    var passedExpected : Int = 1
     var sessions_generated: Int = 0
 //    var passesAllowable: Int = 1
     var day: Int = 1

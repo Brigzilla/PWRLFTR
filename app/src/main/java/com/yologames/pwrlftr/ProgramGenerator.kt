@@ -79,34 +79,54 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-    private fun PopulateCardsNew(){
-        //lifecycleScope.launch(Dispatchers.IO) {
-            ClearCards()
-            val session = sessionDao.getAllSessions().sortedBy { it.title }
-            if (sessionDao.getAllSessions().isNotEmpty())
-            {
-
-                var i = 0
-
-                while (i < session.size) {
-                    sessionsInCard = arrayListOf("_","_", "_", "_", "_", "_", "_", "_", "_", "_")
-                    val tempTitles = sessionDao.getByTitle(session[i].title)
-                    //val tempTitles = sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise)
-                    //Log.d("FATAL", sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise).toString())
-                   // Log.d("FATAL",tempTitles.size.toString())
-                    var j = 0
-                    while (j< tempTitles.size)
-                    {
-                        sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement")
-                        j++
-                    }
-                    addPCard(tempTitles[0])
-                    i+= tempTitles.size
-                }
+//    private fun PopulateCardsNew(){
+//        //lifecycleScope.launch(Dispatchers.IO) {
+//            ClearCards()
+//            val session = sessionDao.getAllSessions().sortedBy { it.title }
+//            if (sessionDao.getAllSessions().isNotEmpty())
+//            {
+//                var i = 0
+//                while (i < session.size) {
+//                    sessionsInCard = arrayListOf("_","_", "_", "_", "_", "_", "_", "_", "_", "_")
+//                    val tempTitles = sessionDao.getByTitle(session[i].title)
+//                    //val tempTitles = sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise)
+//                    //Log.d("FATAL", sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise).toString())
+//                   // Log.d("FATAL",tempTitles.size.toString())
+//                    var j = 0
+//                    while (j< tempTitles.size)
+//                    {
+//                        sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement")
+//                        j++
+//                    }
+//                    addPCard(tempTitles[0])
+//                    i+= tempTitles.size
+//                }
+//            }
+//           // }
+//        updateRecyclerView()
+//        }
+private fun PopulateCardsNew() {
+    ClearCards()
+    val session = sessionDao.getAllSessions().sortedBy { it.title }
+    if (sessionDao.getAllSessions().isNotEmpty()) {
+        var i = 0
+        while (i < session.size) {
+            val tempTitles = sessionDao.getByTitle(session[i].title)
+            val sessionsInCard = ArrayList<String>(10)
+            for (j in 0 until 10) {
+                sessionsInCard.add("_")
             }
-           // }
-        updateRecyclerView()
+            var j = 0
+            while (j < tempTitles.size && j < 10) {
+                sessionsInCard[j] = "${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement"
+                j++
+            }
+            addPCard(tempTitles[0], sessionsInCard)
+            i += tempTitles.size
         }
+    }
+    updateRecyclerView()
+}
 
     private fun updateRecyclerView() {
         requireActivity().runOnUiThread {
@@ -114,26 +134,44 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-    private fun addPCard(session: Session) {
-        val cardToAdd = PCard(
-            session.title,
-            session.exercise,
-            sessionsInCard[0],
-            sessionsInCard[1],
-            sessionsInCard[2],
-            sessionsInCard[3],
-            sessionsInCard[4],
-            sessionsInCard[5],
-            sessionsInCard[6],
-            sessionsInCard[7],
-            sessionsInCard[8],
-            sessionsInCard[9],
-            0
-        )
-        //Log.d("FATAL", cardToAdd.title)
-        PCardList.add(cardToAdd)
-
-    }
+//    private fun addPCard(session: Session) {
+//        val cardToAdd = PCard(
+//            session.title,
+//            session.exercise,
+//            sessionsInCard[0],
+//            sessionsInCard[1],
+//            sessionsInCard[2],
+//            sessionsInCard[3],
+//            sessionsInCard[4],
+//            sessionsInCard[5],
+//            sessionsInCard[6],
+//            sessionsInCard[7],
+//            sessionsInCard[8],
+//            sessionsInCard[9],
+//            0
+//        )
+//        //Log.d("FATAL", cardToAdd.title)
+//        PCardList.add(cardToAdd)
+//
+//    }
+private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
+    val cardToAdd = PCard(
+        session.title,
+        session.exercise,
+        sessionsInCard[0],
+        sessionsInCard[1],
+        sessionsInCard[2],
+        sessionsInCard[3],
+        sessionsInCard[4],
+        sessionsInCard[5],
+        sessionsInCard[6],
+        sessionsInCard[7],
+        sessionsInCard[8],
+        sessionsInCard[9],
+        0
+    )
+    PCardList.add(cardToAdd)
+}
 
     fun generateNextWeek(){
         viewModel.sessions_generated = 0
@@ -270,7 +308,15 @@ class ProgramGenerator : Fragment() {
             viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-
+//            viewModel.passedExpected += 1
+//            if (_passesAllowable < viewModel.sessions_generated) {
+//
+//                _passesAllowable += 1
+//            }
+            if (_sessions_reviewed >= 5){
+                _passesAllowable += 1
+                _sessions_reviewed = 0
+            }
             lifecycleScope.launch { Dispatchers.IO
                 val temp = viewModel.createBetaProgram()
 
@@ -349,7 +395,7 @@ class ProgramGenerator : Fragment() {
         binding.enter1rmSquat.visibility = View.GONE
         binding.enter1rmBench.visibility = View.GONE
         binding.enter1rmDead.visibility = View.GONE
-        binding.addTestButton.visibility = View.GONE
+        //binding.addTestButton.visibility = View.GONE
         binding.textSquat.visibility = View.GONE
         binding.textBench.visibility = View.GONE
         binding.textDead.visibility = View.GONE
