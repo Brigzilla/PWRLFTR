@@ -39,7 +39,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
     fun createBetaProgram(): ArrayList<Session>{
-        passesComplete = _weeks
+//        passesComplete = _weeks
         while (passesComplete < _passesAllowable) {
             if (day == 1) {
 //                createDay_1()

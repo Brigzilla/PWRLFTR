@@ -17,5 +17,5 @@ class PCard(
     var id: Int? = PCardList.size
 ) {
     var reviewingSession : Boolean = false
-    var completedReview : Boolean = false
+    //var completedReview : Boolean = false
 }

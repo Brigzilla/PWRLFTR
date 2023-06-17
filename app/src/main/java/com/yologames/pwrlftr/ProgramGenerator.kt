@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
@@ -164,14 +165,33 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
     }
 
-    fun InitRecycler(){
-        binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(this.context, 1)
-            adapter = PCardAdapter(PCardList)
-        }
+//    fun InitRecycler(){
+//        binding.recyclerView.apply {
+//            layoutManager = GridLayoutManager(this.context, 1)
+//            adapter = PCardAdapter(PCardList)
+//        }
+//
+//        updateDataset()
+//    }
+fun InitRecycler() {
+    binding.recyclerView.apply {
+        layoutManager = LinearLayoutManager(context)
+        adapter = PCardAdapter(PCardList)
 
-        updateDataset()
+        // Set the index you want to scroll to
+        val index = _session_feedback_left.lastIndexOf(true)
+        Log.d("FATAL", index.toString())
+        // Scroll to the desired position
+        post {
+            layoutManager?.scrollToPosition(index)
+        }
     }
+
+    updateDataset()
+}
+
+
+
 
 
     fun setOnClickListeners(){
@@ -180,34 +200,30 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
             viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-//            viewModel.passedExpected += 1
-//            if (_passesAllowable < viewModel.sessions_generated) {
-//
-//                _passesAllowable += 1
-//            }
+
             if (_sessions_reviewed >= 5){
                 _passesAllowable += 1
                 _sessions_reviewed = 0
             }
-            lifecycleScope.launch { Dispatchers.IO
-                val temp = viewModel.createBetaProgram()
+            viewModel.passesComplete = _weeks
+            if (_passesAllowable > viewModel.passesComplete) {
+                lifecycleScope.launch {
+                    Dispatchers.IO
+                    val temp = viewModel.createBetaProgram()
 
-
-            addArrayToDatabase(temp)
-            hideInitialElements()
-                updateRecyclerView()
-                reloadFragment()
+                    addArrayToDatabase(temp)
+                    hideInitialElements()
+                    updateRecyclerView()
+                    reloadFragment()
                 }
+            }
         }
 
         binding.addSecondaryTestButton.setOnClickListener{
         }
 
         binding.removeTestButton.setOnClickListener{
-            //clearDatabase()
-//            while (PCardList.size > 0) {
-//                RemoveElementFromDatabase()
-//            }
+
             binding.removeTestButton.visibility = View.GONE
             lifecycleScope.launch(Dispatchers.Main)
             {
@@ -233,11 +249,8 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         lifecycleScope.launch(Dispatchers.IO) {
                 sessionDao.insertSession(_local_session)
         }
-        //AddElementToRecycler()
         updateDataset()
-        //PopulateCards()
         PopulateCardsNew()
-
     }
 
     fun reloadFragment(){
@@ -278,27 +291,6 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         updateDataset()
         reloadFragment()
     }
-
-
-//    fun clearDatabase() {
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val sessions = sessionDao.getAllSessions()
-//
-//            for (session in sessions) {
-//                if (session.id != 0) {
-//                    sessionDao.deleteByID(session.id)
-//                }
-//            }
-//        }
-//
-//        PCardList.clear()
-//        updateDataset()
-//        reloadFragment()
-//    }
-
-
-
-
 
 }
 
