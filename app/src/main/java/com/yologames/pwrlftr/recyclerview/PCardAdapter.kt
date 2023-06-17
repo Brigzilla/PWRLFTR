@@ -24,10 +24,4 @@ class PCardAdapter(private val PCards: List<PCard>):RecyclerView.Adapter<PCardVi
 
     override fun getItemCount(): Int = PCards.size
 
-//    class OnClickListener(val clickListener: (dCard: PCard) -> Unit) {
-//        fun onClick(dCard: PCard) {
-//            clickListener(dCard)
-//        }
-//    }
-
 }

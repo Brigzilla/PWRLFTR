@@ -2,7 +2,10 @@ package com.yologames.pwrlftr.recyclerview
 
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
+import com.yologames.pwrlftr.MainActivity
+import com.yologames.pwrlftr.ProgramGeneratorViewModel
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
 import kotlin.math.min
 
@@ -10,6 +13,18 @@ import kotlin.math.min
 class PCardViewHolder(
     private val cardCellBinding: ProgramCardBinding,
 ):RecyclerView.ViewHolder(cardCellBinding.root) {
+
+    interface PCardViewHolderListener {
+        fun onFunctionCall()
+    }
+
+    private var listener: PCardViewHolderListener? = null
+
+    fun setListener(listener: PCardViewHolderListener) {
+        this.listener = listener
+    }
+
+
 
     fun bindCards(pCard: PCard)
     {
@@ -51,6 +66,7 @@ class PCardViewHolder(
             cardCellBinding.difficulty.visibility = View.VISIBLE
             cardCellBinding.commitReview.visibility = View.VISIBLE
             cardCellBinding.reviewButton.visibility = View.GONE
+
         }
 
         if (!reviewingSession && !completedReview ) cardCellBinding.difficulty.visibility = View.GONE
@@ -149,6 +165,8 @@ class PCardViewHolder(
             if (!reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.GONE
 
     }
+
+
 
 //        cardCellBinding.cardView.setOnClickListener {
 //            // D_MOD_SELECTED = dCard.moduleID

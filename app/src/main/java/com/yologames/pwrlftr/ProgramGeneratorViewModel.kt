@@ -11,13 +11,14 @@ class ProgramGeneratorViewModel : ViewModel() {
     //    val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
     val trainingProgram = ArrayList<Session>()
 
-
     var multiplier : Double = 1.00
 
     var increment : Double = 2.5
 
     var passesComplete : Int = 0
     var passedExpected : Int = 5
+    var sessions_generated: Int = 0
+//    var passesAllowable: Int = 1
     var day: Int = 1
     var dayExpected = 3
 
@@ -28,9 +29,19 @@ class ProgramGeneratorViewModel : ViewModel() {
         _1rms.add( 300.0f) //Deadlift
     }
 
+    fun incrementWeek()
+    {
+        if (_passesAllowable < passedExpected)
+        {
+            _passesAllowable++
+        }
+
+    }
+
 
     fun createBetaProgram(): ArrayList<Session>{
-        while (passesComplete < passedExpected) {
+
+        while (passesComplete < _passesAllowable) {
             if (day == 1) {
 //                createDay_1()
                 //Squat
@@ -41,6 +52,7 @@ class ProgramGeneratorViewModel : ViewModel() {
                 trainingProgram.add(Beta_Set_5())
                 trainingProgram.add(Beta_Set_6())
                 trainingProgram.add(Beta_Set_7())
+                sessions_generated++
 
                 //Bench
                 trainingProgram.add(Beta_Set_8())
@@ -50,6 +62,7 @@ class ProgramGeneratorViewModel : ViewModel() {
                 trainingProgram.add(Beta_Set_12())
                 trainingProgram.add(Beta_Set_13())
                 trainingProgram.add(Beta_Set_14())
+                sessions_generated++
             }
             if (day == 2) {
 //                createDay_2()
@@ -58,12 +71,14 @@ class ProgramGeneratorViewModel : ViewModel() {
                 trainingProgram.add(Beta_Set_16())
                 trainingProgram.add(Beta_Set_17())
                 trainingProgram.add(Beta_Set_18())
+                sessions_generated++
 
                 //Bench
                 trainingProgram.add(Beta_Set_19())
                 trainingProgram.add(Beta_Set_20())
                 trainingProgram.add(Beta_Set_21())
                 trainingProgram.add(Beta_Set_22())
+                sessions_generated++
             }
             if (day == 3) {
 //                createDay_3()
@@ -75,13 +90,15 @@ class ProgramGeneratorViewModel : ViewModel() {
                 trainingProgram.add(Beta_Set_27())
                 trainingProgram.add(Beta_Set_28())
                 trainingProgram.add(Beta_Set_29())
+                sessions_generated++
             }
 
             if (day <= dayExpected) {
                 day++
             }
             if (day > dayExpected){
-                passesComplete ++
+                    passesComplete++
+
                 day = 1
             }
         }
@@ -91,6 +108,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     private fun createDay_1(){
 
         //Squat
+
         trainingProgram.add(Beta_Set_1())
         trainingProgram.add(Beta_Set_2())
         trainingProgram.add(Beta_Set_3())

@@ -133,6 +133,10 @@ class ProgramGenerator : Fragment() {
         //Log.d("FATAL", cardToAdd.title)
         PCardList.add(cardToAdd)
 
+    }
+
+    fun generateNextWeek(){
+        viewModel.sessions_generated = 0
 
     }
 
@@ -258,47 +262,6 @@ class ProgramGenerator : Fragment() {
     fun setOnClickListeners(){
 
 
-        binding.enter1rmSquat.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                if (binding.enter1rmSquat.text.isNotEmpty() || binding.enter1rmBench.text.isNotEmpty() || binding.enter1rmDead.text.isNotEmpty())
-                {
-                    addArrayToDatabase(viewModel.createAlphaProgram())
-                    updateDataset()
-                    hideInitialElements()
-                }
-
-                    return@OnKeyListener true
-            }
-            false
-        })
-
-        binding.enter1rmBench.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                if (binding.enter1rmSquat.text.isNotEmpty() || binding.enter1rmBench.text.isNotEmpty() || binding.enter1rmDead.text.isNotEmpty())
-                {
-                    addArrayToDatabase(viewModel.createAlphaProgram())
-                    updateDataset()
-                    hideInitialElements()
-                }
-
-                return@OnKeyListener true
-            }
-            false
-        })
-
-        binding.enter1rmDead.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                if (binding.enter1rmSquat.text.isNotEmpty() || binding.enter1rmBench.text.isNotEmpty() || binding.enter1rmDead.text.isNotEmpty())
-                {
-                    addArrayToDatabase(viewModel.createAlphaProgram())
-                    updateDataset()
-                    hideInitialElements()
-                }
-
-                return@OnKeyListener true
-            }
-            false
-        })
 
 
 
@@ -309,6 +272,8 @@ class ProgramGenerator : Fragment() {
 
             lifecycleScope.launch { Dispatchers.IO
                 val temp = viewModel.createBetaProgram()
+
+
             addArrayToDatabase(temp)
             hideInitialElements()
                 updateRecyclerView()
@@ -333,6 +298,13 @@ class ProgramGenerator : Fragment() {
 
             }
 
+        }
+    }
+
+    fun incrementViewModelPassesAllowed(){
+        if (_passesAllowable < viewModel.passedExpected)
+        {
+            _passesAllowable++
         }
     }
 
