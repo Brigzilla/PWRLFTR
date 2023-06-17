@@ -30,6 +30,10 @@ interface SessionDao {
     @Query("SELECT * FROM session_table WHERE title = :title AND exercise = :exercise")
     fun getByTitleAndExercise(title: String, exercise: String): List<Session>
 
+    @Query("DELETE FROM session_table WHERE id NOT IN (SELECT id FROM session_table ORDER BY id ASC LIMIT 0)")
+    fun deleteAllSessionsExceptFirst()
+
+
 
 
 

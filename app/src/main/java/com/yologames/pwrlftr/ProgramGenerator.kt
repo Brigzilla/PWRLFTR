@@ -79,32 +79,6 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-//    private fun PopulateCardsNew(){
-//        //lifecycleScope.launch(Dispatchers.IO) {
-//            ClearCards()
-//            val session = sessionDao.getAllSessions().sortedBy { it.title }
-//            if (sessionDao.getAllSessions().isNotEmpty())
-//            {
-//                var i = 0
-//                while (i < session.size) {
-//                    sessionsInCard = arrayListOf("_","_", "_", "_", "_", "_", "_", "_", "_", "_")
-//                    val tempTitles = sessionDao.getByTitle(session[i].title)
-//                    //val tempTitles = sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise)
-//                    //Log.d("FATAL", sessionDao.getByTitleAndExercise(session[i].title, session[i].exercise).toString())
-//                   // Log.d("FATAL",tempTitles.size.toString())
-//                    var j = 0
-//                    while (j< tempTitles.size)
-//                    {
-//                        sessionsInCard[j] = ("${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement")
-//                        j++
-//                    }
-//                    addPCard(tempTitles[0])
-//                    i+= tempTitles.size
-//                }
-//            }
-//           // }
-//        updateRecyclerView()
-//        }
 private fun PopulateCardsNew() {
     ClearCards()
     val session = sessionDao.getAllSessions().sortedBy { it.title }
@@ -134,26 +108,6 @@ private fun PopulateCardsNew() {
         }
     }
 
-//    private fun addPCard(session: Session) {
-//        val cardToAdd = PCard(
-//            session.title,
-//            session.exercise,
-//            sessionsInCard[0],
-//            sessionsInCard[1],
-//            sessionsInCard[2],
-//            sessionsInCard[3],
-//            sessionsInCard[4],
-//            sessionsInCard[5],
-//            sessionsInCard[6],
-//            sessionsInCard[7],
-//            sessionsInCard[8],
-//            sessionsInCard[9],
-//            0
-//        )
-//        //Log.d("FATAL", cardToAdd.title)
-//        PCardList.add(cardToAdd)
-//
-//    }
 private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     val cardToAdd = PCard(
         session.title,
@@ -177,41 +131,6 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         viewModel.sessions_generated = 0
 
     }
-
-
-//    private fun PopulateCards() {
-//
-//        lifecycleScope.launch(Dispatchers.IO){
-//        ClearCards()
-//
-//        var i = 0
-//        if (sessionDao.getAllSessions().isNotEmpty())
-//        {
-//
-//        while (i< sessionDao.getAllSessions().size)
-//        {
-//            val session = sessionDao.getAllSessions().sortedBy { it.title }
-//            for (Session in session) {
-//
-//            }
-//            val tempSession = session[i]
-//            val cardToAdd = PCard(
-//                tempSession.title,
-//                tempSession.exercise,
-//                tempSession.sets.toString() + " * "+ tempSession.reps +" at "+ tempSession.weight + "KG",
-//                "","","","","","","","","",
-//                i
-//            )
-//            PCardList.add(cardToAdd)
-//            i++
-//        }
-//        }
-//        }
-//
-//
-//    }
-
-
 
     override fun onCreateView(
 
@@ -255,54 +174,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     }
 
 
-
-//    fun AddElementToRecycler(){
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val session = sessionDao.getAllSessions()
-//            if (sessionDao.getAllSessions().isNotEmpty()) {
-//                val tempSession = session.last()
-//
-//                val cardToAdd = PCard(
-//                    tempSession.title,
-//                    tempSession.exercise,
-//                    tempSession.sets,
-//                    tempSession.reps,
-//                    tempSession.weight.toString().toInt(),
-//                    session.size-1
-//
-//                    )
-//                PCardList.add(cardToAdd)
-//               // withContext(Dispatchers.Main)
-//               // {
-//                    binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size)
-//                //}
-//            }
-//        }
-//
-//        //binding.recyclerView.adapter!!.notifyItemInserted(PCardList.size-1 )
-//    }
-
-    fun RemoveElementFromDatabase(){
-        var t : Int = 0
-        lifecycleScope.launch(Dispatchers.IO) {
-
-            if (sessionDao.getAllSessions().isNotEmpty()) {
-                sessionDao.deleteByID(sessionDao.getAllSessions().last().id)
-            }
-        }
-        if (PCardList.size > 0) {
-            PCardList.removeAt(PCardList.size - 1)
-
-            binding.recyclerView.adapter!!.notifyItemRemoved(PCardList.size)
-        }
-
-    }
-
     fun setOnClickListeners(){
-
-
-
-
 
         binding.addTestButton.setOnClickListener {
             viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
@@ -328,9 +200,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                 }
         }
 
-
         binding.addSecondaryTestButton.setOnClickListener{
-            //addToTestDatabase(sesh2)
         }
 
         binding.removeTestButton.setOnClickListener{
@@ -342,16 +212,10 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
             lifecycleScope.launch(Dispatchers.Main)
             {
                 clearDatabase()
+                _weeks = 0
 
             }
 
-        }
-    }
-
-    fun incrementViewModelPassesAllowed(){
-        if (_passesAllowable < viewModel.passedExpected)
-        {
-            _passesAllowable++
         }
     }
 
@@ -369,7 +233,6 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         lifecycleScope.launch(Dispatchers.IO) {
                 sessionDao.insertSession(_local_session)
         }
-
         //AddElementToRecycler()
         updateDataset()
         //PopulateCards()
@@ -407,30 +270,37 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         binding.recyclerView.visibility = View.VISIBLE
     }
 
-    fun clearDatabase(){
+    fun clearDatabase() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val sessions = sessionDao.getAllSessions()
-
-            for (session in sessions) {
-                sessionDao.deleteByID(session.id)
-            }
-            val sessionsB = sessionDao.getAllSessions()
-
+            sessionDao.deleteAllSessionsExceptFirst()
         }
-        var i = _Database_size
-        while (i > 0)
-        {
-            binding.recyclerView.adapter!!.notifyItemRemoved(i)
-            i--
-        }
-
+        PCardList.clear()
         updateDataset()
         reloadFragment()
     }
 
 
+//    fun clearDatabase() {
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            val sessions = sessionDao.getAllSessions()
+//
+//            for (session in sessions) {
+//                if (session.id != 0) {
+//                    sessionDao.deleteByID(session.id)
+//                }
+//            }
+//        }
+//
+//        PCardList.clear()
+//        updateDataset()
+//        reloadFragment()
+//    }
 
-    }
+
+
+
+
+}
 
     fun updateDataset(){
         binding.recyclerView.adapter!!.notifyDataSetChanged()
@@ -439,29 +309,3 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     private fun ClearCards() {
         PCardList.clear()
     }
-
-
-//
-////        Log.d("SDAO", "**** Inserting Session ****")
-//// sessionDao.insertSession(Session(0, "Week 2", "Bench", 4, 4, 120))
-//sessionDao.insertSession(sesh)
-//
-//val sessions = sessionDao.getAllSessions()
-//
-//Log.d("SDAO", "${sessions.size} Sessions Total")
-//
-//// sessionDao.deleteSession(Session(0, "Week 2", "Bench", 4, 4, 120))
-//sessionDao.deleteSession(sesh)
-//val sessions2 = database.sessionDaosessionDao.getAllSessions()
-//
-//for (session in sessions2){
-//    Log.i("SDAO", "id: ${session.id}")
-//}
-//
-//Log.d("SDAO", "${sessions2.size} Sessions2 Total")
-//
-//sessionDao.deleteSession(sesh)
-//sessionDao.deleteSession(sesh)
-//sessionDao.deleteSession(sesh)
-//val sessions3 = sessionDao.getAllSessions()
-//Log.d("SDAO", "${sessions3.size} Sessions3 Total")
