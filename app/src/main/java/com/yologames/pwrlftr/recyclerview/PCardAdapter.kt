@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr._session_feedback_left
-import com.yologames.pwrlftr._sessions_reviewed
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
 
 class PCardAdapter(private val PCards: List<PCard>):RecyclerView.Adapter<PCardViewHolder>() {

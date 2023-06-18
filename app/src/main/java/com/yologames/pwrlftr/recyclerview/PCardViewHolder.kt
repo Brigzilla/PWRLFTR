@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr.MainActivity
 import com.yologames.pwrlftr.ProgramGeneratorViewModel
 import com.yologames.pwrlftr._session_feedback_left
-import com.yologames.pwrlftr._sessions_reviewed
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
 import kotlin.math.min
 
@@ -64,9 +63,9 @@ class PCardViewHolder(
                 disableSeekBars()
                 cardCellBinding.reviewButton.visibility = View.GONE
                 cardCellBinding.commitReview.visibility = View.INVISIBLE
-                _sessions_reviewed += 1
+                //_sessions_reviewed += 1
 //            pCard.completedReview =! completedReview
-                _session_feedback_left[adapterPosition] = !completedReview
+                _session_feedback_left[adapterPosition] = true
                 bindCards(pCard)
             }
 

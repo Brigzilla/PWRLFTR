@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -201,9 +202,8 @@ fun InitRecycler() {
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
 
-            if (_sessions_reviewed >= 5){
+            if (_session_feedback_left.lastIndexOf(true) < (_passesAllowable *5)){
                 _passesAllowable += 1
-                _sessions_reviewed = 0
             }
             viewModel.passesComplete = _weeks
             if (_passesAllowable > viewModel.passesComplete) {
@@ -214,6 +214,7 @@ fun InitRecycler() {
                     addArrayToDatabase(temp)
                     hideInitialElements()
                     updateRecyclerView()
+                    saveAll()
                     reloadFragment()
                 }
             }
@@ -234,6 +235,14 @@ fun InitRecycler() {
             }
 
         }
+    }
+
+    fun saveAll(){
+
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
+        mainActivity.saveIntToPrefs("passes_allowable", _passesAllowable)
+//        mainActivity.saveIntToPrefs("sessions_reviewed", _sessions_reviewed)
     }
 
     fun addArrayToDatabase(list : ArrayList<Session>){
