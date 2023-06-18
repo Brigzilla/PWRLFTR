@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr
 
+import PCardAdapter
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
-import com.yologames.pwrlftr.recyclerview.PCardAdapter
 import com.yologames.pwrlftr.recyclerview.PCardList
 import com.yologames.pwrlftr.room.Session
 import com.yologames.pwrlftr.room.SessionDao
@@ -202,8 +202,9 @@ fun InitRecycler() {
             viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
             viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
 
-            if (_session_feedback_left.lastIndexOf(true) < (_passesAllowable *5)){
+            if (_sessions_reviewed >= 5){
                 _passesAllowable += 1
+                _sessions_reviewed = 0
             }
             viewModel.passesComplete = _weeks
             if (_passesAllowable > viewModel.passesComplete) {
@@ -214,7 +215,11 @@ fun InitRecycler() {
                     addArrayToDatabase(temp)
                     hideInitialElements()
                     updateRecyclerView()
-                    saveAll()
+                    val mainActivity = requireActivity() as MainActivity
+                    mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
+                    mainActivity.saveIntToPrefs("passes_allowable", _passesAllowable)
+                    mainActivity.saveIntToPrefs("weeks", _weeks)
+
                     reloadFragment()
                 }
             }
@@ -235,14 +240,6 @@ fun InitRecycler() {
             }
 
         }
-    }
-
-    fun saveAll(){
-
-        val mainActivity = requireActivity() as MainActivity
-        mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
-        mainActivity.saveIntToPrefs("passes_allowable", _passesAllowable)
-//        mainActivity.saveIntToPrefs("sessions_reviewed", _sessions_reviewed)
     }
 
     fun addArrayToDatabase(list : ArrayList<Session>){

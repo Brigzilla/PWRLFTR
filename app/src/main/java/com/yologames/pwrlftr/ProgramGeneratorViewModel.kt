@@ -28,14 +28,14 @@ class ProgramGeneratorViewModel : ViewModel() {
         _1rms.add( 300.0f) //Deadlift
     }
 
-//    fun incrementWeek()
-//    {
-//        if (_passesAllowable < passedExpected)
-//        {
-//            _passesAllowable++
-//        }
-//
-//    }
+    fun incrementWeek()
+    {
+        if (_passesAllowable < passedExpected)
+        {
+            _passesAllowable++
+        }
+
+    }
 
 
     fun createBetaProgram(): ArrayList<Session>{

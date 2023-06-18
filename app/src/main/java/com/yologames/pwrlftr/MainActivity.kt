@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        _session_feedback_left.clear()
         _session_feedback_left = loadBooleanListFromPrefs("session_feedback_list") as ArrayList<Boolean>
 //        _passesAllowable = loadIntFromPrefs("passes_allowable", 1)
 //        _sessions_reviewed = loadIntFromPrefs("sessions_reviewed", 5)

@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr.recyclerview
 
+import android.app.Activity
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr.MainActivity
 import com.yologames.pwrlftr.ProgramGeneratorViewModel
 import com.yologames.pwrlftr._session_feedback_left
+import com.yologames.pwrlftr._sessions_reviewed
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
 import kotlin.math.min
 
@@ -29,13 +31,13 @@ class PCardViewHolder(
 
     fun bindCards(pCard: PCard)
     {
+        Log.d("FATAL", "Adapter Position  $adapterPosition, Review Status $_session_feedback_left")
 //        if (_session_feedback_left.size < adapterPosition)
 //        {
 //            _session_feedback_left.add(false)
 //        }
         val reviewingSession = pCard.reviewingSession
         //val completedReview = pCard.completedReview
-        val completedReview = _session_feedback_left[adapterPosition]
         cardCellBinding.title.text = pCard.title
 
 
@@ -63,7 +65,7 @@ class PCardViewHolder(
                 disableSeekBars()
                 cardCellBinding.reviewButton.visibility = View.GONE
                 cardCellBinding.commitReview.visibility = View.INVISIBLE
-                //_sessions_reviewed += 1
+                _sessions_reviewed += 1
 //            pCard.completedReview =! completedReview
                 _session_feedback_left[adapterPosition] = true
                 bindCards(pCard)
@@ -75,21 +77,21 @@ class PCardViewHolder(
             }
 
 
-            if (reviewingSession && !completedReview) {
+            if (reviewingSession && !_session_feedback_left[adapterPosition]) {
                 cardCellBinding.difficulty.visibility = View.VISIBLE
                 cardCellBinding.commitReview.visibility = View.VISIBLE
                 cardCellBinding.reviewButton.visibility = View.GONE
 
             }
 
-            if (!reviewingSession && !completedReview) cardCellBinding.difficulty.visibility =
+            if (!reviewingSession && !_session_feedback_left[adapterPosition]) cardCellBinding.difficulty.visibility =
                 View.GONE
 
-            if (completedReview) {
+            if (_session_feedback_left[adapterPosition]) {
                 compressAll() //don't bind cards it breaks everything
             }
 
-            if (!completedReview) {
+            if (!_session_feedback_left[adapterPosition]) {
                 if (pCard.aspect0 != "_") {
                     cardCellBinding.aspect0.visibility = View.VISIBLE
                     if (reviewingSession) cardCellBinding.aspect0Seekbar.visibility = View.VISIBLE
@@ -216,8 +218,8 @@ class PCardViewHolder(
         cardCellBinding.difficulty.visibility = View.GONE
 
         cardCellBinding.commitReview.visibility = View.VISIBLE
+//       mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
         cardCellBinding.commitReview.text = "Feedback Complete"
-
 
     }
 
