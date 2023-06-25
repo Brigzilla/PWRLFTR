@@ -1,10 +1,8 @@
 package com.yologames.pwrlftr
 
 import PCardAdapter
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
@@ -75,6 +72,8 @@ class ProgramGenerator : Fragment() {
                 _1rms[0]= mainActivity.loadFloat("s1rm")
                 _1rms[1]= mainActivity.loadFloat("b1rm")
                 _1rms[2]= mainActivity.loadFloat("d1rm")
+                _passesAllowable = mainActivity.loadIntFromPrefs("passes", 0)
+                viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
             }
 
             if (_Database_size > 0)
@@ -195,16 +194,20 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     fun setOnClickListeners(){
 
         binding.addTestButton.setOnClickListener {
+
             if (_1rms[0] == 0.0f) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
                 _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-            }
 
-            if (_sessions_reviewed >= 5){
-                _passesAllowable += 1
-                _sessions_reviewed = 0
             }
+            val trueCount = countTrueElements(_session_feedback_left)
+
+            if (trueCount >= _session_feedback_left.size) {
+                _passesAllowable ++
+                _sessions_reviewed = trueCount
+            }
+            Log.d("FATAL", "Passes Complete ${viewModel.passesComplete} Passes Allowable $_passesAllowable")
             viewModel.passesComplete = _weeks
             if (_passesAllowable > viewModel.passesComplete) {
                 lifecycleScope.launch {
@@ -219,9 +222,12 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                     mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
                     mainActivity.saveIntToPrefs("passes_allowable", _passesAllowable)
                     mainActivity.saveIntToPrefs("weeks", _weeks)
+                    mainActivity.saveIntToPrefs("passes", _passesAllowable)
+                    mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
                     mainActivity.saveFloat("s1rm", _1rms[0])
                     mainActivity.saveFloat("b1rm", _1rms[1])
                     mainActivity.saveFloat("d1rm", _1rms[2])
+
                     reloadFragment()
                 }
             }
@@ -243,6 +249,17 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
         }
     }
+
+    fun countTrueElements(array: ArrayList<Boolean>): Int {
+        var count = 0
+        for (element in array) {
+            if (element) {
+                count++
+            }
+        }
+        return count
+    }
+
 
     fun addArrayToDatabase(list : ArrayList<Session>){
         var i = 0
