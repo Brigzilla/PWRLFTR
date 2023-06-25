@@ -1,6 +1,5 @@
 package com.yologames.pwrlftr
 
-import PCardAdapter
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
+import com.yologames.pwrlftr.recyclerview.PCardAdapter
 import com.yologames.pwrlftr.recyclerview.PCardList
 import com.yologames.pwrlftr.room.Session
 import com.yologames.pwrlftr.room.SessionDao
@@ -70,11 +70,15 @@ class ProgramGenerator : Fragment() {
             if (i > _Database_size)
             {
                 _Database_size = i
+
+                val mainActivity = requireActivity() as MainActivity
+                _1rms[0]= mainActivity.loadFloat("s1rm")
+                _1rms[1]= mainActivity.loadFloat("b1rm")
+                _1rms[2]= mainActivity.loadFloat("d1rm")
             }
 
             if (_Database_size > 0)
             {
-                //PopulateCards()
                 PopulateCardsNew()
             }
             }
@@ -181,7 +185,7 @@ fun InitRecycler() {
 
         // Set the index you want to scroll to
         val index = _session_feedback_left.lastIndexOf(true)
-        Log.d("FATAL", index.toString())
+//        Log.d("FATAL", index.toString())
         // Scroll to the desired position
         post {
             layoutManager?.scrollToPosition(index)
@@ -198,9 +202,11 @@ fun InitRecycler() {
     fun setOnClickListeners(){
 
         binding.addTestButton.setOnClickListener {
-            viewModel._1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
-            viewModel._1rms[1] = binding.enter1rmBench.text.toString().toFloat()
-            viewModel._1rms[2] = binding.enter1rmDead.text.toString().toFloat()
+            if (_1rms[0] == 0.0f) {
+                _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
+                _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
+                _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
+            }
 
             if (_sessions_reviewed >= 5){
                 _passesAllowable += 1
@@ -219,7 +225,9 @@ fun InitRecycler() {
                     mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
                     mainActivity.saveIntToPrefs("passes_allowable", _passesAllowable)
                     mainActivity.saveIntToPrefs("weeks", _weeks)
-
+                    mainActivity.saveFloat("s1rm", _1rms[0])
+                    mainActivity.saveFloat("b1rm", _1rms[1])
+                    mainActivity.saveFloat("d1rm", _1rms[2])
                     reloadFragment()
                 }
             }
@@ -295,6 +303,11 @@ fun InitRecycler() {
             sessionDao.deleteAllSessionsExceptFirst()
         }
         PCardList.clear()
+        val mainActivity = requireActivity() as MainActivity
+
+        mainActivity.saveFloat("s1rm", 0.0f)
+        mainActivity.saveFloat("b1rm", 0.0f)
+        mainActivity.saveFloat("d1rm", 0.0f)
         updateDataset()
         reloadFragment()
     }

@@ -69,6 +69,20 @@ class MainActivity : AppCompatActivity() {
         return booleanList
     }
 
+    fun loadFloat(key: String): Float {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getFloat(key, 0.0f)
+    }
+
+    fun saveFloat(key: String, value: Float) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putFloat(key, value)
+        editor.apply()
+    }
+
+
+
 
 
 
