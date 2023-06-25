@@ -58,6 +58,24 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    fun saveBooleanToPrefs(key: String, booleanList: List<Boolean>, index: Int) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+        // Update the value at the specified index in the boolean list
+        val updatedList = booleanList.toMutableList()
+        updatedList[index] = true
+
+        // Convert the updated boolean list to a comma-separated string
+        val booleanString = updatedList.joinToString(",")
+
+        // Save the string to preferences
+        editor.putString(key, booleanString)
+        editor.apply()
+        Log.d("FATAL", "Saved")
+    }
+
+
     fun loadBooleanListFromPrefs(key: String): List<Boolean> {
         val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 

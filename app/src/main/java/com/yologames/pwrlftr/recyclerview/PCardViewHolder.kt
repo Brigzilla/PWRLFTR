@@ -15,7 +15,9 @@ import kotlin.math.min
 
 class PCardViewHolder(
     private val cardCellBinding: ProgramCardBinding,
+    private val mainActivity: MainActivity,
 ):RecyclerView.ViewHolder(cardCellBinding.root) {
+
 
     interface PCardViewHolderListener {
         fun onFunctionCall()
@@ -88,6 +90,18 @@ class PCardViewHolder(
                 View.GONE
 
             if (_session_feedback_left[adapterPosition]) {
+
+                //val mainActivity = requireActivity() as MainActivity
+//                activity?.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
+
+//                (itemView.context as? MainActivity)?.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
+
+                // Rest of the code...
+
+                // Call the saveBooleanToPrefs function from the MainActivity
+                mainActivity?.saveBooleanToPrefs("session_feedback_list", _session_feedback_left, adapterPosition)
+
+
                 compressAll() //don't bind cards it breaks everything
             }
 

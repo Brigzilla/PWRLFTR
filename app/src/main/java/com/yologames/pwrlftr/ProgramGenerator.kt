@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr
 
+import PCardAdapter
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.yologames.pwrlftr.databinding.FragmentProgramGeneratorBinding
 import com.yologames.pwrlftr.recyclerview.PCard
-import com.yologames.pwrlftr.recyclerview.PCardAdapter
 import com.yologames.pwrlftr.recyclerview.PCardList
 import com.yologames.pwrlftr.room.Session
 import com.yologames.pwrlftr.room.SessionDao
@@ -81,6 +81,7 @@ class ProgramGenerator : Fragment() {
             {
                 PopulateCardsNew()
             }
+
             }
         }
     }
@@ -170,30 +171,22 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
     }
 
-//    fun InitRecycler(){
-//        binding.recyclerView.apply {
-//            layoutManager = GridLayoutManager(this.context, 1)
-//            adapter = PCardAdapter(PCardList)
-//        }
-//
-//        updateDataset()
-//    }
-fun InitRecycler() {
-    binding.recyclerView.apply {
-        layoutManager = LinearLayoutManager(context)
-        adapter = PCardAdapter(PCardList)
+
+    fun InitRecycler() {
+         binding.recyclerView.apply {
+             layoutManager = LinearLayoutManager(context)
+             adapter = PCardAdapter(PCardList)
 
         // Set the index you want to scroll to
-        val index = _session_feedback_left.lastIndexOf(true)
-//        Log.d("FATAL", index.toString())
+         val index = _session_feedback_left.lastIndexOf(true)
         // Scroll to the desired position
-        post {
-            layoutManager?.scrollToPosition(index)
-        }
-    }
+         post {
+                layoutManager?.scrollToPosition(index)
+         }
+     }
 
-    updateDataset()
-}
+     updateDataset()
+    }
 
 
 
@@ -216,6 +209,7 @@ fun InitRecycler() {
             if (_passesAllowable > viewModel.passesComplete) {
                 lifecycleScope.launch {
                     Dispatchers.IO
+
                     val temp = viewModel.createBetaProgram()
 
                     addArrayToDatabase(temp)
@@ -304,7 +298,8 @@ fun InitRecycler() {
         }
         PCardList.clear()
         val mainActivity = requireActivity() as MainActivity
-
+        _session_feedback_left.clear()
+        mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
         mainActivity.saveFloat("s1rm", 0.0f)
         mainActivity.saveFloat("b1rm", 0.0f)
         mainActivity.saveFloat("d1rm", 0.0f)
