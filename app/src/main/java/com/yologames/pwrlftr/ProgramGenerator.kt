@@ -207,7 +207,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                 _passesAllowable ++
                 _sessions_reviewed = trueCount
             }
-            Log.d("FATAL", "Passes Complete ${viewModel.passesComplete} Passes Allowable $_passesAllowable")
+//            Log.d("FATAL", "Passes Complete ${viewModel.passesComplete} Passes Allowable $_passesAllowable")
             viewModel.passesComplete = _weeks
             if (_passesAllowable > viewModel.passesComplete) {
                 lifecycleScope.launch {
@@ -220,7 +220,6 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                     updateRecyclerView()
                     val mainActivity = requireActivity() as MainActivity
                     mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
-                    mainActivity.saveIntToPrefs("passes_allowable", _passesAllowable)
                     mainActivity.saveIntToPrefs("weeks", _weeks)
                     mainActivity.saveIntToPrefs("passes", _passesAllowable)
                     mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
