@@ -16,8 +16,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     var increment : Double = 2.5
 
     var passesComplete : Int = 0
-    var passedExpected : Int = 1
-    var sessions_generated: Int = 0
+    var sessions_generated : Int = 0
 //    var passesAllowable: Int = 1
     var day: Int = 1
     var dayExpected = 3
@@ -31,7 +30,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
     fun createBetaProgram(): ArrayList<Session>{
-        Log.d("FATAL", "S ${_1rms[0]} B ${_1rms[1]} D ${_1rms[2]}")
+//        Log.d("FATAL", "S ${_1rms[0]} B ${_1rms[1]} D ${_1rms[2]}")
         while (passesComplete < _passesAllowable) {
             if (day == 1) {
                 //Squat

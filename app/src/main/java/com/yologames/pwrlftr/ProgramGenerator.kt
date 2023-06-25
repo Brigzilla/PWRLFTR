@@ -19,8 +19,7 @@ import com.yologames.pwrlftr.recyclerview.PCardList
 import com.yologames.pwrlftr.room.Session
 import com.yologames.pwrlftr.room.SessionDao
 import com.yologames.pwrlftr.room.SessionDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 private lateinit var binding: FragmentProgramGeneratorBinding
@@ -29,6 +28,7 @@ var _Database_size = 1
 
 private lateinit var sessionDao: SessionDao
 
+var polling_done = false
 
 var sessionsInCard = ArrayList<String>(40)
 //some test sessions. Can probably safely delete but will save time later
@@ -58,6 +58,8 @@ class ProgramGenerator : Fragment() {
         can_init = true
     }
 
+
+
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
     fun queryDatabaseSize(){
         lifecycleScope.launch(Dispatchers.IO) {
@@ -74,6 +76,8 @@ class ProgramGenerator : Fragment() {
                 _1rms[2]= mainActivity.loadFloat("d1rm")
                 _passesAllowable = mainActivity.loadIntFromPrefs("passes", 0)
                 viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
+                viewModel.sessions_generated = mainActivity.loadIntFromPrefs("sgenerated", 0)
+                mainActivity.loadIntFromPrefs("day", 0)
             }
 
             if (_Database_size > 0)
@@ -93,7 +97,7 @@ private fun PopulateCardsNew() {
         while (i < session.size) {
             val tempTitles = sessionDao.getByTitle(session[i].title)
             val sessionsInCard = ArrayList<String>(10)
-            for (j in 0 until 10) {
+            for (k in 0 until 10) {
                 sessionsInCard.add("_")
             }
             var j = 0
@@ -209,7 +213,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
             }
 //            Log.d("FATAL", "Passes Complete ${viewModel.passesComplete} Passes Allowable $_passesAllowable")
             viewModel.passesComplete = _weeks
-            if (_passesAllowable > viewModel.passesComplete) {
+            if (_passesAllowable >= viewModel.passesComplete) {
                 lifecycleScope.launch {
                     Dispatchers.IO
 
@@ -223,9 +227,11 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                     mainActivity.saveIntToPrefs("weeks", _weeks)
                     mainActivity.saveIntToPrefs("passes", _passesAllowable)
                     mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
+                    mainActivity.saveIntToPrefs("day", viewModel.day)
                     mainActivity.saveFloat("s1rm", _1rms[0])
                     mainActivity.saveFloat("b1rm", _1rms[1])
                     mainActivity.saveFloat("d1rm", _1rms[2])
+                    mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
 
                     reloadFragment()
                 }
