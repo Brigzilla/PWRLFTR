@@ -122,11 +122,12 @@
         android:id="@+id/remove_test_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:alpha=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:alpha=".2"
         app:layout_constraintWidth_percent="0.45"
         android:visibility="gone"
         app:strokeWidth="1dp"
-        android:text="Remove Element">
+        android:text="$ Dev Remove $">
 
     </com.google.android.material.button.MaterialButton>
 

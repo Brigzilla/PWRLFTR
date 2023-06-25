@@ -33,7 +33,7 @@ class PCardViewHolder(
 
     fun bindCards(pCard: PCard)
     {
-        Log.d("FATAL", "Adapter Position  $adapterPosition, Review Status ${_session_feedback_left[adapterPosition]}")
+//        Log.d("FATAL", "Adapter Position  $adapterPosition, Review Status ${_session_feedback_left[adapterPosition]}")
 //        if (_session_feedback_left.size < adapterPosition)
 //        {
 //            _session_feedback_left.add(false)
@@ -44,7 +44,7 @@ class PCardViewHolder(
 
 
         if (!_session_feedback_left[adapterPosition]) {
-
+            cardCellBinding.finishedMarker.visibility = View.INVISIBLE
             cardCellBinding.exercise.text = pCard.exercise
             cardCellBinding.aspect0.text = pCard.aspect0.toString()
             cardCellBinding.aspect1.text = pCard.aspect1.toString()
@@ -63,6 +63,7 @@ class PCardViewHolder(
             }
 
             cardCellBinding.commitReview.setOnClickListener {
+
 //            pCard.reviewingSession = false
                 disableSeekBars()
                 cardCellBinding.reviewButton.visibility = View.GONE
@@ -70,6 +71,7 @@ class PCardViewHolder(
                 _sessions_reviewed += 1
 //            pCard.completedReview =! completedReview
                 _session_feedback_left[adapterPosition] = true
+                cardCellBinding.finishedMarker.visibility = View.VISIBLE
                 pCard.reviewingSession = false
                 bindCards(pCard)
             }
@@ -234,6 +236,8 @@ class PCardViewHolder(
 
         cardCellBinding.commitReview.visibility = View.INVISIBLE
         cardCellBinding.reviewButton.visibility = View.INVISIBLE
+
+        cardCellBinding.finishedMarker.visibility = View.VISIBLE
 //       mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
 //        cardCellBinding.commitReview.text = "Feedback Complete"
 
