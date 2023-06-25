@@ -203,27 +203,26 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
                 _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-
             }
             val trueCount = countTrueElements(_session_feedback_left)
-
             if (trueCount >= _session_feedback_left.size) {
                 _passesAllowable ++
                 _sessions_reviewed = trueCount
-            }
-//            Log.d("FATAL", "Passes Complete ${viewModel.passesComplete} Passes Allowable $_passesAllowable")
+
             viewModel.passesComplete = _weeks
+
             if (_passesAllowable >= viewModel.passesComplete) {
                 lifecycleScope.launch {
                     Dispatchers.IO
-
                     val temp = viewModel.createBetaProgram()
-
                     addArrayToDatabase(temp)
                     hideInitialElements()
                     updateRecyclerView()
                     val mainActivity = requireActivity() as MainActivity
-                    mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
+                    mainActivity.saveBooleanListToPrefs(
+                        "session_feedback_list",
+                        _session_feedback_left
+                    )
                     mainActivity.saveIntToPrefs("weeks", _weeks)
                     mainActivity.saveIntToPrefs("passes", _passesAllowable)
                     mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
@@ -232,9 +231,9 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                     mainActivity.saveFloat("b1rm", _1rms[1])
                     mainActivity.saveFloat("d1rm", _1rms[2])
                     mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
-
                     reloadFragment()
                 }
+            }
             }
         }
 
