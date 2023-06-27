@@ -196,21 +196,18 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
 
     fun setOnClickListeners(){
-
+//        Log.d("FATAL", "${_session_feedback_left.size}")
         binding.addTestButton.setOnClickListener {
-
             if (_1rms[0] == 0.0f) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
                 _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
             }
             val trueCount = countTrueElements(_session_feedback_left)
-            if (trueCount >= _session_feedback_left.size) {
-                _passesAllowable ++
+            if (trueCount >= _session_feedback_left.size-1) {
+                _passesAllowable =1
                 _sessions_reviewed = trueCount
-
             viewModel.passesComplete = _weeks
-
             if (_passesAllowable >= viewModel.passesComplete) {
                 lifecycleScope.launch {
                     Dispatchers.IO
@@ -324,6 +321,8 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         mainActivity.saveFloat("s1rm", 0.0f)
         mainActivity.saveFloat("b1rm", 0.0f)
         mainActivity.saveFloat("d1rm", 0.0f)
+        _passesAllowable = 0
+        mainActivity.saveIntToPrefs("passes", _passesAllowable)
         updateDataset()
         reloadFragment()
     }

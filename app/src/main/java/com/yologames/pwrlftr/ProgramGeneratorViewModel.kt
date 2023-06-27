@@ -31,7 +31,8 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     fun createBetaProgram(): ArrayList<Session>{
 //        Log.d("FATAL", "S ${_1rms[0]} B ${_1rms[1]} D ${_1rms[2]}")
-        while (passesComplete < _passesAllowable) {
+//        while (passesComplete < _passesAllowable) {
+        while (_passesAllowable > 0){
             if (day == 1) {
                 //Squat
                 trainingProgram.add(Beta_Set_1())
@@ -87,7 +88,9 @@ class ProgramGeneratorViewModel : ViewModel() {
                 passesComplete++
                 _weeks = passesComplete
                 day = 1
+                _passesAllowable = 0
             }
+
         }
 
         return trainingProgram
