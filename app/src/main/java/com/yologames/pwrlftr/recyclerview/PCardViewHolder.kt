@@ -1,32 +1,21 @@
 package com.yologames.pwrlftr.recyclerview
 
-import android.app.Activity
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr.MainActivity
-import com.yologames.pwrlftr.ProgramGeneratorViewModel
 import com.yologames.pwrlftr._session_feedback_left
 import com.yologames.pwrlftr._sessions_reviewed
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
-import kotlin.math.min
 
 
 class PCardViewHolder(
     private val cardCellBinding: ProgramCardBinding,
-    private val mainActivity: MainActivity,
+    private val listener: PCardViewHolderListener?
 ):RecyclerView.ViewHolder(cardCellBinding.root) {
 
-
     interface PCardViewHolderListener {
-        fun onFunctionCall()
-    }
-
-    private var listener: PCardViewHolderListener? = null
-
-    fun setListener(listener: PCardViewHolderListener) {
-        this.listener = listener
+        fun onItemClicked()
     }
 
 
@@ -98,11 +87,16 @@ class PCardViewHolder(
 //                activity?.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
 
 //                (itemView.context as? MainActivity)?.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
+//                    listener?.onItemClicked()
 
                 // Rest of the code...
-
                 // Call the saveBooleanToPrefs function from the MainActivity
-                mainActivity?.saveBooleanToPrefs("session_feedback_list", _session_feedback_left, adapterPosition)
+//                mainActivity?.saveBooleanToPrefs("session_feedback_list", _session_feedback_left, adapterPosition)
+//                cardCellBinding.
+//                mainActivity?.saveBooleanListToPrefs(
+//                    "session_feedback_list",
+//                    _session_feedback_left
+//                )
 
 
                 compressAll() //don't bind cards it breaks everything
@@ -209,6 +203,8 @@ class PCardViewHolder(
 
     private fun compressAll()
     {
+//        Log.d("FATAL", "Bukakke")
+        listener?.onItemClicked()
         cardCellBinding.aspect0.visibility = View.GONE
         cardCellBinding.aspect0Seekbar.visibility = View.GONE
         cardCellBinding.aspect1.visibility = View.GONE

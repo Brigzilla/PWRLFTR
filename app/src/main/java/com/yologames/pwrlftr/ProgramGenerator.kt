@@ -179,6 +179,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
          binding.recyclerView.apply {
              layoutManager = LinearLayoutManager(context)
              adapter = PCardAdapter(PCardList)
+//             adapter.setOnClickListener(this)
 
         // Set the index you want to scroll to
          val index = _session_feedback_left.lastIndexOf(true)

@@ -10,12 +10,14 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.yologames.pwrlftr.recyclerview.PCardViewHolder
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PCardViewHolder.PCardViewHolderListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,9 +101,8 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
-
-
-
-
+    override fun onItemClicked() {
+        Log.d("FATAL", "Bukakke2")
+    }
 
 }

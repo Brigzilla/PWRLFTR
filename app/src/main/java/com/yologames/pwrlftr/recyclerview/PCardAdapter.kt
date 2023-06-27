@@ -8,18 +8,38 @@ import com.yologames.pwrlftr.databinding.ProgramCardBinding
 import com.yologames.pwrlftr.recyclerview.PCard
 import com.yologames.pwrlftr.recyclerview.PCardViewHolder
 
+private var listener: PCardAdapter.MyCallback? = null
+
+
 class PCardAdapter(private val PCards: List<PCard>): RecyclerView.Adapter<PCardViewHolder>() {
+
+    interface MyCallback {
+        fun onItemClicked()
+    }
+
+
 
     @SuppressLint("ResourceType")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PCardViewHolder {
-        val from = LayoutInflater.from(parent.context)
-        val binding = ProgramCardBinding.inflate(from, parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ProgramCardBinding.inflate(inflater, parent, false)
         val mainActivity = parent.context as? MainActivity
-        return mainActivity?.let { PCardViewHolder(binding, it) }
-            ?: throw IllegalStateException("MainActivity not found in the context")
+        val viewHolder = mainActivity?.let { PCardViewHolder(binding, it) }
+        viewHolder?.setIsRecyclable(false) // Optional: Disable view recycling to maintain item states
+        viewHolder?.let {
+            it.itemView.setOnClickListener { _ ->
+                listener?.onItemClicked()
+            }
+        }
+        return viewHolder ?: throw IllegalStateException("MainActivity not found in the context")
     }
 
+
+
     override fun onBindViewHolder(holder: PCardViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            listener?.onItemClicked()
+        }
         if (_session_feedback_left.size <= position) {
             _session_feedback_left.add(false)
         }
