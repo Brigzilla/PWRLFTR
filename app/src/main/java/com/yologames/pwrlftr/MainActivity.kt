@@ -102,7 +102,10 @@ class MainActivity : AppCompatActivity(), PCardViewHolder.PCardViewHolderListene
     }
 
     override fun onItemClicked() {
-        Log.d("FATAL", "Bukakke2")
+        saveBooleanListToPrefs(
+            "session_feedback_list",
+            _session_feedback_left
+        )
     }
 
 }

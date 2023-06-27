@@ -17,8 +17,6 @@ class PCardAdapter(private val PCards: List<PCard>): RecyclerView.Adapter<PCardV
         fun onItemClicked()
     }
 
-
-
     @SuppressLint("ResourceType")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PCardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -33,7 +31,6 @@ class PCardAdapter(private val PCards: List<PCard>): RecyclerView.Adapter<PCardV
         }
         return viewHolder ?: throw IllegalStateException("MainActivity not found in the context")
     }
-
 
 
     override fun onBindViewHolder(holder: PCardViewHolder, position: Int) {

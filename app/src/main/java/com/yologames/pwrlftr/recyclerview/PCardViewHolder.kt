@@ -18,17 +18,9 @@ class PCardViewHolder(
         fun onItemClicked()
     }
 
-
-
     fun bindCards(pCard: PCard)
     {
-//        Log.d("FATAL", "Adapter Position  $adapterPosition, Review Status ${_session_feedback_left[adapterPosition]}")
-//        if (_session_feedback_left.size < adapterPosition)
-//        {
-//            _session_feedback_left.add(false)
-//        }
         val reviewingSession = pCard.reviewingSession
-        //val completedReview = pCard.completedReview
         cardCellBinding.title.text = pCard.title
 
 
@@ -82,22 +74,6 @@ class PCardViewHolder(
                 View.GONE
 
             if (_session_feedback_left[adapterPosition]) {
-
-                //val mainActivity = requireActivity() as MainActivity
-//                activity?.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
-
-//                (itemView.context as? MainActivity)?.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
-//                    listener?.onItemClicked()
-
-                // Rest of the code...
-                // Call the saveBooleanToPrefs function from the MainActivity
-//                mainActivity?.saveBooleanToPrefs("session_feedback_list", _session_feedback_left, adapterPosition)
-//                cardCellBinding.
-//                mainActivity?.saveBooleanListToPrefs(
-//                    "session_feedback_list",
-//                    _session_feedback_left
-//                )
-
 
                 compressAll() //don't bind cards it breaks everything
             }
@@ -203,7 +179,6 @@ class PCardViewHolder(
 
     private fun compressAll()
     {
-//        Log.d("FATAL", "Bukakke")
         listener?.onItemClicked()
         cardCellBinding.aspect0.visibility = View.GONE
         cardCellBinding.aspect0Seekbar.visibility = View.GONE
