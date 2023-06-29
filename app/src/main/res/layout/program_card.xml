@@ -426,8 +426,9 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="0dp"
-                    app:layout_constraintWidth_percent=".5"
-                    android:layout_height="wrap_content"
+                    android:layout_height="56dp"
+                    app:layout_constraintWidth_percent="0.45"
+                    app:strokeWidth="1dp"
                     android:id="@+id/review_button"
                     android:textColor="?attr/colorOnPrimary"
                     android:background="?attr/colorSecondary"
@@ -435,10 +436,12 @@
                     app:layout_constraintTop_toBottomOf="@id/aspect_9"
                     app:layout_constraintStart_toEndOf="@id/aspect_9"
                     android:text="Review Session"
+                    app:cornerRadius="32dp"
                     android:textSize="12dp"
                     android:fontFamily="@font/roboto"
                     >
                 </com.google.android.material.button.MaterialButton>
+
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="0dp"
