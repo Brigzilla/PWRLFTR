@@ -34,6 +34,9 @@ class ProgramGeneratorViewModel : ViewModel() {
                 trainingProgram.add(Beta_Set_5())
                 trainingProgram.add(Beta_Set_6())
                 trainingProgram.add(Beta_Set_7())
+//                for (element in trainingProgram) {
+//                    Log.d("FATAL", "Day $day added. Session : $element")
+//                }
                 sessions_generated++
 
                 //Bench

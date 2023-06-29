@@ -212,28 +212,33 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                 viewModel.passesComplete = _weeks
                  if (_passesAllowable > 0) {
                      Log.d("FATAL", "$_weeks")
-                   lifecycleScope.launch {
-                    Dispatchers.IO
-                    val temp = viewModel.createBetaProgram()
-                    addArrayToDatabase(temp)
-                    hideInitialElements()
-                    updateRecyclerView()
-                    val mainActivity = requireActivity() as MainActivity
-                    mainActivity.saveBooleanListToPrefs(
-                        "session_feedback_list",
-                        _session_feedback_left
-                    )
-                    mainActivity.saveIntToPrefs("weeks", _weeks)
-//                    mainActivity.saveIntToPrefs("passes", _passesAllowable)
-                    mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
-                    mainActivity.saveIntToPrefs("day", viewModel.day)
-                    mainActivity.saveFloat("s1rm", _1rms[0])
-                    mainActivity.saveFloat("b1rm", _1rms[1])
-                    mainActivity.saveFloat("d1rm", _1rms[2])
-                    mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
-                    reloadFragment()
 
-                }
+                     lifecycleScope.launch {
+                         withContext(Dispatchers.IO) {
+                             val temp = viewModel.createBetaProgram()
+                             addArrayToDatabase(temp)
+                             // Perform other database operations here
+                         }
+
+                       hideInitialElements()
+                        updateRecyclerView()
+                        val mainActivity = requireActivity() as MainActivity
+                        mainActivity.saveBooleanListToPrefs(
+                            "session_feedback_list",
+                            _session_feedback_left
+                        )
+                        mainActivity.saveIntToPrefs("weeks", _weeks)
+//                    mainActivity.saveIntToPrefs("passes", _passesAllowable)
+                        mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
+                        mainActivity.saveIntToPrefs("day", viewModel.day)
+                        mainActivity.saveFloat("s1rm", _1rms[0])
+                        mainActivity.saveFloat("b1rm", _1rms[1])
+                        mainActivity.saveFloat("d1rm", _1rms[2])
+                        mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
+                        reloadFragment()
+                    }
+
+
             }
             }
         }
