@@ -23,8 +23,6 @@ class ProgramGeneratorViewModel : ViewModel() {
 
 
     fun createBetaProgram(): ArrayList<Session>{
-
-
         while (_passesAllowable > 0){
             if (day == 1) {
                 //Squat
