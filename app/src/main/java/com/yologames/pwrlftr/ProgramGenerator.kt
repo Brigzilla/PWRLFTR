@@ -74,9 +74,10 @@ class ProgramGenerator : Fragment() {
                 _1rms[0]= mainActivity.loadFloat("s1rm")
                 _1rms[1]= mainActivity.loadFloat("b1rm")
                 _1rms[2]= mainActivity.loadFloat("d1rm")
-                _passesAllowable = mainActivity.loadIntFromPrefs("passes", 0)
+//                _passesAllowable = mainActivity.loadIntFromPrefs("passes", 0)
                 viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
                 viewModel.sessions_generated = mainActivity.loadIntFromPrefs("sgenerated", 0)
+                _weeks = mainActivity.loadIntFromPrefs("weeks", 0)
                 mainActivity.loadIntFromPrefs("day", 0)
             }
 
@@ -206,11 +207,12 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
             }
             val trueCount = countTrueElements(_session_feedback_left)
             if (trueCount >= _session_feedback_left.size-1) {
-                _passesAllowable =1
+                _passesAllowable = 1
                 _sessions_reviewed = trueCount
-            viewModel.passesComplete = _weeks
-            if (_passesAllowable >= viewModel.passesComplete) {
-                lifecycleScope.launch {
+                viewModel.passesComplete = _weeks
+                 if (_passesAllowable > 0) {
+                     Log.d("FATAL", "$_weeks")
+                   lifecycleScope.launch {
                     Dispatchers.IO
                     val temp = viewModel.createBetaProgram()
                     addArrayToDatabase(temp)
@@ -222,7 +224,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                         _session_feedback_left
                     )
                     mainActivity.saveIntToPrefs("weeks", _weeks)
-                    mainActivity.saveIntToPrefs("passes", _passesAllowable)
+//                    mainActivity.saveIntToPrefs("passes", _passesAllowable)
                     mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
                     mainActivity.saveIntToPrefs("day", viewModel.day)
                     mainActivity.saveFloat("s1rm", _1rms[0])
@@ -230,6 +232,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                     mainActivity.saveFloat("d1rm", _1rms[2])
                     mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
                     reloadFragment()
+
                 }
             }
             }

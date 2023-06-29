@@ -22,16 +22,8 @@ class ProgramGeneratorViewModel : ViewModel() {
     var dayExpected = 3
 
 
-//    init {
-//        _1rms.add( 300.0f) //Squat
-//        _1rms.add( 230.0f) //Bench
-//        _1rms.add( 300.0f) //Deadlift
-//    }
-
-
     fun createBetaProgram(): ArrayList<Session>{
-//        Log.d("FATAL", "S ${_1rms[0]} B ${_1rms[1]} D ${_1rms[2]}")
-//        while (passesComplete < _passesAllowable) {
+
         while (_passesAllowable > 0){
             if (day == 1) {
                 //Squat
