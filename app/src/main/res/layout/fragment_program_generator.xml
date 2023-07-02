@@ -30,17 +30,18 @@
         android:inputType="number|numberDecimal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/enter_1rm_bench"
+        app:layout_constraintEnd_toStartOf="@id/enter_1rm_bench"
+
+        android:layout_marginTop="64dp"
         android:text="100"
 
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/text_squat"
-        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_squat"
-        app:layout_constraintEnd_toStartOf="@id/enter_1rm_squat"
-        app:layout_constraintTop_toTopOf="@id/enter_1rm_squat"
+        app:layout_constraintBottom_toTopOf="@id/enter_1rm_squat"
+        app:layout_constraintStart_toStartOf="@id/enter_1rm_squat"
+        app:layout_constraintEnd_toEndOf="@id/enter_1rm_squat"
         android:text="Squat"
 
         android:visibility="invisible"
@@ -56,18 +57,17 @@
         android:ems="10"
         android:text="100"
         android:inputType="number|numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/enter_1rm_squat"
-        app:layout_constraintStart_toStartOf="parent"
-
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/enter_1rm_dead"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/enter_1rm_squat"
+        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_squat"
+        app:layout_constraintEnd_toStartOf="@id/enter_1rm_dead"
+        app:layout_constraintStart_toEndOf="@id/enter_1rm_squat"/>
 
     <TextView
         android:id="@+id/text_bench"
-        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_bench"
-        app:layout_constraintEnd_toStartOf="@id/enter_1rm_bench"
-        app:layout_constraintTop_toTopOf="@id/enter_1rm_bench"
+        app:layout_constraintBottom_toTopOf="@id/enter_1rm_bench"
+        app:layout_constraintStart_toStartOf="@id/enter_1rm_bench"
+        app:layout_constraintEnd_toEndOf="@id/enter_1rm_bench"
         android:text="Bench"
 
         android:visibility="invisible"
@@ -83,20 +83,18 @@
         android:ems="10"
         android:text="100"
         android:inputType="number|numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/enter_1rm_bench"
-        app:layout_constraintStart_toStartOf="parent"
-
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/add_test_button"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/enter_1rm_squat"
+        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_squat"
+        app:layout_constraintStart_toEndOf="@id/enter_1rm_bench"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/text_dead"
-        app:layout_constraintBottom_toBottomOf="@id/enter_1rm_dead"
-        app:layout_constraintEnd_toStartOf="@id/enter_1rm_dead"
-
         android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="@id/enter_1rm_dead"
+        app:layout_constraintBottom_toTopOf="@id/enter_1rm_dead"
+        app:layout_constraintStart_toStartOf="@id/enter_1rm_dead"
+        app:layout_constraintEnd_toEndOf="@id/enter_1rm_dead"
         android:text="Deadlift"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
