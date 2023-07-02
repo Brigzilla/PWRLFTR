@@ -28,14 +28,6 @@ var _Database_size = 1
 
 private lateinit var sessionDao: SessionDao
 
-var polling_done = false
-
-var sessionsInCard = ArrayList<String>(40)
-//some test sessions. Can probably safely delete but will save time later
-//val sesh = Session(0, "Week 1", "Bench", 4, 4, 120)
-//val sesh2 = Session(0, "Week 2", "Bench", 3, 4, 125)
-//val sesh3 = Session(0, "Week 3", "Bench", 2, 4, 130)
-var weight_measurement = "KG"
 var can_init: Boolean  = false
 
 class ProgramGenerator : Fragment() {
@@ -47,8 +39,11 @@ class ProgramGenerator : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         BuildDatabase()
+
         super.onCreate(savedInstanceState)
     }
+
+
 
     fun BuildDatabase(){
         val database = Room.databaseBuilder(
@@ -59,8 +54,6 @@ class ProgramGenerator : Fragment() {
         queryDatabaseSize()
         can_init = true
     }
-
-
 
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
     fun queryDatabaseSize() {
@@ -90,44 +83,9 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-
-
-//    private fun PopulateCardsNew() {
-//        ClearCards()
-//        val session = sessionDao.getAllSessions().sortedBy { it.title }
-//        if (sessionDao.getAllSessions().isNotEmpty()) {
-//            var i = 0
-//            while (i < session.size) {
-//                val sessionsInCard = ArrayList<String>(10)
-//                for (k in 0 until 10) {
-//                    sessionsInCard.add("_")
-//                }
-//               if (session[i].set_0 != "") sessionsInCard[0] = session[i].set_0
-//                if (session[i].set_1 != "") sessionsInCard[1] = session[i].set_1
-//                if (session[i].set_2 != "")  sessionsInCard[2] = session[i].set_2
-//                if (session[i].set_3 != "") sessionsInCard[3] = session[i].set_3
-//                if (session[i].set_4 != "") sessionsInCard[4] = session[i].set_4
-//                if (session[i].set_5 != "") sessionsInCard[5] = session[i].set_5
-//                if (session[i].set_6 != "") sessionsInCard[6] = session[i].set_6
-//                if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
-//                if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
-//                if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
-//                    addPCard(session[i], sessionsInCard)
-//
-//                i++
-//            }
-//        }
-//        updateRecyclerView()
-//    }
-
-//    private fun updateRecyclerView() {
-//        requireActivity().runOnUiThread {
-//            binding.recyclerView.adapter?.notifyDataSetChanged()
-//        }
-//    }
 private fun updateRecyclerView() {
     lifecycleScope.launch(Dispatchers.IO) {
-        val sessions = sessionDao.getAllSessions()
+        val sessions = sessionDao.getAllSessions().sortedBy { it.title }
         withContext(Dispatchers.Main) {
             PCardList.clear()
             sessions.forEach { session ->
@@ -199,10 +157,11 @@ private fun updateRecyclerView() {
             R.layout.fragment_program_generator, container, false)
         return binding.root
 
+
         updateDataset()
 
-
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -276,8 +235,10 @@ private fun updateRecyclerView() {
                 }
             }
             val trueCount = countTrueElements(_session_feedback_left)
-            if (trueCount >= _session_feedback_left.size-1 && sessionDao.getAllSessions().isNotEmpty()) {
-                _passesAllowable = 1
+            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
+//                if (sessionDao.getAllSessions().isNotEmpty()) { //use this to test the ordering. Removes the requirement to leave feedback before generating the next week
+
+                    _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 if (sessionDao.getAllSessions().isNotEmpty())  viewModel.passesComplete = _weeks
                  //_weeks = 1
@@ -426,3 +387,41 @@ private fun updateRecyclerView() {
     private fun ClearCards() {
         PCardList.clear()
     }
+
+
+
+
+
+//    private fun PopulateCardsNew() {
+//        ClearCards()
+//        val session = sessionDao.getAllSessions().sortedBy { it.title }
+//        if (sessionDao.getAllSessions().isNotEmpty()) {
+//            var i = 0
+//            while (i < session.size) {
+//                val sessionsInCard = ArrayList<String>(10)
+//                for (k in 0 until 10) {
+//                    sessionsInCard.add("_")
+//                }
+//               if (session[i].set_0 != "") sessionsInCard[0] = session[i].set_0
+//                if (session[i].set_1 != "") sessionsInCard[1] = session[i].set_1
+//                if (session[i].set_2 != "")  sessionsInCard[2] = session[i].set_2
+//                if (session[i].set_3 != "") sessionsInCard[3] = session[i].set_3
+//                if (session[i].set_4 != "") sessionsInCard[4] = session[i].set_4
+//                if (session[i].set_5 != "") sessionsInCard[5] = session[i].set_5
+//                if (session[i].set_6 != "") sessionsInCard[6] = session[i].set_6
+//                if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
+//                if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
+//                if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
+//                    addPCard(session[i], sessionsInCard)
+//
+//                i++
+//            }
+//        }
+//        updateRecyclerView()
+//    }
+
+//    private fun updateRecyclerView() {
+//        requireActivity().runOnUiThread {
+//            binding.recyclerView.adapter?.notifyDataSetChanged()
+//        }
+//    }
