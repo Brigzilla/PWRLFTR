@@ -93,7 +93,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     private fun Beta_Set_1(): Session{
         return Session(0,
-            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
+            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
             "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
             "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
@@ -108,7 +108,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     }
     private fun Beta_Set_2(): Session{
         return Session(0,
-            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
+            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
             "Bench",
             "1 * 5 at ${rounded(_1rms[1]*.7).toInt()}",
             "1 * 3 at ${rounded(_1rms[1]*.75).toInt()}",
@@ -124,7 +124,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     private fun Beta_Set_3(): Session{
         return Session(0,
-            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
+            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
             "1 * 5 at ${rounded(_1rms[0]*.6).toInt()}",
             "1 * 5 at ${rounded(_1rms[0]*.65).toInt()}",
@@ -140,7 +140,7 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     private fun Beta_Set_4(): Session{
         return Session(0,
-            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
+            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
             "Bench",
             "1 * 5 at ${rounded(_1rms[1]*.6).toInt()}",
             "1 * 3 at ${rounded(_1rms[1]*.65).toInt()}",
@@ -155,7 +155,7 @@ class ProgramGeneratorViewModel : ViewModel() {
     }
     private fun Beta_Set_5(): Session{
         return Session(0,
-            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Deadlift",
+            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Deadlift",
             "Deadlift",
             "1 * 5 at ${rounded(_1rms[2]*.65).toInt()}",
             "1 * 5 at ${rounded(_1rms[2]*.75).toInt()}",
