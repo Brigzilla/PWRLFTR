@@ -40,6 +40,8 @@ var can_init: Boolean  = false
 
 class ProgramGenerator : Fragment() {
 
+
+
     private val viewModel: ProgramGeneratorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,11 +80,11 @@ class ProgramGenerator : Fragment() {
                     _weeks = mainActivity.loadIntFromPrefs("weeks", 0)
                     mainActivity.loadIntFromPrefs("day", 0)
 
-                    withContext(Dispatchers.Main) {
-                        if (_Database_size > 0) {
-                            populateRecyclerView()
-                        }
-                    }
+//                    withContext(Dispatchers.Main) {
+//                        if (_Database_size > 0) {
+//                            PopulateCardsNew()
+//                        }
+//                    }
                 }
             }
         }
@@ -90,92 +92,85 @@ class ProgramGenerator : Fragment() {
 
 
 
-//private fun PopulateCardsNew() {
-//    ClearCards()
-//    val session = sessionDao.getAllSessions().sortedBy { it.title }
-//    if (sessionDao.getAllSessions().isNotEmpty()) {
-//        var i = 0
-//        while (i < session.size) {
-//            val tempTitles = sessionDao.getByTitle(session[i].title)
-//            val sessionsInCard = ArrayList<String>(10)
-//            for (k in 0 until 10) {
-//                sessionsInCard.add("_")
+//    private fun PopulateCardsNew() {
+//        ClearCards()
+//        val session = sessionDao.getAllSessions().sortedBy { it.title }
+//        if (sessionDao.getAllSessions().isNotEmpty()) {
+//            var i = 0
+//            while (i < session.size) {
+//                val sessionsInCard = ArrayList<String>(10)
+//                for (k in 0 until 10) {
+//                    sessionsInCard.add("_")
+//                }
+//               if (session[i].set_0 != "") sessionsInCard[0] = session[i].set_0
+//                if (session[i].set_1 != "") sessionsInCard[1] = session[i].set_1
+//                if (session[i].set_2 != "")  sessionsInCard[2] = session[i].set_2
+//                if (session[i].set_3 != "") sessionsInCard[3] = session[i].set_3
+//                if (session[i].set_4 != "") sessionsInCard[4] = session[i].set_4
+//                if (session[i].set_5 != "") sessionsInCard[5] = session[i].set_5
+//                if (session[i].set_6 != "") sessionsInCard[6] = session[i].set_6
+//                if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
+//                if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
+//                if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
+//                    addPCard(session[i], sessionsInCard)
+//
+//                i++
 //            }
-//            var j = 0
-//            while (j < tempTitles.size && j < 10) {
-//                sessionsInCard[j] = "${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement"
-//                j++
-//            }
-//            addPCard(tempTitles[0], sessionsInCard)
-//            i += tempTitles.size
+//        }
+//        updateRecyclerView()
+//    }
+
+//    private fun updateRecyclerView() {
+//        requireActivity().runOnUiThread {
+//            binding.recyclerView.adapter?.notifyDataSetChanged()
 //        }
 //    }
-//    updateRecyclerView()
-//}
-
-    private fun populateRecyclerView() {
-        ClearCards()
-        val session = sessionDao.getAllSessions().sortedBy { it.title }
-        if (sessionDao.getAllSessions().isNotEmpty()) {
-            var i = 0
-            while (i < session.size) {
+private fun updateRecyclerView() {
+    lifecycleScope.launch(Dispatchers.IO) {
+        val sessions = sessionDao.getAllSessions()
+        withContext(Dispatchers.Main) {
+            PCardList.clear()
+            sessions.forEach { session ->
                 val sessionsInCard = ArrayList<String>(10)
                 for (k in 0 until 10) {
                     sessionsInCard.add("_")
                 }
-                if (session[i].set_0 != "") sessionsInCard[0] = session[i].set_0
-                if (session[i].set_1 != "") sessionsInCard[1] = session[i].set_1
-                if (session[i].set_2 != "") sessionsInCard[2] = session[i].set_2
-                if (session[i].set_3 != "") sessionsInCard[3] = session[i].set_3
-                if (session[i].set_4 != "") sessionsInCard[4] = session[i].set_4
-                if (session[i].set_5 != "") sessionsInCard[5] = session[i].set_5
-                if (session[i].set_6 != "") sessionsInCard[6] = session[i].set_6
-                if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
-                if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
-                if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
-                addPCard(session[i], sessionsInCard)
-                i++
+                if (session.set_0 != "") sessionsInCard[0] = session.set_0
+                if (session.set_1 != "") sessionsInCard[1] = session.set_1
+                if (session.set_2 != "") sessionsInCard[2] = session.set_2
+                if (session.set_3 != "") sessionsInCard[3] = session.set_3
+                if (session.set_4 != "") sessionsInCard[4] = session.set_4
+                if (session.set_5 != "") sessionsInCard[5] = session.set_5
+                if (session.set_6 != "") sessionsInCard[6] = session.set_6
+                if (session.set_7 != "") sessionsInCard[7] = session.set_7
+                if (session.set_8 != "") sessionsInCard[8] = session.set_8
+                if (session.set_9 != "") sessionsInCard[9] = session.set_9
+
+                val cardToAdd = PCard(
+                    session.title.substringAfter("_"),
+                    session.exercise,
+                    sessionsInCard[0],
+                    sessionsInCard[1],
+                    sessionsInCard[2],
+                    sessionsInCard[3],
+                    sessionsInCard[4],
+                    sessionsInCard[5],
+                    sessionsInCard[6],
+                    sessionsInCard[7],
+                    sessionsInCard[8],
+                    sessionsInCard[9],
+                    0
+                )
+                PCardList.add(cardToAdd)
             }
-        }
-        updateRecyclerView()
-    }
 
-
-    private fun PopulateCardsNew() {
-        ClearCards()
-        val session = sessionDao.getAllSessions().sortedBy { it.title }
-        if (sessionDao.getAllSessions().isNotEmpty()) {
-            var i = 0
-            while (i < session.size) {
-                val sessionsInCard = ArrayList<String>(10)
-                for (k in 0 until 10) {
-                    sessionsInCard.add("_")
-                }
-               if (session[i].set_0 != "") sessionsInCard[0] = session[i].set_0
-                if (session[i].set_1 != "") sessionsInCard[1] = session[i].set_1
-                if (session[i].set_2 != "")  sessionsInCard[2] = session[i].set_2
-                if (session[i].set_3 != "") sessionsInCard[3] = session[i].set_3
-                if (session[i].set_4 != "") sessionsInCard[4] = session[i].set_4
-                if (session[i].set_5 != "") sessionsInCard[5] = session[i].set_5
-                if (session[i].set_6 != "") sessionsInCard[6] = session[i].set_6
-                if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
-                if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
-                if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
-                    addPCard(session[i], sessionsInCard)
-
-                i++
-            }
-        }
-        updateRecyclerView()
-    }
-
-    private fun updateRecyclerView() {
-        requireActivity().runOnUiThread {
             binding.recyclerView.adapter?.notifyDataSetChanged()
         }
     }
+}
 
-private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
+
+    private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     val cardToAdd = PCard(
         session.title.substringAfter("_"),
         session.exercise,
@@ -206,25 +201,26 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
         updateDataset()
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
 
-       if (can_init) {
-           InitRecycler()
+        if (can_init) {
+            InitRecycler()
 
-           lifecycleScope.launch(Dispatchers.Main)
-           {
+            lifecycleScope.launch(Dispatchers.Main) {
+                if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
+                if (sessionDao.getAllSessions().isEmpty()) showInitialElements()
 
-               if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
-               if (sessionDao.getAllSessions().isEmpty())showInitialElements()
-           }
-       }
-           setOnClickListeners()
+                updateRecyclerView() // Update the RecyclerView here
+            }
+        }
 
+        setOnClickListeners()
     }
+
 
 
     fun InitRecycler() {
@@ -253,14 +249,39 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
                 _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
             }
-            val trueCount = countTrueElements(_session_feedback_left)
 
-            if (trueCount >= _session_feedback_left.size-1 || sessionDao.getAllSessions().isEmpty()) {
+            if (sessionDao.getAllSessions().isEmpty()) {
                 _passesAllowable = 1
+                lifecycleScope.launch {
+                    withContext(Dispatchers.Main) {
+                        val temp = viewModel.createNextWeek()
+                        addArrayToDatabase(temp)
+                        hideInitialElements()
+                        updateRecyclerView()
 
+                        val mainActivity = requireActivity() as MainActivity
+                        mainActivity.saveBooleanListToPrefs(
+                            "session_feedback_list",
+                            _session_feedback_left
+                        )
+                        mainActivity.saveIntToPrefs("weeks", _weeks)
+                        mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
+                        mainActivity.saveIntToPrefs("day", viewModel.day)
+                        mainActivity.saveFloat("s1rm", _1rms[0])
+                        mainActivity.saveFloat("b1rm", _1rms[1])
+                        mainActivity.saveFloat("d1rm", _1rms[2])
+                        mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
+                        reloadFragment()
+                    }
+                }
+            }
+            val trueCount = countTrueElements(_session_feedback_left)
+            if (trueCount >= _session_feedback_left.size-1 && sessionDao.getAllSessions().isNotEmpty()) {
+                _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 if (sessionDao.getAllSessions().isNotEmpty())  viewModel.passesComplete = _weeks
-                if (sessionDao.getAllSessions().isEmpty()) viewModel.passesComplete = 0
+                 //_weeks = 1
+
                 lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
                              //val temp = viewModel.createBetaProgram()
@@ -276,7 +297,6 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                             _session_feedback_left
                         )
                         mainActivity.saveIntToPrefs("weeks", _weeks)
-//                    mainActivity.saveIntToPrefs("passes", _passesAllowable)
                         mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
                         mainActivity.saveIntToPrefs("day", viewModel.day)
                         mainActivity.saveFloat("s1rm", _1rms[0])
@@ -332,10 +352,19 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
             sessionDao.insertSession(_local_session)
             withContext(Dispatchers.Main) {
                 updateDataset()
+                refreshRecyclerView()
             }
         }
-        PopulateCardsNew()
+//        PopulateCardsNew()
     }
+
+
+    private fun refreshRecyclerView() {
+        binding.recyclerView.adapter?.apply {
+            notifyDataSetChanged()
+        }
+    }
+
 
 
     fun reloadFragment(){
@@ -380,6 +409,8 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
         mainActivity.saveFloat("b1rm", 0.0f)
         mainActivity.saveFloat("d1rm", 0.0f)
         _passesAllowable = 0
+        _weeks = 0
+        mainActivity.saveIntToPrefs("weeks", _weeks)
         mainActivity.saveIntToPrefs("passes", _passesAllowable)
         updateDataset()
         reloadFragment()
@@ -389,6 +420,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
     fun updateDataset(){
        binding.recyclerView.adapter!!.notifyDataSetChanged()
+
     }
 
     private fun ClearCards() {
