@@ -52,7 +52,7 @@ class ProgramGenerator : Fragment() {
         val database = Room.databaseBuilder(
             requireContext(),
             SessionDatabase::class.java, "session_database"
-        ).allowMainThreadQueries().build()
+        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
         sessionDao = database.sessionDao()
         queryDatabaseSize()
         can_init = true
@@ -90,28 +90,55 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-private fun PopulateCardsNew() {
-    ClearCards()
-    val session = sessionDao.getAllSessions().sortedBy { it.title }
-    if (sessionDao.getAllSessions().isNotEmpty()) {
-        var i = 0
-        while (i < session.size) {
-            val tempTitles = sessionDao.getByTitle(session[i].title)
-            val sessionsInCard = ArrayList<String>(10)
-            for (k in 0 until 10) {
-                sessionsInCard.add("_")
+//private fun PopulateCardsNew() {
+//    ClearCards()
+//    val session = sessionDao.getAllSessions().sortedBy { it.title }
+//    if (sessionDao.getAllSessions().isNotEmpty()) {
+//        var i = 0
+//        while (i < session.size) {
+//            val tempTitles = sessionDao.getByTitle(session[i].title)
+//            val sessionsInCard = ArrayList<String>(10)
+//            for (k in 0 until 10) {
+//                sessionsInCard.add("_")
+//            }
+//            var j = 0
+//            while (j < tempTitles.size && j < 10) {
+//                sessionsInCard[j] = "${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement"
+//                j++
+//            }
+//            addPCard(tempTitles[0], sessionsInCard)
+//            i += tempTitles.size
+//        }
+//    }
+//    updateRecyclerView()
+//}
+
+    private fun PopulateCardsNew() {
+        ClearCards()
+        val session = sessionDao.getAllSessions().sortedBy { it.title }
+        if (sessionDao.getAllSessions().isNotEmpty()) {
+            var i = 0
+            while (i < session.size) {
+                val sessionsInCard = ArrayList<String>(10)
+                for (k in 0 until 10) {
+                    sessionsInCard.add("_")
+                }
+               if (session[i].set_0 != "") sessionsInCard[0] = session[i].set_0
+                if (session[i].set_1 != "") sessionsInCard[1] = session[i].set_1
+                if (session[i].set_2 != "")  sessionsInCard[2] = session[i].set_2
+                if (session[i].set_3 != "") sessionsInCard[3] = session[i].set_3
+                if (session[i].set_4 != "") sessionsInCard[4] = session[i].set_4
+                if (session[i].set_5 != "") sessionsInCard[5] = session[i].set_5
+                if (session[i].set_6 != "") sessionsInCard[6] = session[i].set_6
+                if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
+                if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
+                if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
+                addPCard(session[i], sessionsInCard)
+                i++
             }
-            var j = 0
-            while (j < tempTitles.size && j < 10) {
-                sessionsInCard[j] = "${tempTitles[j].sets} * ${tempTitles[j].reps} at ${tempTitles[j].weight}$weight_measurement"
-                j++
-            }
-            addPCard(tempTitles[0], sessionsInCard)
-            i += tempTitles.size
         }
+        updateRecyclerView()
     }
-    updateRecyclerView()
-}
 
     private fun updateRecyclerView() {
         requireActivity().runOnUiThread {
