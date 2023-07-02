@@ -28,14 +28,7 @@ class ProgramGeneratorViewModel : ViewModel() {
                 //Squat
                 trainingProgram.add(Beta_Set_1())
                 trainingProgram.add(Beta_Set_2())
-//                trainingProgram.add(Beta_Set_3())
-//                trainingProgram.add(Beta_Set_4())
-//                trainingProgram.add(Beta_Set_5())
-//                trainingProgram.add(Beta_Set_6())
-//                trainingProgram.add(Beta_Set_7())
-//                for (element in trainingProgram) {
-//                    Log.d("FATAL", "Day $day added. Session : $element")
-//                }
+
                 sessions_generated++
 
                 //Bench
@@ -92,25 +85,25 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     private fun Beta_Set_1(): Session{
         return Session(0,
-            "01 Week ${passesComplete + 1}, Day $day - Squat",
+            "01_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
-            1,
-            5,
+            0,
+            0,
             rounded(_1rms[0]*.7).toInt(),
-        "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10")
+        "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
+            "1 * 3 at ${rounded(_1rms[0]*.75).toInt()}",
+            "1 * 2 at ${rounded(_1rms[0]*.8).toInt()}",
+            "1 * 1 at ${rounded(_1rms[0]*.85).toInt()}",
+            "1 * 1 at ${rounded(_1rms[0]*.9).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.8).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.75).toInt()}",
+            "",
+            "",
+            "")
     }
     private fun Beta_Set_2(): Session{
         return Session(0,
-            "02 Week ${passesComplete + 1}, Day ${day+1} - Bench",
+            "02_Week ${passesComplete + 1}, Day ${day+1} - Bench",
             "Squat",
             1,
             3,
@@ -126,57 +119,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "9",
             "")
     }
-//    private fun Beta_Set_3(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            2,
-//            rounded(_1rms[0]*.80).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_4(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            1,
-//            rounded(_1rms[0]*.85).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_5(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            1,
-//            rounded(_1rms[0]*.90).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_6(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            5,
-//            rounded(_1rms[0]*.80).toInt(),
-//            "")
-//    }
-//    private fun Beta_Set_7(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            5,
-//            rounded(_1rms[0]*.75).toInt(),
-//            "")
-//    }
-//
-//
-//
+
 //    private fun Beta_Set_8(): Session{
 //        return Session(0,
 //            "Week ${passesComplete + 1}, Day $day - Bench",

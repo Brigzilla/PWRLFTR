@@ -148,7 +148,7 @@ class ProgramGenerator : Fragment() {
 
 private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     val cardToAdd = PCard(
-        session.title,
+        session.title.substringAfter("_"),
         session.exercise,
         sessionsInCard[0],
         sessionsInCard[1],
