@@ -11,12 +11,13 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="0dp"
         android:layout_height="56dp"
+        style="@style/RoundedButton"
         android:id="@+id/add_test_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.45"
-        app:strokeWidth="1dp"
+        android:fontFamily="@font/roboto"
         android:text="Generate Program">
 
     </com.google.android.material.button.MaterialButton>
