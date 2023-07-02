@@ -24,6 +24,8 @@ class PCardViewHolder(
         cardCellBinding.title.text = pCard.title
 
 
+
+
         if (!_session_feedback_left[adapterPosition]) {
             cardCellBinding.finishedMarker.visibility = View.INVISIBLE
             cardCellBinding.exercise.text = pCard.exercise
@@ -44,13 +46,10 @@ class PCardViewHolder(
             }
 
             cardCellBinding.commitReview.setOnClickListener {
-
-//            pCard.reviewingSession = false
                 disableSeekBars()
                 cardCellBinding.reviewButton.visibility = View.GONE
                 cardCellBinding.commitReview.visibility = View.INVISIBLE
                 _sessions_reviewed += 1
-//            pCard.completedReview =! completedReview
                 _session_feedback_left[adapterPosition] = true
                 cardCellBinding.finishedMarker.visibility = View.VISIBLE
                 pCard.reviewingSession = false
@@ -170,6 +169,7 @@ class PCardViewHolder(
                     if (!reviewingSession) cardCellBinding.aspect9Seekbar.visibility = View.GONE
 
                 }
+
             }
         }
         else {
