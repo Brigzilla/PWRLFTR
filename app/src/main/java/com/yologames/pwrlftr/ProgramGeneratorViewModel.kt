@@ -1,6 +1,5 @@
 package com.yologames.pwrlftr
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.yologames.pwrlftr.room.Session
 import java.math.BigDecimal
@@ -41,7 +40,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         //Deadlift
         trainingProgram.add(Beta_Set_5())
         sessions_generated++
-        Log.d("FATAL", sessions_generated.toString())
+//        Log.d("FATAL", sessions_generated.toString())
 
             passesComplete++
             _weeks = passesComplete
@@ -51,45 +50,6 @@ class ProgramGeneratorViewModel : ViewModel() {
         return trainingProgram
     }
 
-
-    fun createBetaProgram(): ArrayList<Session>{
-        while (_passesAllowable > 0){
-            if (day == 1) {
-                //Squat
-                trainingProgram.add(Beta_Set_1())
-                sessions_generated++
-                //Bench
-                trainingProgram.add(Beta_Set_2())
-                sessions_generated++
-            }
-            if (day == 2) {
-                //Squat
-                trainingProgram.add(Beta_Set_3())
-                sessions_generated++
-                //Bench
-                trainingProgram.add(Beta_Set_4())
-                sessions_generated++
-            }
-            if (day == 3) {
-                //Deadlift
-                trainingProgram.add(Beta_Set_5())
-                sessions_generated++
-            }
-
-            if (day <= dayExpected) {
-                day++
-            }
-            if (day > dayExpected){
-                passesComplete++
-                _weeks = passesComplete
-                day = 1
-                _passesAllowable = 0
-            }
-
-        }
-
-        return trainingProgram
-    }
 
     private fun Beta_Set_1(): Session{
         return Session(0,
@@ -168,200 +128,6 @@ class ProgramGeneratorViewModel : ViewModel() {
             "",
             "")
     }
-//    private fun Beta_Set_11(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            1,
-//            rounded(_1rms[1]*.85).toInt(),
-//            "")
-//    }
-//    private fun Beta_Set_12(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            1,
-//            rounded(_1rms[1]*.90).toInt(),
-//            "")
-//    }
-//    private fun Beta_Set_13(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.80).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_14(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.75).toInt(),
-//            "")
-//    }
-//
-//
-//
-//    private fun Beta_Set_15(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            5,
-//            rounded(_1rms[0]*.60).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_16(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            5,
-//            rounded(_1rms[0]*.65).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_17(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            5,
-//            rounded(_1rms[0]*.70).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_18(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Squat",
-//            "Squat",
-//            1,
-//            5,
-//            rounded(_1rms[0]*.75).toInt(),
-//            "")
-//    }
-//
-//
-//
-//    private fun Beta_Set_19(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.60).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_20(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.65).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_21(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.70).toInt(),
-//            "")
-//    }
-//    private fun Beta_Set_22(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.75).toInt(),
-//            "")
-//    }
-//
-//
-//
-//
-//    private fun Beta_Set_23(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            5,
-//            rounded(_1rms[2]*.65).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_24(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            5,
-//            rounded(_1rms[2]*.75).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_25(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            3,
-//            rounded(_1rms[2]*.85).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_26(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            1,
-//            rounded(_1rms[2]*.90).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_27(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            1,
-//            rounded(_1rms[2]*.95).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_28(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            5,
-//            rounded(_1rms[2]*.80).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_29(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Deadlift",
-//            "Deadlift",
-//            1,
-//            5,
-//            rounded(_1rms[2]*.75).toInt(),
-//            "")
-//    }
-
 
     //Math stuff
     fun rounded(f: Double): BigDecimal
@@ -369,17 +135,18 @@ class ProgramGeneratorViewModel : ViewModel() {
         val bd = BigDecimal(f).round(MathContext(3))
         return applyIncrement(bd)
     }
-
-    fun applyMultiplier(f: BigDecimal) : BigDecimal
+//
+    fun applyMultiplier(f: Double) : BigDecimal
     {
 
-        val bd = f * (BigDecimal(multiplier))
-        return applyIncrement(bd)
+        val bd = f * multiplier
+        return BigDecimal(bd)
     }
 
     fun applyIncrement(bd: BigDecimal) : BigDecimal
     {
-        return bd + BigDecimal(increment * passesComplete)
+//        return applyMultiplier(bd + BigDecimal(increment * passesComplete))
+        return bd + applyMultiplier(increment * passesComplete)
     }
 
 }
