@@ -52,7 +52,7 @@ class ProgramGenerator : Fragment() {
         val database = Room.databaseBuilder(
             requireContext(),
             SessionDatabase::class.java, "session_database"
-        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
+        ).allowMainThreadQueries().build()
         sessionDao = database.sessionDao()
         queryDatabaseSize()
         can_init = true
@@ -61,34 +61,33 @@ class ProgramGenerator : Fragment() {
 
 
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
-    fun queryDatabaseSize(){
+    fun queryDatabaseSize() {
         lifecycleScope.launch(Dispatchers.IO) {
-            if (sessionDao.getAllSessions().isNotEmpty())
-            {
-            val i = sessionDao.getAllSessions().size
-            if (i > _Database_size)
-            {
-                _Database_size = i
+            val sessionList = sessionDao.getAllSessions()
+            if (sessionList.isNotEmpty()) {
+                val databaseSize = sessionList.size
+                if (databaseSize > _Database_size) {
+                    _Database_size = databaseSize
 
-                val mainActivity = requireActivity() as MainActivity
-                _1rms[0]= mainActivity.loadFloat("s1rm")
-                _1rms[1]= mainActivity.loadFloat("b1rm")
-                _1rms[2]= mainActivity.loadFloat("d1rm")
-//                _passesAllowable = mainActivity.loadIntFromPrefs("passes", 0)
-                viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
-                viewModel.sessions_generated = mainActivity.loadIntFromPrefs("sgenerated", 0)
-                _weeks = mainActivity.loadIntFromPrefs("weeks", 0)
-                mainActivity.loadIntFromPrefs("day", 0)
-            }
+                    val mainActivity = requireActivity() as MainActivity
+                    _1rms[0] = mainActivity.loadFloat("s1rm")
+                    _1rms[1] = mainActivity.loadFloat("b1rm")
+                    _1rms[2] = mainActivity.loadFloat("d1rm")
+                    viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
+                    viewModel.sessions_generated = mainActivity.loadIntFromPrefs("sgenerated", 0)
+                    _weeks = mainActivity.loadIntFromPrefs("weeks", 0)
+                    mainActivity.loadIntFromPrefs("day", 0)
 
-            if (_Database_size > 0)
-            {
-                PopulateCardsNew()
-            }
-
+                    withContext(Dispatchers.Main) {
+                        if (_Database_size > 0) {
+                            PopulateCardsNew()
+                        }
+                    }
+                }
             }
         }
     }
+
 
 //private fun PopulateCardsNew() {
 //    ClearCards()
@@ -133,7 +132,8 @@ class ProgramGenerator : Fragment() {
                 if (session[i].set_7 != "") sessionsInCard[7] = session[i].set_7
                 if (session[i].set_8 != "") sessionsInCard[8] = session[i].set_8
                 if (session[i].set_9 != "") sessionsInCard[9] = session[i].set_9
-                addPCard(session[i], sessionsInCard)
+                    addPCard(session[i], sessionsInCard)
+
                 i++
             }
         }
@@ -225,7 +225,6 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 
 
     fun setOnClickListeners(){
-//        Log.d("FATAL", "${_session_feedback_left.size}")
         binding.addTestButton.setOnClickListener {
             if (_1rms[0] == 0.0f) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
@@ -237,12 +236,12 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
                 _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
-                 if (_passesAllowable > 0) {
-                     Log.d("FATAL", "$_weeks")
-
-                     lifecycleScope.launch {
+                 if (_passesAllowable > 0)
+                 {
+                     lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
-                             val temp = viewModel.createBetaProgram()
+                             //val temp = viewModel.createBetaProgram()
+                             val temp  =viewModel.createNextWeek()
                              addArrayToDatabase(temp)
                              // Perform other database operations here
                          }
@@ -308,13 +307,16 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
     }
 
 
-    fun addToTestDatabase(_local_session : Session) {
+    fun addToTestDatabase(_local_session: Session) {
         lifecycleScope.launch(Dispatchers.IO) {
-                sessionDao.insertSession(_local_session)
+            sessionDao.insertSession(_local_session)
+            withContext(Dispatchers.Main) {
+                updateDataset()
+            }
         }
-        updateDataset()
         PopulateCardsNew()
     }
+
 
     fun reloadFragment(){
         findNavController().navigate(R.id.action_programGenerator_self)
@@ -366,7 +368,7 @@ private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
 }
 
     fun updateDataset(){
-        binding.recyclerView.adapter!!.notifyDataSetChanged()
+       binding.recyclerView.adapter!!.notifyDataSetChanged()
     }
 
     private fun ClearCards() {

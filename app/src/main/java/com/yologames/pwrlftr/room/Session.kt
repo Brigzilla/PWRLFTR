@@ -16,15 +16,6 @@ data class Session(
     @ColumnInfo(name = "exercise")
     var exercise: String,
 
-    @ColumnInfo(name = "sets")
-    var sets: Int,
-
-    @ColumnInfo(name = "reps")
-    var reps: Int,
-
-    @ColumnInfo(name = "weight")
-    var weight: Int,
-
     @ColumnInfo(name = "set0")
     var set_0: String,
 

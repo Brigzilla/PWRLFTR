@@ -21,50 +21,58 @@ class ProgramGeneratorViewModel : ViewModel() {
     var day: Int = 1
     var dayExpected = 3
 
+    fun createNextWeek(): ArrayList<Session>{
+        day = 1
+
+        //Squat
+        trainingProgram.add(Beta_Set_1())
+        sessions_generated++
+        //Bench
+        trainingProgram.add(Beta_Set_2())
+        sessions_generated++
+        day = 2
+        //Squat
+        trainingProgram.add(Beta_Set_3())
+        sessions_generated++
+        //Bench
+        trainingProgram.add(Beta_Set_4())
+        sessions_generated++
+        day = 3
+        //Deadlift
+        trainingProgram.add(Beta_Set_5())
+        sessions_generated++
+        Log.d("FATAL", sessions_generated.toString())
+
+            passesComplete++
+            _weeks = passesComplete
+            day = 1
+            _passesAllowable = 0
+
+        return trainingProgram
+    }
+
 
     fun createBetaProgram(): ArrayList<Session>{
         while (_passesAllowable > 0){
             if (day == 1) {
                 //Squat
                 trainingProgram.add(Beta_Set_1())
-                trainingProgram.add(Beta_Set_2())
-
                 sessions_generated++
-
                 //Bench
-//                trainingProgram.add(Beta_Set_8())
-//                trainingProgram.add(Beta_Set_9())
-//                trainingProgram.add(Beta_Set_10())
-//                trainingProgram.add(Beta_Set_11())
-//                trainingProgram.add(Beta_Set_12())
-//                trainingProgram.add(Beta_Set_13())
-//                trainingProgram.add(Beta_Set_14())
+                trainingProgram.add(Beta_Set_2())
                 sessions_generated++
             }
             if (day == 2) {
                 //Squat
-//                trainingProgram.add(Beta_Set_15())
-//                trainingProgram.add(Beta_Set_16())
-//                trainingProgram.add(Beta_Set_17())
-//                trainingProgram.add(Beta_Set_18())
+                trainingProgram.add(Beta_Set_3())
                 sessions_generated++
-
                 //Bench
-//                trainingProgram.add(Beta_Set_19())
-//                trainingProgram.add(Beta_Set_20())
-//                trainingProgram.add(Beta_Set_21())
-//                trainingProgram.add(Beta_Set_22())
+                trainingProgram.add(Beta_Set_4())
                 sessions_generated++
             }
             if (day == 3) {
                 //Deadlift
-//                trainingProgram.add(Beta_Set_23())
-//                trainingProgram.add(Beta_Set_24())
-//                trainingProgram.add(Beta_Set_25())
-//                trainingProgram.add(Beta_Set_26())
-//                trainingProgram.add(Beta_Set_27())
-//                trainingProgram.add(Beta_Set_28())
-//                trainingProgram.add(Beta_Set_29())
+                trainingProgram.add(Beta_Set_5())
                 sessions_generated++
             }
 
@@ -85,13 +93,10 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     private fun Beta_Set_1(): Session{
         return Session(0,
-            "01_Week ${passesComplete + 1}, Day $day - Squat",
+            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
-            0,
-            0,
-            rounded(_1rms[0]*.7).toInt(),
-        "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
-            "1 * 3 at ${rounded(_1rms[0]*.75).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
             "1 * 2 at ${rounded(_1rms[0]*.8).toInt()}",
             "1 * 1 at ${rounded(_1rms[0]*.85).toInt()}",
             "1 * 1 at ${rounded(_1rms[0]*.9).toInt()}",
@@ -103,51 +108,66 @@ class ProgramGeneratorViewModel : ViewModel() {
     }
     private fun Beta_Set_2(): Session{
         return Session(0,
-            "02_Week ${passesComplete + 1}, Day ${day+1} - Bench",
-            "Squat",
-            1,
-            3,
-            rounded(_1rms[0]*.75).toInt(),
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
+            "Bench",
+            "1 * 5 at ${rounded(_1rms[1]*.7).toInt()}",
+            "1 * 3 at ${rounded(_1rms[1]*.75).toInt()}",
+            "1 * 2 at ${rounded(_1rms[1]*.8).toInt()}",
+            "1 * 1 at ${rounded(_1rms[1]*.85).toInt()}",
+            "1 * 1 at ${rounded(_1rms[1]*.9).toInt()}",
+            "1 * 5 at ${rounded(_1rms[1]*.8).toInt()}",
+            "1 * 5 at ${rounded(_1rms[1]*.75).toInt()}",
+            "",
+            "",
             "")
     }
 
-//    private fun Beta_Set_8(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            5,
-//            rounded(_1rms[1]*.7).toInt(),
-//            "")
-//    }
-//
-//    private fun Beta_Set_9(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            3,
-//            rounded(_1rms[1]*.75).toInt(),
-//            "")
-//    }
-//    private fun Beta_Set_10(): Session{
-//        return Session(0,
-//            "Week ${passesComplete + 1}, Day $day - Bench",
-//            "Bench",
-//            1,
-//            2,
-//            rounded(_1rms[1]*.80).toInt(),
-//            "")
-//    }
+    private fun Beta_Set_3(): Session{
+        return Session(0,
+            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
+            "Squat",
+            "1 * 5 at ${rounded(_1rms[0]*.6).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.65).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
+            "1 * 5 at ${rounded(_1rms[0]*.75).toInt()}",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "")
+    }
+
+    private fun Beta_Set_4(): Session{
+        return Session(0,
+            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
+            "Bench",
+            "1 * 5 at ${rounded(_1rms[1]*.6).toInt()}",
+            "1 * 3 at ${rounded(_1rms[1]*.65).toInt()}",
+            "1 * 2 at ${rounded(_1rms[1]*.7).toInt()}",
+            "1 * 1 at ${rounded(_1rms[1]*.75).toInt()}",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "")
+    }
+    private fun Beta_Set_5(): Session{
+        return Session(0,
+            "${sessions_generated}_Week ${passesComplete + 1}, Day $day - Deadlift",
+            "Deadlift",
+            "1 * 5 at ${rounded(_1rms[2]*.65).toInt()}",
+            "1 * 5 at ${rounded(_1rms[2]*.75).toInt()}",
+            "1 * 3 at ${rounded(_1rms[2]*.85).toInt()}",
+            "1 * 1 at ${rounded(_1rms[2]*.9).toInt()}",
+            "1 * 1 at ${rounded(_1rms[2]*.95).toInt()}",
+            "1 * 5 at ${rounded(_1rms[2]*.8).toInt()}",
+            "1 * 5 at ${rounded(_1rms[2]*.75).toInt()}",
+            "",
+            "",
+            "")
+    }
 //    private fun Beta_Set_11(): Session{
 //        return Session(0,
 //            "Week ${passesComplete + 1}, Day $day - Bench",
