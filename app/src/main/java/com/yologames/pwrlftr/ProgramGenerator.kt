@@ -199,10 +199,6 @@ private fun updateRecyclerView() {
 
     fun setOnClickListeners(){
         binding.addTestButton.setOnClickListener {
-//            if (_1rms[0] == 0.0f) {
-//
-//            }
-
             if (sessionDao.getAllSessions().isEmpty()) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
@@ -224,10 +220,9 @@ private fun updateRecyclerView() {
                 _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
-
                 lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
-                             val temp  =viewModel.createNextWeek()
+                             val temp  = viewModel.createNextWeek()
                              addArrayToDatabase(temp)
                              saveThroughMain()
                          }
