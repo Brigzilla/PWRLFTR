@@ -96,7 +96,7 @@ class ProgramGeneratorViewModel : ViewModel() {
             "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
             "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
-            "1 * 5 at ${rounded(_1rms[0]*.75).toInt()}",
+            "1 * 3 at ${rounded(_1rms[0]*.75).toInt()}",
             "1 * 2 at ${rounded(_1rms[0]*.8).toInt()}",
             "1 * 1 at ${rounded(_1rms[0]*.85).toInt()}",
             "1 * 1 at ${rounded(_1rms[0]*.9).toInt()}",

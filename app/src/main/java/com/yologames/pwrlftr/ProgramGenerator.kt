@@ -52,6 +52,7 @@ class ProgramGenerator : Fragment() {
         ).allowMainThreadQueries().build()
         sessionDao = database.sessionDao()
         queryDatabaseSize()
+        loadFromMain()
         can_init = true
     }
 
@@ -64,23 +65,22 @@ class ProgramGenerator : Fragment() {
                 if (databaseSize > _Database_size) {
                     _Database_size = databaseSize
 
-                    val mainActivity = requireActivity() as MainActivity
-                    _1rms[0] = mainActivity.loadFloat("s1rm")
-                    _1rms[1] = mainActivity.loadFloat("b1rm")
-                    _1rms[2] = mainActivity.loadFloat("d1rm")
-                    viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
-                    viewModel.sessions_generated = mainActivity.loadIntFromPrefs("sgenerated", 0)
-                    _weeks = mainActivity.loadIntFromPrefs("weeks", 0)
-                    mainActivity.loadIntFromPrefs("day", 0)
 
-//                    withContext(Dispatchers.Main) {
-//                        if (_Database_size > 0) {
-//                            PopulateCardsNew()
-//                        }
-//                    }
+
                 }
             }
         }
+    }
+
+    fun loadFromMain(){
+        val mainActivity = requireActivity() as MainActivity
+        _1rms[0] = mainActivity.loadFloat("s1rm")
+        _1rms[1] = mainActivity.loadFloat("b1rm")
+        _1rms[2] = mainActivity.loadFloat("d1rm")
+        viewModel.passesComplete = mainActivity.loadIntFromPrefs("complete", 0)
+        viewModel.sessions_generated = mainActivity.loadIntFromPrefs("sgenerated", 0)
+        _weeks = mainActivity.loadIntFromPrefs("weeks", 0)
+        mainActivity.loadIntFromPrefs("day", 0)
     }
 
 private fun updateRecyclerView() {
@@ -166,7 +166,7 @@ private fun updateRecyclerView() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (can_init) {
+//        if (can_init) {
             InitRecycler()
 
             lifecycleScope.launch(Dispatchers.Main) {
@@ -175,7 +175,7 @@ private fun updateRecyclerView() {
 
                 updateRecyclerView() // Update the RecyclerView here
             }
-        }
+//        }
 
         setOnClickListeners()
     }
@@ -197,76 +197,41 @@ private fun updateRecyclerView() {
      updateDataset()
     }
 
-
-
-
-
     fun setOnClickListeners(){
         binding.addTestButton.setOnClickListener {
-            if (_1rms[0] == 0.0f) {
+//            if (_1rms[0] == 0.0f) {
+//
+//            }
+
+            if (sessionDao.getAllSessions().isEmpty()) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()
                 _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
-            }
-
-            if (sessionDao.getAllSessions().isEmpty()) {
                 _passesAllowable = 1
+                viewModel.passesComplete = _weeks
                 lifecycleScope.launch {
                     withContext(Dispatchers.Main) {
                         val temp = viewModel.createNextWeek()
                         addArrayToDatabase(temp)
-                        hideInitialElements()
-                        updateRecyclerView()
-
-                        val mainActivity = requireActivity() as MainActivity
-                        mainActivity.saveBooleanListToPrefs(
-                            "session_feedback_list",
-                            _session_feedback_left
-                        )
-                        mainActivity.saveIntToPrefs("weeks", _weeks)
-                        mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
-                        mainActivity.saveIntToPrefs("day", viewModel.day)
-                        mainActivity.saveFloat("s1rm", _1rms[0])
-                        mainActivity.saveFloat("b1rm", _1rms[1])
-                        mainActivity.saveFloat("d1rm", _1rms[2])
-                        mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
-                        reloadFragment()
+                        saveThroughMain()
                     }
                 }
             }
             val trueCount = countTrueElements(_session_feedback_left)
             if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
-//                if (sessionDao.getAllSessions().isNotEmpty()) { //use this to test the ordering. Removes the requirement to leave feedback before generating the next week
-
-                    _passesAllowable = 1
+// Swap above with below to test the ordering. Removes the requirement to leave feedback before generating the next week
+//                if (sessionDao.getAllSessions().isNotEmpty()) {
+                _passesAllowable = 1
                 _sessions_reviewed = trueCount
-                if (sessionDao.getAllSessions().isNotEmpty())  viewModel.passesComplete = _weeks
-                 //_weeks = 1
+                viewModel.passesComplete = _weeks
 
                 lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
-                             //val temp = viewModel.createBetaProgram()
                              val temp  =viewModel.createNextWeek()
                              addArrayToDatabase(temp)
-                             // Perform other database operations here
+                             saveThroughMain()
                          }
-                       hideInitialElements()
-                        updateRecyclerView()
-                        val mainActivity = requireActivity() as MainActivity
-                        mainActivity.saveBooleanListToPrefs(
-                            "session_feedback_list",
-                            _session_feedback_left
-                        )
-                        mainActivity.saveIntToPrefs("weeks", _weeks)
-                        mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
-                        mainActivity.saveIntToPrefs("day", viewModel.day)
-                        mainActivity.saveFloat("s1rm", _1rms[0])
-                        mainActivity.saveFloat("b1rm", _1rms[1])
-                        mainActivity.saveFloat("d1rm", _1rms[2])
-                        mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
-                         reloadFragment()
-
-            }
+                }
             }
         }
 
@@ -285,6 +250,24 @@ private fun updateRecyclerView() {
             }
 
         }
+    }
+
+    fun saveThroughMain(){
+        hideInitialElements()
+        updateRecyclerView()
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.saveBooleanListToPrefs(
+            "session_feedback_list",
+            _session_feedback_left
+        )
+        mainActivity.saveIntToPrefs("weeks", _weeks)
+        mainActivity.saveIntToPrefs("complete", viewModel.passesComplete)
+        mainActivity.saveIntToPrefs("day", viewModel.day)
+        mainActivity.saveFloat("s1rm", _1rms[0])
+        mainActivity.saveFloat("b1rm", _1rms[1])
+        mainActivity.saveFloat("d1rm", _1rms[2])
+        mainActivity.saveIntToPrefs("sgenerated", viewModel.sessions_generated)
+        reloadFragment()
     }
 
     fun countTrueElements(array: ArrayList<Boolean>): Int {
@@ -371,6 +354,7 @@ private fun updateRecyclerView() {
         mainActivity.saveFloat("d1rm", 0.0f)
         _passesAllowable = 0
         _weeks = 0
+
         mainActivity.saveIntToPrefs("weeks", _weeks)
         mainActivity.saveIntToPrefs("passes", _passesAllowable)
         updateDataset()
