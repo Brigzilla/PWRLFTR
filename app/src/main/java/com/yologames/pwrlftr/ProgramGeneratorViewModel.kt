@@ -16,7 +16,6 @@ class ProgramGeneratorViewModel : ViewModel() {
 
     var passesComplete : Int = 0
     var sessions_generated : Int = 0
-//    var passesAllowable: Int = 1
     var day: Int = 1
 
     val cSessionGenerator = CardioSessionGenerator()
