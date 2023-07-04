@@ -111,6 +111,7 @@ private fun updateRecyclerView() {
                     sessionsInCard[7],
                     sessionsInCard[8],
                     sessionsInCard[9],
+                    session.can_review,
                     0
                 )
                 PCardList.add(cardToAdd)
