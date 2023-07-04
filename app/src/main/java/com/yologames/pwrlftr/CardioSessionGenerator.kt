@@ -2,7 +2,9 @@ package com.yologames.pwrlftr
 
 import com.yologames.pwrlftr.room.Session
 
-
+//**
+//TODO: Class should select each session before selecting the same one again
+//**
 
 class CardioSessionGenerator {
     private val cardioList = ArrayList<Session>()
@@ -25,7 +27,8 @@ class CardioSessionGenerator {
             "",
             "",
             "",
-            ""
+            "",
+            false
         ))
 
         cardioList.add(Session(0,
@@ -40,7 +43,8 @@ class CardioSessionGenerator {
             "",
             "",
             "",
-            ""
+            "",
+            false
         ))
 
         cardioList.add(Session(0,
@@ -55,7 +59,8 @@ class CardioSessionGenerator {
             "",
             "",
             "",
-            ""
+            "",
+            false
         ))
 
         cardioList.add(Session(0,
@@ -70,7 +75,8 @@ class CardioSessionGenerator {
             "",
             "",
             "",
-            ""
+            "",
+            false
         ))
 
         cardioList.add(Session(0,
@@ -85,7 +91,8 @@ class CardioSessionGenerator {
             "",
             "",
             "",
-            ""
+            "",
+            false
         ))
 
         cardioList.add(Session(0,
@@ -100,7 +107,8 @@ class CardioSessionGenerator {
             "",
             "",
             "",
-            ""
+            "",
+            false
         ))
     }
 

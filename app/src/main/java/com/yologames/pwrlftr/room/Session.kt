@@ -12,7 +12,6 @@ data class Session(
     var title: String,
 
 
-
     @ColumnInfo(name = "exercise")
     var exercise: String,
 
@@ -44,7 +43,10 @@ data class Session(
     var set_8: String,
 
     @ColumnInfo(name = "set9")
-    var set_9: String
+    var set_9: String,
+
+    @ColumnInfo(name = "canreview")
+    var can_review: Boolean
 
 
 

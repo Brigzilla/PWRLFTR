@@ -72,7 +72,8 @@ class ProgramGeneratorViewModel : ViewModel() {
             "1 * 5 at ${rounded(_1rms[0]*.75).toInt()}",
             "",
             "",
-            "")
+            "",
+        true)
     }
     private fun Beta_Set_2(): Session{
         return Session(0,
@@ -87,7 +88,8 @@ class ProgramGeneratorViewModel : ViewModel() {
             "1 * 5 at ${rounded(_1rms[1]*.75).toInt()}",
             "",
             "",
-            "")
+            "",
+            true)
     }
 
     private fun Beta_Set_3(): Session{
@@ -103,7 +105,8 @@ class ProgramGeneratorViewModel : ViewModel() {
             "",
             "",
             "",
-            "")
+            "",
+            true)
     }
 
     private fun Beta_Set_4(): Session{
@@ -119,7 +122,8 @@ class ProgramGeneratorViewModel : ViewModel() {
             "",
             "",
             "",
-            "")
+            "",
+            true)
     }
     private fun Beta_Set_5(): Session{
         return Session(0,
@@ -134,7 +138,8 @@ class ProgramGeneratorViewModel : ViewModel() {
             "1 * 5 at ${rounded(_1rms[2]*.75).toInt()}",
             "",
             "",
-            "")
+            "",
+            true)
     }
 
     //Math stuff
