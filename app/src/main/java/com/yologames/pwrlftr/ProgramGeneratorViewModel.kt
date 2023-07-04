@@ -19,6 +19,8 @@ class ProgramGeneratorViewModel : ViewModel() {
 //    var passesAllowable: Int = 1
     var day: Int = 1
 
+    val cSessionGenerator = CardioSessionGenerator()
+
     fun createNextWeek(): ArrayList<Session>{
         day = 1
         trainingProgram.add(Beta_Set_1())
@@ -27,7 +29,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         sessions_generated++
 
         day = 2
-        trainingProgram.add(Cardio_1())
+        trainingProgram.add(generateCardio())
         sessions_generated++
 
         day = 3
@@ -37,7 +39,7 @@ class ProgramGeneratorViewModel : ViewModel() {
         sessions_generated++
 
         day = 4
-        trainingProgram.add(Cardio_2())
+        trainingProgram.add(generateCardio())
         sessions_generated++
 
         day = 5
@@ -52,44 +54,11 @@ class ProgramGeneratorViewModel : ViewModel() {
         return trainingProgram
     }
 
-
-    private fun Cardio_1(): Session {
-        return Session(0,
-            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Row",
-            "Row",
-            "10 Minutes, 22 s/m",
-            "5 Intervals of 500m - 1 Minute rest",
-            "5 Minutes, 20 s/m",
-            "3 Minutes, 15 s/m",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-
-        )
+    private fun generateCardio(): Session{
+       val cSession = cSessionGenerator.generateCardio()
+        cSession.title = "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - ${cSession.exercise}"
+        return cSession
     }
-
-    private fun Cardio_2(): Session {
-        return Session(0,
-            "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Cycle",
-            "Cycle",
-            "10 Minutes, Low intensity - Warm-up",
-            "40 Minutes, Steady pace",
-            "10 minutes, Low intensity - Cool-down",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-
-        )
-    }
-
-
 
     private fun Beta_Set_1(): Session{
         return Session(0,

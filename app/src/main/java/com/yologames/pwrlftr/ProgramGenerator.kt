@@ -61,9 +61,6 @@ class ProgramGenerator : Fragment() {
                 val databaseSize = sessionList.size
                 if (databaseSize > _Database_size) {
                     _Database_size = databaseSize
-
-
-
                 }
             }
         }
@@ -124,24 +121,7 @@ private fun updateRecyclerView() {
     }
 }
 
-    private fun addPCard(session: Session, sessionsInCard: ArrayList<String>) {
-    val cardToAdd = PCard(
-        session.title.substringAfter("_"),
-        session.exercise,
-        sessionsInCard[0],
-        sessionsInCard[1],
-        sessionsInCard[2],
-        sessionsInCard[3],
-        sessionsInCard[4],
-        sessionsInCard[5],
-        sessionsInCard[6],
-        sessionsInCard[7],
-        sessionsInCard[8],
-        sessionsInCard[9],
-        0
-    )
-    PCardList.add(cardToAdd)
-}
+
 
     override fun onCreateView(
 
@@ -161,18 +141,13 @@ private fun updateRecyclerView() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        if (can_init) {
             InitRecycler()
-
             lifecycleScope.launch(Dispatchers.Main) {
                 if (sessionDao.getAllSessions().isNotEmpty()) hideInitialElements()
                 if (sessionDao.getAllSessions().isEmpty()) showInitialElements()
 
                 updateRecyclerView() // Update the RecyclerView here
             }
-//        }
-
         setOnClickListeners()
     }
 
@@ -182,14 +157,11 @@ private fun updateRecyclerView() {
          binding.recyclerView.apply {
              layoutManager = LinearLayoutManager(context)
              adapter = PCardAdapter(PCardList)
-        // Set the index you want to scroll to
          val index = _session_feedback_left.lastIndexOf(true)
-        // Scroll to the desired position
          post {
                 layoutManager?.scrollToPosition(index)
          }
      }
-
      updateDataset()
     }
 
@@ -201,13 +173,12 @@ private fun updateRecyclerView() {
                 _1rms[2] = binding.enter1rmDead.text.toString().toFloat()
                 _passesAllowable = 1
                 viewModel.passesComplete = _weeks
+                val temp = viewModel.createNextWeek()
                 lifecycleScope.launch {
                     withContext(Dispatchers.Main) {
-                        val temp = viewModel.createNextWeek()
                         addArrayToDatabase(temp)
                     }
                         saveThroughMain()
-
                 }
             }
             val trueCount = countTrueElements(_session_feedback_left)
@@ -217,13 +188,13 @@ private fun updateRecyclerView() {
                 _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
+                val temp = viewModel.createNextWeek()
                 lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
-                             val temp = viewModel.createNextWeek()
+
                              addArrayToDatabase(temp)
                          }
                              saveThroughMain()
-
                 }
             }
         }
@@ -337,15 +308,14 @@ private fun updateRecyclerView() {
         PCardList.clear()
         val mainActivity = requireActivity() as MainActivity
         _session_feedback_left.clear()
-        mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
-        mainActivity.saveFloat("s1rm", 0.0f)
-        mainActivity.saveFloat("b1rm", 0.0f)
-        mainActivity.saveFloat("d1rm", 0.0f)
+        mainActivity.saveBooleanListToPrefs(s_session_feedback_list, _session_feedback_left)
+        mainActivity.saveFloat(s_s1rm, 0.0f)
+        mainActivity.saveFloat(s_b1rm, 0.0f)
+        mainActivity.saveFloat(s_d1rm, 0.0f)
         _passesAllowable = 0
         _weeks = 0
 
-        mainActivity.saveIntToPrefs("weeks", _weeks)
-        mainActivity.saveIntToPrefs("passes", _passesAllowable)
+        mainActivity.saveIntToPrefs(s_week, _weeks)
         updateDataset()
         reloadFragment()
     }

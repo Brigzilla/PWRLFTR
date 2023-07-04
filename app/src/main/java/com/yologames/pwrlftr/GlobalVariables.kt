@@ -1,5 +1,7 @@
 package com.yologames.pwrlftr
 
+import com.yologames.pwrlftr.room.Session
+
 var _passesAllowable : Int = 1
 
 var _weeks : Int = 0
