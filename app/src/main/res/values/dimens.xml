@@ -2,5 +2,6 @@
 <resources>
     <dimen name="seek_bar_height">3dp</dimen>
     <dimen name="default_padding">16dp</dimen>
+    <dimen name="text_box_width">120dp</dimen>
 
 </resources>

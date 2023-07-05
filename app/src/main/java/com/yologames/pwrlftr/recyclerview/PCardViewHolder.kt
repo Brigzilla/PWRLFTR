@@ -74,14 +74,14 @@ class PCardViewHolder(
 
 
                 if (reviewingSession && !_session_feedback_left[adapterPosition]) {
-                    cardCellBinding.difficulty.visibility = View.VISIBLE
+//                    cardCellBinding.difficulty.visibility = View.VISIBLE
                     cardCellBinding.commitReview.visibility = View.VISIBLE
                     cardCellBinding.reviewButton.visibility = View.GONE
 
                 }
 
-                if (!reviewingSession && !_session_feedback_left[adapterPosition]) cardCellBinding.difficulty.visibility =
-                    View.GONE
+//                if (!reviewingSession && !_session_feedback_left[adapterPosition]) cardCellBinding.difficulty.visibility =
+//                    View.GONE
 
                 if (_session_feedback_left[adapterPosition]) {
 
@@ -226,7 +226,7 @@ class PCardViewHolder(
 
         cardCellBinding.headerReps.visibility = View.GONE
         cardCellBinding.headerSets.visibility = View.GONE
-        cardCellBinding.difficulty.visibility = View.GONE
+//        cardCellBinding.difficulty.visibility = View.GONE
 
         cardCellBinding.commitReview.visibility = View.INVISIBLE
         cardCellBinding.reviewButton.visibility = View.INVISIBLE
