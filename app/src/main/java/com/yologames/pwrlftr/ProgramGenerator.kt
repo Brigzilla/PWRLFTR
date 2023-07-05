@@ -2,7 +2,6 @@ package com.yologames.pwrlftr
 
 import PCardAdapter
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -185,9 +184,9 @@ private fun updateRecyclerView() {
 
             }
             val trueCount = countTrueElements(_session_feedback_left)
-           // if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
+            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
 // Swap above with below to test the ordering. Removes the requirement to leave feedback before generating the next week
-                if (sessionDao.getAllSessions().isNotEmpty()) {
+//                if (sessionDao.getAllSessions().isNotEmpty()) {
                 _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
@@ -251,12 +250,15 @@ private fun updateRecyclerView() {
         val l = list.sortedBy { it.title }
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
+//                sessionDao.insertAllSessions(list)
         var i = 0
         while (i < list.size)
              {
             addToTestDatabase(l[i])
             i++
              }
+                updateDataset()
+                refreshRecyclerView()
             }
         }
     }
@@ -267,8 +269,7 @@ private fun updateRecyclerView() {
             withContext(Dispatchers.Main) {
                 sessionDao.insertSession(_local_session)
                 withContext(Dispatchers.Main) {
-                    updateDataset()
-                    refreshRecyclerView()
+
                 }
             }
             }
@@ -314,9 +315,6 @@ private fun updateRecyclerView() {
     }
 
     fun clearDatabase() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            sessionDao.deleteAllSessionsExceptFirst()
-        }
         PCardList.clear()
         val mainActivity = requireActivity() as MainActivity
         _session_feedback_left.clear()
@@ -329,7 +327,14 @@ private fun updateRecyclerView() {
 
         mainActivity.saveIntToPrefs(s_week, _weeks)
         updateDataset()
-        reloadFragment()
+        lifecycleScope.launch(Dispatchers.Main) {
+//            sessionDao.deleteAllSessionsExceptFirst()
+            sessionDao.deleteAllSessions()
+            reloadFragment()
+        }
+
+
+
     }
 
 

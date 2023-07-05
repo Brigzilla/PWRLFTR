@@ -1,6 +1,5 @@
 package com.yologames.pwrlftr.room
 
-import android.os.FileObserver.DELETE
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -33,8 +32,8 @@ interface SessionDao {
     @Query("DELETE FROM session_table WHERE id NOT IN (SELECT id FROM session_table ORDER BY id ASC LIMIT 0)")
     fun deleteAllSessionsExceptFirst()
 
-
-
+    @Query("DELETE FROM session_table")
+    suspend fun deleteAllSessions()
 
 
 }
