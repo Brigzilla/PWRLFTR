@@ -41,7 +41,6 @@ class ProgramGenerator : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-
     fun BuildDatabase(){
         val database = Room.databaseBuilder(
             requireContext(),
@@ -158,14 +157,13 @@ private fun updateRecyclerView() {
          binding.recyclerView.apply {
              layoutManager = LinearLayoutManager(context)
              adapter = PCardAdapter(PCardList)
-         val index = _session_feedback_left.lastIndexOf(true)
+         val index = _session_feedback_left.lastIndexOf(false) //change to true for actual build
          post {
                 layoutManager?.scrollToPosition(index)
          }
      }
      updateDataset()
     }
-
     fun setOnClickListeners(){
         binding.addTestButton.setOnClickListener {
             if (sessionDao.getAllSessions().isEmpty()) {
@@ -175,24 +173,30 @@ private fun updateRecyclerView() {
                 _passesAllowable = 1
                 viewModel.passesComplete = _weeks
                 val temp = viewModel.createNextWeek()
+//                for (item in temp) {
+//                    Log.d("FATAL",item.title.toString())
+//                }
                 lifecycleScope.launch {
                     withContext(Dispatchers.Main) {
                         addArrayToDatabase(temp)
                     }
-                        saveThroughMain()
                 }
+                saveThroughMain()
+
             }
             val trueCount = countTrueElements(_session_feedback_left)
             if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
 // Swap above with below to test the ordering. Removes the requirement to leave feedback before generating the next week
-                //if (sessionDao.getAllSessions().isNotEmpty()) {
+               // if (sessionDao.getAllSessions().isNotEmpty()) {
                 _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
                 val temp = viewModel.createNextWeek()
+//                    for (item in temp) {
+//                        Log.d("FATAL",item.title.toString())
+//                    }
                 lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
-
                              addArrayToDatabase(temp)
                          }
                              saveThroughMain()
@@ -244,23 +248,29 @@ private fun updateRecyclerView() {
 
 
     fun addArrayToDatabase(list : ArrayList<Session>){
+        lifecycleScope.launch {
+            withContext(Dispatchers.Main) {
         var i = 0
         while (i < list.size)
-        {
+             {
             addToTestDatabase(list[i])
             i++
+             }
+            }
         }
     }
 
 
     fun addToTestDatabase(_local_session: Session) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            sessionDao.insertSession(_local_session)
+        lifecycleScope.launch {
             withContext(Dispatchers.Main) {
-                updateDataset()
-                refreshRecyclerView()
+                sessionDao.insertSession(_local_session)
+                withContext(Dispatchers.Main) {
+                    updateDataset()
+                    refreshRecyclerView()
+                }
             }
-        }
+            }
     }
 
 
