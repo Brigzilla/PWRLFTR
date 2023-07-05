@@ -438,8 +438,7 @@
                     ></TextView>
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="0dp"
-                    app:layout_constraintWidth_percent=".5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/review_button"
                     style="@style/RoundedButton"
@@ -447,16 +446,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintStart_toEndOf="@id/aspect_9"
-                    app:icon="@drawable/ic_baseline_rate_review_24"
+                    app:icon="@drawable/ic_baseline_feedback_24"
                     app:iconGravity="textStart"
+                    app:iconSize="48dp"
                     android:fontFamily="@font/roboto" />
 
 
 
 
+
+
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="0dp"
-                    app:layout_constraintWidth_percent=".5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/commit_review"
                     android:visibility="gone"
