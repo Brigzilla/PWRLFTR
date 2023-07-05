@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr.MainActivity
+import com.yologames.pwrlftr.R
 import com.yologames.pwrlftr._session_feedback_left
 import com.yologames.pwrlftr._sessions_reviewed
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
@@ -26,7 +27,8 @@ class PCardViewHolder(
         if (!pCard.canReview)
         {
             cardCellBinding.reviewButton.visibility = View.INVISIBLE
-            cardCellBinding.reviewButton.text = "Finished"
+//            cardCellBinding.reviewButton.text = "Finished"
+            cardCellBinding.reviewButton.setIconResource(R.drawable.ic_baseline_check_24)
         }
 
             if (!_session_feedback_left[adapterPosition]) {
