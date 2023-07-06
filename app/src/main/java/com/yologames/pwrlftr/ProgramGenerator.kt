@@ -1,6 +1,7 @@
 package com.yologames.pwrlftr
 
 import PCardAdapter
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -163,6 +164,7 @@ private fun updateRecyclerView() {
      }
      updateDataset()
     }
+    @SuppressLint("SuspiciousIndentation")
     fun setOnClickListeners(){
         binding.addTestButton.setOnClickListener {
             if (sessionDao.getAllSessions().isEmpty()) {
@@ -184,9 +186,9 @@ private fun updateRecyclerView() {
 
             }
             val trueCount = countTrueElements(_session_feedback_left)
-            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
+//            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
 // Swap above with below to test the ordering. Removes the requirement to leave feedback before generating the next week
-//                if (sessionDao.getAllSessions().isNotEmpty()) {
+                if (sessionDao.getAllSessions().isNotEmpty()) {
                 _passesAllowable = 1
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
@@ -201,6 +203,7 @@ private fun updateRecyclerView() {
                              saveThroughMain()
                 }
             }
+
         }
 
         binding.removeTestButton.setOnClickListener{

@@ -2,13 +2,16 @@ package com.yologames.pwrlftr
 
 import androidx.lifecycle.*
 import com.yologames.pwrlftr.room.Session
+import kotlinx.coroutines.GlobalScope.coroutineContext
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.math.BigDecimal
 import java.math.MathContext
 
 class ProgramGeneratorViewModel : ViewModel() {
 
 
-    val trainingProgram = ArrayList<Session>()
+
 
     var multiplier : Double = 1.00
 
@@ -21,29 +24,33 @@ class ProgramGeneratorViewModel : ViewModel() {
     val cSessionGenerator = CardioSessionGenerator()
 
     fun createNextWeek(): ArrayList<Session>{
-        day = 1
-        trainingProgram.add(Beta_Set_1())
-        sessions_generated++
-        trainingProgram.add(Beta_Set_2())
-        sessions_generated++
+        val trainingProgram = ArrayList<Session>()
+        day =1
+        runBlocking(coroutineContext) {
+            trainingProgram.add(Beta_Set_1())
+            sessions_generated++
+            trainingProgram.add(Beta_Set_2())
+            sessions_generated++
 
-        day = 2
-        trainingProgram.add(generateCardio())
-        sessions_generated++
+            day++
+            trainingProgram.add(generateCardio())
 
-        day = 3
-        trainingProgram.add(Beta_Set_3())
-        sessions_generated++
-        trainingProgram.add(Beta_Set_4())
-        sessions_generated++
+            sessions_generated++
 
-        day = 4
-        trainingProgram.add(generateCardio())
-        sessions_generated++
+            day++
+            trainingProgram.add(Beta_Set_3())
+            sessions_generated++
+            trainingProgram.add(Beta_Set_4())
+            sessions_generated++
 
-        day = 5
-        trainingProgram.add(Beta_Set_5())
-        sessions_generated++
+            day++
+            trainingProgram.add(generateCardio())
+            sessions_generated++
+
+            day++
+            trainingProgram.add(Beta_Set_5())
+            sessions_generated++
+        }
 
         passesComplete++
         _weeks = passesComplete

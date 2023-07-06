@@ -8,10 +8,24 @@ import com.yologames.pwrlftr.room.Session
 
 class CardioSessionGenerator {
     private val cardioList = ArrayList<Session>()
+    private var previousSession: Session? = null
 
-    fun generateCardio(): Session{
+    init {
         buildList()
-        return cardioList.random()
+    }
+
+    fun generateCardio(): Session {
+        val availableSessions = cardioList.filter { it != previousSession }
+
+        if (availableSessions.isEmpty()) {
+            // Handle the case where all sessions have been selected,
+            // or there is only one session available
+            return cardioList.random()
+        }
+
+        val selectedSession = availableSessions.random()
+        previousSession = selectedSession
+        return selectedSession
     }
 
     private fun buildList() {
