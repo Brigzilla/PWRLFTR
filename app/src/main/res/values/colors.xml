@@ -14,4 +14,6 @@
     <color name="orange">#FF8D00</color>
     <color name="yellow">#FFAB04</color>
     <color name="green">#47FF04</color>
+    <color name="seek_bar_notch_text_color">#000000</color>
+
 </resources>
