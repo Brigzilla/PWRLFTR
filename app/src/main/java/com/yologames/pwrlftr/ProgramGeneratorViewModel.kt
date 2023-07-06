@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.yologames.pwrlftr.room.Session
 import kotlinx.coroutines.GlobalScope.coroutineContext
@@ -159,16 +160,21 @@ class ProgramGeneratorViewModel : ViewModel() {
     {
 
         val bd = f * multiplier
-        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + ((10-feedback_offset_squat)))
-        if (exercise == "Bench"&& !feedback_offset_bench.isNaN())return BigDecimal(bd + ((10-feedback_offset_bench)))
-        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN())return BigDecimal(bd + ((10-feedback_offset_deadl)))
+//        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + ((10-feedback_offset_squat)))
+//        if (exercise == "Bench"&& !feedback_offset_bench.isNaN())return BigDecimal(bd + ((10-feedback_offset_bench)))
+//        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN())return BigDecimal(bd + ((10-feedback_offset_deadl)))
+        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + +(5-(10-feedback_offset_squat))/2)
+        if (exercise == "Bench"&& !feedback_offset_bench.isNaN()) return BigDecimal(bd + +(5-(10-feedback_offset_bench))/2)
+        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN()) return BigDecimal(bd + +(5-(10-feedback_offset_deadl))/2)
+
         else return BigDecimal(bd)
 
     }
 
     fun applyIncrement(exercise: String, bd: BigDecimal) : BigDecimal
     {
-
+//        Log.d ("FATAL", "bd with multiplier${bd + applyMultiplier(exercise,increment  * passesComplete)}")
+//        Log.d ("FATAL", "bd ${bd}")
         return bd + applyMultiplier(exercise,increment  * passesComplete)
     }
 
