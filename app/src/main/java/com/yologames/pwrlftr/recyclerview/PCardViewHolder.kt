@@ -244,43 +244,43 @@ class PCardViewHolder(
         var f = 0.0f
         var feedbackTotal = 0
         if (cardCellBinding.aspect0Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect0Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect0Seekbar.progress.toFloat() +0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect1Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect1Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect1Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect2Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect2Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect2Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect3Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect3Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect3Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect4Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect4Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect4Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect5Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect5Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect5Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect6Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect6Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect6Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect7Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect7Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect7Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect8Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect8Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect8Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
         if (cardCellBinding.aspect9Seekbar.visibility == View.VISIBLE) {
-            f += cardCellBinding.aspect9Seekbar.progress.toFloat()
+            f += cardCellBinding.aspect9Seekbar.progress.toFloat()+0.01f
             feedbackTotal += 1
         }
 
@@ -289,7 +289,7 @@ class PCardViewHolder(
         if (exercise == "Squat") feedback_offset_squat = ((f/feedbackTotal) ) //feedback_offset_squat = 10-((f-5)/2)
         if (exercise == "Bench") feedback_offset_bench = ((f/feedbackTotal))  //feedback_offset_bench = 10-((f-5)/2)
         if (exercise == "Deadlift") feedback_offset_deadl = ((f/feedbackTotal))  //feedback_offset_deadl = 10-((f-5)/2)
-        Log.d("FATAL", "Squat offset $feedback_offset_squat, Bench offset $feedback_offset_bench, Deadlift offset $feedback_offset_deadl")
+//        Log.d("QM", "Squat offset $feedback_offset_squat, Bench offset $feedback_offset_bench, Deadlift offset $feedback_offset_deadl")
 
     }
 

@@ -1,11 +1,9 @@
 package com.yologames.pwrlftr
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.yologames.pwrlftr.room.Session
 import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import java.math.BigDecimal
 import java.math.MathContext
 
@@ -71,13 +69,13 @@ class ProgramGeneratorViewModel : ViewModel() {
         return Session(0,
             "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
-            "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
-            "1 * 3 at ${rounded(_1rms[0]*.75).toInt()}",
-            "1 * 2 at ${rounded(_1rms[0]*.8).toInt()}",
-            "1 * 1 at ${rounded(_1rms[0]*.85).toInt()}",
-            "1 * 1 at ${rounded(_1rms[0]*.9).toInt()}",
-            "1 * 5 at ${rounded(_1rms[0]*.8).toInt()}",
-            "1 * 5 at ${rounded(_1rms[0]*.75).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.7).toInt()}",
+            "1 * 3 at ${rounded("Squat",_1rms[0]*.75).toInt()}",
+            "1 * 2 at ${rounded("Squat",_1rms[0]*.8).toInt()}",
+            "1 * 1 at ${rounded("Squat",_1rms[0]*.85).toInt()}",
+            "1 * 1 at ${rounded("Squat",_1rms[0]*.9).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.8).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.75).toInt()}",
             "",
             "",
             "",
@@ -87,13 +85,13 @@ class ProgramGeneratorViewModel : ViewModel() {
         return Session(0,
             "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
             "Bench",
-            "1 * 5 at ${rounded(_1rms[1]*.7).toInt()}",
-            "1 * 3 at ${rounded(_1rms[1]*.75).toInt()}",
-            "1 * 2 at ${rounded(_1rms[1]*.8).toInt()}",
-            "1 * 1 at ${rounded(_1rms[1]*.85).toInt()}",
-            "1 * 1 at ${rounded(_1rms[1]*.9).toInt()}",
-            "1 * 5 at ${rounded(_1rms[1]*.8).toInt()}",
-            "1 * 5 at ${rounded(_1rms[1]*.75).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.7).toInt()}",
+            "1 * 3 at ${rounded("Bench",_1rms[1]*.75).toInt()}",
+            "1 * 2 at ${rounded("Bench",_1rms[1]*.8).toInt()}",
+            "1 * 1 at ${rounded("Bench",_1rms[1]*.85).toInt()}",
+            "1 * 1 at ${rounded("Bench",_1rms[1]*.9).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.8).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.75).toInt()}",
             "",
             "",
             "",
@@ -104,10 +102,10 @@ class ProgramGeneratorViewModel : ViewModel() {
         return Session(0,
             "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Squat",
             "Squat",
-            "1 * 5 at ${rounded(_1rms[0]*.6).toInt()}",
-            "1 * 5 at ${rounded(_1rms[0]*.65).toInt()}",
-            "1 * 5 at ${rounded(_1rms[0]*.7).toInt()}",
-            "1 * 5 at ${rounded(_1rms[0]*.75).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.6).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.65).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.7).toInt()}",
+            "1 * 5 at ${rounded("Squat",_1rms[0]*.75).toInt()}",
             "",
             "",
             "",
@@ -121,10 +119,10 @@ class ProgramGeneratorViewModel : ViewModel() {
         return Session(0,
             "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Bench",
             "Bench",
-            "1 * 5 at ${rounded(_1rms[1]*.6).toInt()}",
-            "1 * 5 at ${rounded(_1rms[1]*.65).toInt()}",
-            "1 * 5 at ${rounded(_1rms[1]*.7).toInt()}",
-            "1 * 5 at ${rounded(_1rms[1]*.75).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.6).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.65).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.7).toInt()}",
+            "1 * 5 at ${rounded("Bench",_1rms[1]*.75).toInt()}",
             "",
             "",
             "",
@@ -137,13 +135,13 @@ class ProgramGeneratorViewModel : ViewModel() {
         return Session(0,
             "${1000+sessions_generated}_Week ${passesComplete + 1}, Day $day - Deadlift",
             "Deadlift",
-            "1 * 5 at ${rounded(_1rms[2]*.65).toInt()}",
-            "1 * 5 at ${rounded(_1rms[2]*.75).toInt()}",
-            "1 * 3 at ${rounded(_1rms[2]*.85).toInt()}",
-            "1 * 1 at ${rounded(_1rms[2]*.9).toInt()}",
-            "1 * 1 at ${rounded(_1rms[2]*.95).toInt()}",
-            "1 * 5 at ${rounded(_1rms[2]*.8).toInt()}",
-            "1 * 5 at ${rounded(_1rms[2]*.75).toInt()}",
+            "1 * 5 at ${rounded("Deadlift",_1rms[2]*.65).toInt()}",
+            "1 * 5 at ${rounded("Deadlift",_1rms[2]*.75).toInt()}",
+            "1 * 3 at ${rounded("Deadlift",_1rms[2]*.85).toInt()}",
+            "1 * 1 at ${rounded("Deadlift",_1rms[2]*.9).toInt()}",
+            "1 * 1 at ${rounded("Deadlift",_1rms[2]*.95).toInt()}",
+            "1 * 5 at ${rounded("Deadlift",_1rms[2]*.8).toInt()}",
+            "1 * 5 at ${rounded("Deadlift",_1rms[2]*.75).toInt()}",
             "",
             "",
             "",
@@ -151,31 +149,27 @@ class ProgramGeneratorViewModel : ViewModel() {
     }
 
     //Math stuff
-    fun rounded(f: Double): BigDecimal
+    fun rounded(exercise : String ,f: Double): BigDecimal
     {
         val bd = BigDecimal(f).round(MathContext(3))
-        return applyIncrement(bd)
+        return applyIncrement(exercise, bd)
     }
 //
-    fun applyMultiplier(f: Double) : BigDecimal
+    fun applyMultiplier(exercise: String, f: Double) : BigDecimal
     {
 
         val bd = f * multiplier
-        Log.d("QM", "bd = $bd, Squat offset = $feedback_offset_squat, Combined = ${bd * feedback_offset_squat} ")
-        return BigDecimal(bd + ((10-feedback_offset_squat)))
+        if (exercise == "Squat"&& feedback_offset_squat != Float.NaN) return BigDecimal(bd + ((10-feedback_offset_squat)))
+        if (exercise == "Bench"&& feedback_offset_bench != Float.NaN)return BigDecimal(bd + ((10-feedback_offset_bench)))
+        if (exercise == "Deadlift" && feedback_offset_deadl != Float.NaN)return BigDecimal(bd + ((10-feedback_offset_deadl)))
+        else return BigDecimal(bd)
+
     }
 
-    fun applyIncrement(bd: BigDecimal) : BigDecimal
+    fun applyIncrement(exercise: String, bd: BigDecimal) : BigDecimal
     {
-        Log.d("FATAL", "Squat val $feedback_offset_squat")
-//        feedback_offset_squat = 0.1f
-//        feedback_offset_bench = 0.1f
-//        feedback_offset_deadl = 0.1f
-        Log.d("FATAL", "Squat val $feedback_offset_squat")
 
-
-//        return applyMultiplier(bd + BigDecimal(increment * passesComplete))
-        return bd + applyMultiplier(increment  * passesComplete)
+        return bd + applyMultiplier(exercise,increment  * passesComplete)
     }
 
 }

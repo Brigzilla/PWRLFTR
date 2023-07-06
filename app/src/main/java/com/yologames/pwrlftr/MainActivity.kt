@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(), PCardViewHolder.PCardViewHolderListene
 
     fun loadFloat(key: String): Float {
         val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getFloat(key, 0.0f)
+        return sharedPreferences.getFloat(key, 0.1f)
     }
 
     fun saveFloat(key: String, value: Float) {

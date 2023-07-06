@@ -183,9 +183,7 @@ private fun updateRecyclerView() {
                 _sessions_reviewed = trueCount
                 viewModel.passesComplete = _weeks
                 val temp = viewModel.createNextWeek()
-//                    for (item in temp) {
-//                        Log.d("FATAL",item.title.toString())
-//                    }
+
                 lifecycleScope.launch{
                          withContext(Dispatchers.IO) {
                              addArrayToDatabase(temp)
