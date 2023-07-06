@@ -65,16 +65,6 @@ class ProgramGenerator : Fragment() {
         }
     }
 
-    fun loadFromMain(){
-        val mainActivity = requireActivity() as MainActivity
-        _1rms[0] = mainActivity.loadFloat(s_s1rm)
-        _1rms[1] = mainActivity.loadFloat(s_b1rm)
-        _1rms[2] = mainActivity.loadFloat(s_d1rm)
-        viewModel.passesComplete = mainActivity.loadIntFromPrefs(s_complete, 0)
-        viewModel.sessions_generated = mainActivity.loadIntFromPrefs(s_sgenerated, 0)
-        _weeks = mainActivity.loadIntFromPrefs(s_week, 0)
-        mainActivity.loadIntFromPrefs(s_day, 0)
-    }
 
 private fun updateRecyclerView() {
     lifecycleScope.launch(Dispatchers.IO) {
@@ -235,7 +225,20 @@ private fun updateRecyclerView() {
         mainActivity.saveFloat(s_b1rm, _1rms[1])
         mainActivity.saveFloat(s_d1rm, _1rms[2])
         mainActivity.saveIntToPrefs(s_sgenerated, viewModel.sessions_generated)
+        mainActivity.saveFloat(s_fbo, feedback_offset)
         reloadFragment()
+    }
+
+    fun loadFromMain(){
+        val mainActivity = requireActivity() as MainActivity
+        _1rms[0] = mainActivity.loadFloat(s_s1rm)
+        _1rms[1] = mainActivity.loadFloat(s_b1rm)
+        _1rms[2] = mainActivity.loadFloat(s_d1rm)
+        feedback_offset = mainActivity.loadFloat(s_fbo)
+        viewModel.passesComplete = mainActivity.loadIntFromPrefs(s_complete, 0)
+        viewModel.sessions_generated = mainActivity.loadIntFromPrefs(s_sgenerated, 0)
+        _weeks = mainActivity.loadIntFromPrefs(s_week, 0)
+        mainActivity.loadIntFromPrefs(s_day, 0)
     }
 
     fun countTrueElements(array: ArrayList<Boolean>): Int {
