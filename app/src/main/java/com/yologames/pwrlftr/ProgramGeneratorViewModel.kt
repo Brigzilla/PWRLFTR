@@ -1,5 +1,6 @@
 package com.yologames.pwrlftr
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.yologames.pwrlftr.room.Session
 import kotlinx.coroutines.GlobalScope.coroutineContext
@@ -160,13 +161,21 @@ class ProgramGeneratorViewModel : ViewModel() {
     {
 
         val bd = f * multiplier
-        return BigDecimal(bd)
+        Log.d("QM", "bd = $bd, Squat offset = $feedback_offset_squat, Combined = ${bd * feedback_offset_squat} ")
+        return BigDecimal(bd + ((10-feedback_offset_squat)))
     }
 
     fun applyIncrement(bd: BigDecimal) : BigDecimal
     {
+        Log.d("FATAL", "Squat val $feedback_offset_squat")
+//        feedback_offset_squat = 0.1f
+//        feedback_offset_bench = 0.1f
+//        feedback_offset_deadl = 0.1f
+        Log.d("FATAL", "Squat val $feedback_offset_squat")
+
+
 //        return applyMultiplier(bd + BigDecimal(increment * passesComplete))
-        return bd + applyMultiplier(increment * passesComplete)
+        return bd + applyMultiplier(increment  * passesComplete)
     }
 
 }

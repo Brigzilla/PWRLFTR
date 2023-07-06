@@ -3,10 +3,7 @@ package com.yologames.pwrlftr.recyclerview
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.yologames.pwrlftr.MainActivity
-import com.yologames.pwrlftr.R
-import com.yologames.pwrlftr._session_feedback_left
-import com.yologames.pwrlftr._sessions_reviewed
+import com.yologames.pwrlftr.*
 import com.yologames.pwrlftr.databinding.ProgramCardBinding
 
 
@@ -195,6 +192,7 @@ class PCardViewHolder(
 
                 }
             } else {
+                modifyOffset(pCard.exercise)
                 compressAll()
             }
 
@@ -204,6 +202,7 @@ class PCardViewHolder(
 
     private fun compressAll()
     {
+
         listener?.onItemClicked()
         cardCellBinding.aspect0.visibility = View.GONE
         cardCellBinding.aspect0Seekbar.visibility = View.GONE
@@ -237,6 +236,60 @@ class PCardViewHolder(
 //       mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
 //        cardCellBinding.commitReview.text = "Feedback Complete"
 
+
+    }
+
+    private fun modifyOffset(exercise : String){
+//        feedback_offset = 100.0f
+        var f = 0.0f
+        var feedbackTotal = 0
+        if (cardCellBinding.aspect0Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect0Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect1Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect1Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect2Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect2Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect3Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect3Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect4Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect4Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect5Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect5Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect6Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect6Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect7Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect7Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect8Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect8Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+        if (cardCellBinding.aspect9Seekbar.visibility == View.VISIBLE) {
+            f += cardCellBinding.aspect9Seekbar.progress.toFloat()
+            feedbackTotal += 1
+        }
+
+// range is 0-10, default position is 5
+        //10 should add double
+        if (exercise == "Squat") feedback_offset_squat = ((f/feedbackTotal) ) //feedback_offset_squat = 10-((f-5)/2)
+        if (exercise == "Bench") feedback_offset_bench = ((f/feedbackTotal))  //feedback_offset_bench = 10-((f-5)/2)
+        if (exercise == "Deadlift") feedback_offset_deadl = ((f/feedbackTotal))  //feedback_offset_deadl = 10-((f-5)/2)
+        Log.d("FATAL", "Squat offset $feedback_offset_squat, Bench offset $feedback_offset_bench, Deadlift offset $feedback_offset_deadl")
 
     }
 
