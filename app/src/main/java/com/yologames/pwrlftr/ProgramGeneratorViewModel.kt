@@ -159,9 +159,9 @@ class ProgramGeneratorViewModel : ViewModel() {
     {
 
         val bd = f * multiplier
-        if (exercise == "Squat"&& feedback_offset_squat != Float.NaN) return BigDecimal(bd + ((10-feedback_offset_squat)))
-        if (exercise == "Bench"&& feedback_offset_bench != Float.NaN)return BigDecimal(bd + ((10-feedback_offset_bench)))
-        if (exercise == "Deadlift" && feedback_offset_deadl != Float.NaN)return BigDecimal(bd + ((10-feedback_offset_deadl)))
+        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + ((10-feedback_offset_squat)))
+        if (exercise == "Bench"&& !feedback_offset_bench.isNaN())return BigDecimal(bd + ((10-feedback_offset_bench)))
+        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN())return BigDecimal(bd + ((10-feedback_offset_deadl)))
         else return BigDecimal(bd)
 
     }
