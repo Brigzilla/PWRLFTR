@@ -40,6 +40,7 @@ class ProgramGenerator : Fragment() {
         BuildDatabase()
 
         super.onCreate(savedInstanceState)
+
     }
 
 
@@ -322,7 +323,9 @@ private fun updateRecyclerView() {
     private fun refreshRecyclerView() {
         binding.recyclerView.adapter?.apply {
             notifyDataSetChanged()
+
         }
+
     }
 
 
