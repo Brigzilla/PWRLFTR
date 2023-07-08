@@ -62,6 +62,7 @@ class PCardViewHolder(
                     _session_feedback_left[adapterPosition] = true
                     cardCellBinding.finishedMarker.visibility = View.VISIBLE
                     pCard.reviewingSession = false
+                    callback.onItemClicked()
                     bindCards(pCard)
                 }
 
@@ -208,7 +209,7 @@ class PCardViewHolder(
 
     private fun compressAll()
     {
-        callback.onItemClicked()
+
         cardCellBinding.aspect0.visibility = View.GONE
         cardCellBinding.aspect0Seekbar.visibility = View.GONE
         cardCellBinding.aspect1.visibility = View.GONE

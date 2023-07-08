@@ -135,6 +135,10 @@ private fun updateRecyclerView() {
         override fun onItemClicked() {
             // Handle item click event
             Log.d("FATAL", "Item clicked")
+//            val trueCount = countTrueElements(_session_feedback_left)
+//            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
+                generateNextWeek()
+//            }
         }
     }
 
@@ -158,9 +162,10 @@ private fun updateRecyclerView() {
          binding.recyclerView.apply {
              layoutManager = LinearLayoutManager(context)
              adapter = PCardAdapter(PCardList, listener)
-         val index = _session_feedback_left.lastIndexOf(false) //change to true for actual build
+//         val index = _session_feedback_left.lastIndexOf(true)+1 //change to true for actual build
+             val index = _session_feedback_left.lastIndexOf(true)
          post {
-                layoutManager?.scrollToPosition(index)
+                (layoutManager as LinearLayoutManager)?.scrollToPositionWithOffset(index, 2)
          }
      }
      updateDataset()
@@ -216,6 +221,25 @@ private fun updateRecyclerView() {
 
             }
 
+        }
+    }
+
+    fun generateNextWeek(){
+        val trueCount = countTrueElements(_session_feedback_left)
+            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
+// Swap above with below to test the ordering. Removes the requirement to leave feedback before generating the next week
+       // if (sessionDao.getAllSessions().isNotEmpty()) {
+            _passesAllowable = 1
+            _sessions_reviewed = countTrueElements(_session_feedback_left)
+            viewModel.passesComplete = _weeks
+            val temp = viewModel.createNextWeek()
+
+            lifecycleScope.launch{
+                withContext(Dispatchers.IO) {
+                    addArrayToDatabase(temp)
+                }
+                saveThroughMain()
+            }
         }
     }
 
