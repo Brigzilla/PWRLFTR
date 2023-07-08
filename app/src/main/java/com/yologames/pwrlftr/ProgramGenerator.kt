@@ -135,7 +135,8 @@ private fun updateRecyclerView() {
     private val listener = object : PCardAdapter.MyCallback {
         override fun onItemClicked() {
             // Handle item click event
-            Log.d("FATAL", "Item clicked")
+//            Log.d("FATAL", "Item clicked")
+            saveThroughMain()
 //            val trueCount = countTrueElements(_session_feedback_left)
 //            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
                 generateNextWeek()
@@ -161,6 +162,7 @@ private fun updateRecyclerView() {
 
     fun InitRecycler() {
          binding.recyclerView.apply {
+
              layoutManager = LinearLayoutManager(context)
              adapter = PCardAdapter(PCardList, listener)
 //         val index = _session_feedback_left.lastIndexOf(true)+1 //change to true for actual build
@@ -240,6 +242,9 @@ private fun updateRecyclerView() {
                     addArrayToDatabase(temp)
                 }
                 saveThroughMain()
+                reloadFragment()
+//                updateDataset()
+//                updateRecyclerView()
             }
         }
     }
@@ -262,7 +267,7 @@ private fun updateRecyclerView() {
         mainActivity.saveFloat(s_fbo_s, feedback_offset_squat)
         mainActivity.saveFloat(s_fbo_b, feedback_offset_bench)
         mainActivity.saveFloat(s_fbo_d, feedback_offset_deadl)
-        reloadFragment()
+//        reloadFragment()
     }
 
     fun loadFromMain(){
