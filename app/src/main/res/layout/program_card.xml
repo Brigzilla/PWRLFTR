@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="8dp"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,13 +35,12 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:fontFamily="@font/roboto"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/finished_marker"
+                    app:layout_constraintBottom_toBottomOf="@id/finished_marker"/>
 
                 <TextView
                     android:id="@+id/exercise"
@@ -286,6 +285,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:fontFamily="@font/roboto"
@@ -301,6 +301,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -317,6 +318,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -333,6 +335,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -349,6 +352,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -365,6 +369,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -381,6 +386,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -397,6 +403,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -413,6 +420,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -429,6 +437,7 @@
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
                     android:gravity="center_vertical"
                     android:text=""
                     android:visibility="gone"
@@ -448,6 +457,8 @@
                     app:layout_constraintStart_toEndOf="@id/aspect_9"
                     app:icon="@drawable/ic_baseline_rate_review_24"
                     app:iconSize="48dp"
+                    app:cornerRadius="-1dp"
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/roboto" />
 
 
@@ -466,6 +477,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintStart_toEndOf="@id/aspect_9"
                     app:icon="@drawable/ic_baseline_check_24"
+                    app:cornerRadius="-1dp"
+
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/roboto"
                     >
                 </com.google.android.material.button.MaterialButton>
@@ -491,11 +505,10 @@
 
                     android:paddingTop="8dp"
                     android:id="@+id/finished_marker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/ic_baseline_check_24"
                     android:fontFamily="@font/roboto"
                     android:textSize="18dp"

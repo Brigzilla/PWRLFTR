@@ -235,8 +235,8 @@ class PCardViewHolder(
         cardCellBinding.headerSets.visibility = View.GONE
 //        cardCellBinding.difficulty.visibility = View.GONE
 
-        cardCellBinding.commitReview.visibility = View.INVISIBLE
-        cardCellBinding.reviewButton.visibility = View.INVISIBLE
+        cardCellBinding.commitReview.visibility = View.GONE
+        cardCellBinding.reviewButton.visibility = View.GONE
 
         cardCellBinding.finishedMarker.visibility = View.VISIBLE
 //       mainActivity.saveBooleanListToPrefs("session_feedback_list", _session_feedback_left)
