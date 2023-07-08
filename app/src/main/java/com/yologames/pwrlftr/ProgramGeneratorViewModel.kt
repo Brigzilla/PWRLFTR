@@ -163,9 +163,12 @@ class ProgramGeneratorViewModel : ViewModel() {
 //        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + ((10-feedback_offset_squat)))
 //        if (exercise == "Bench"&& !feedback_offset_bench.isNaN())return BigDecimal(bd + ((10-feedback_offset_bench)))
 //        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN())return BigDecimal(bd + ((10-feedback_offset_deadl)))
-        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + +(5-(10-feedback_offset_squat))/2)
-        if (exercise == "Bench"&& !feedback_offset_bench.isNaN()) return BigDecimal(bd + +(5-(10-feedback_offset_bench))/2)
-        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN()) return BigDecimal(bd + +(5-(10-feedback_offset_deadl))/2)
+//        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal(bd + +(5-(feedback_offset_squat))/2)
+//        if (exercise == "Bench"&& !feedback_offset_bench.isNaN()) return BigDecimal(bd + +(5-(feedback_offset_bench))/2)
+//        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN()) return BigDecimal(bd + +(5-(feedback_offset_deadl))/2)
+        if (exercise == "Squat"&& !feedback_offset_squat.isNaN()) return BigDecimal((bd +(5-(feedback_offset_squat))/1.5))
+        if (exercise == "Bench"&& !feedback_offset_bench.isNaN()) return BigDecimal((bd +(5-(feedback_offset_bench))/1.5))
+        if (exercise == "Deadlift" && !feedback_offset_deadl.isNaN()) return BigDecimal((bd +(5-(feedback_offset_deadl))/1.5))
 
         else return BigDecimal(bd)
 

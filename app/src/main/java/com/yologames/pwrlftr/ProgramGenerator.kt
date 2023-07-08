@@ -316,7 +316,7 @@ private fun updateRecyclerView() {
         binding.textDead.visibility = View.GONE
         binding.removeTestButton.visibility = View.VISIBLE
         //binding.removeTestButton.visibility  =View.GONE
-
+        binding.addTestButton.visibility = View.GONE
         //maybe remove bottom two from here for own function
         binding.scrollView.visibility = View.VISIBLE
         binding.recyclerView.visibility = View.VISIBLE
