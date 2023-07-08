@@ -42,13 +42,6 @@ class ProgramGenerator : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    class YourFragment : Fragment(), PCardAdapter.ButtonClickListener {
-        // Fragment code...
-
-        override fun onButtonClicked() {
-            // Handle button click event here
-        }
-    }
 
 
     fun BuildDatabase(){
@@ -138,13 +131,13 @@ private fun updateRecyclerView() {
 
     }
 
-    val listener = object : PCardAdapter.ButtonClickListener {
-        override fun onButtonClicked() {
-            // Handle button click event
-            // This code will be executed when the button is clicked in the adapter
-            Log.d("FATAL", "TEST")
+    private val listener = object : PCardAdapter.MyCallback {
+        override fun onItemClicked() {
+            // Handle item click event
+            Log.d("FATAL", "Item clicked")
         }
     }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

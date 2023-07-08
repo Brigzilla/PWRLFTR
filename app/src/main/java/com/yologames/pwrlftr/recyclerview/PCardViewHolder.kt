@@ -1,6 +1,5 @@
 package com.yologames.pwrlftr.recyclerview
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.yologames.pwrlftr.*
@@ -9,7 +8,7 @@ import com.yologames.pwrlftr.databinding.ProgramCardBinding
 
 class PCardViewHolder(
     private val cardCellBinding: ProgramCardBinding,
-    private val listener: PCardViewHolderListener?
+    private val callback: PCardAdapter.MyCallback
 ):RecyclerView.ViewHolder(cardCellBinding.root) {
 
     interface PCardViewHolderListener {
@@ -200,10 +199,16 @@ class PCardViewHolder(
 
     }
 
+    init {
+        cardCellBinding.commitReview.setOnClickListener {
+            callback?.onItemClicked()
+        }
+    }
+
+
     private fun compressAll()
     {
-
-        listener?.onItemClicked()
+        callback.onItemClicked()
         cardCellBinding.aspect0.visibility = View.GONE
         cardCellBinding.aspect0Seekbar.visibility = View.GONE
         cardCellBinding.aspect1.visibility = View.GONE
