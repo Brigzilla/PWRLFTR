@@ -276,6 +276,16 @@
                     android:progressDrawable="@drawable/seekbar_progress"
 
                     android:thumb="@drawable/seekbar_thumb" />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@id/aspect_0"
+                    app:layout_constraintBottom_toBottomOf="@id/aspect_9"
+                    android:background="?attr/colorOnPrimary"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </View>
+
                 <TextView
                     android:id="@+id/aspect_0"
                     android:layout_width="wrap_content"
