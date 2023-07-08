@@ -11,11 +11,18 @@ import com.yologames.pwrlftr.recyclerview.PCardViewHolder
 private var listener: PCardAdapter.MyCallback? = null
 
 
-class PCardAdapter(private val PCards: List<PCard>): RecyclerView.Adapter<PCardViewHolder>() {
+class PCardAdapter(
+    private val PCards: List<PCard>, listener: ButtonClickListener,
+): RecyclerView.Adapter<PCardViewHolder>() {
 
     interface MyCallback {
         fun onItemClicked()
     }
+
+    interface ButtonClickListener {
+        fun onButtonClicked()
+    }
+
 
     @SuppressLint("ResourceType")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PCardViewHolder {
@@ -31,6 +38,8 @@ class PCardAdapter(private val PCards: List<PCard>): RecyclerView.Adapter<PCardV
         }
         return viewHolder ?: throw IllegalStateException("MainActivity not found in the context")
     }
+
+
 
 
     override fun onBindViewHolder(holder: PCardViewHolder, position: Int) {

@@ -3,6 +3,7 @@ package com.yologames.pwrlftr
 import PCardAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,15 @@ class ProgramGenerator : Fragment() {
 
         super.onCreate(savedInstanceState)
     }
+
+    class YourFragment : Fragment(), PCardAdapter.ButtonClickListener {
+        // Fragment code...
+
+        override fun onButtonClicked() {
+            // Handle button click event here
+        }
+    }
+
 
     fun BuildDatabase(){
         val database = Room.databaseBuilder(
@@ -128,6 +138,14 @@ private fun updateRecyclerView() {
 
     }
 
+    val listener = object : PCardAdapter.ButtonClickListener {
+        override fun onButtonClicked() {
+            // Handle button click event
+            // This code will be executed when the button is clicked in the adapter
+            Log.d("FATAL", "TEST")
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -146,7 +164,7 @@ private fun updateRecyclerView() {
     fun InitRecycler() {
          binding.recyclerView.apply {
              layoutManager = LinearLayoutManager(context)
-             adapter = PCardAdapter(PCardList)
+             adapter = PCardAdapter(PCardList, listener)
          val index = _session_feedback_left.lastIndexOf(false) //change to true for actual build
          post {
                 layoutManager?.scrollToPosition(index)
