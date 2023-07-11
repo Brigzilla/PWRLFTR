@@ -54,6 +54,8 @@ class ProgramGenerator : Fragment() {
         queryDatabaseSize()
         loadFromMain()
         can_init = true
+        generateNextWeek()
+        hideInitialElements()
     }
 
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/

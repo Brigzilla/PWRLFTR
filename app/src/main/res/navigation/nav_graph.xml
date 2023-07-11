@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/programGenerator">
+    app:startDestination="@id/starterPage">
 
     <fragment
         android:id="@+id/one_rm_calc"
@@ -40,5 +40,14 @@
             android:id="@+id/action_programGenerator_self"
             app:destination="@id/programGenerator"
             app:launchSingleTop="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/starterPage"
+        android:name="com.yologames.pwrlftr.StarterPage"
+        android:label="fragment_starter_page"
+        tools:layout="@layout/fragment_starter_page" >
+        <action
+            android:id="@+id/action_starterPage_to_programGenerator"
+            app:destination="@id/programGenerator" />
     </fragment>
 </navigation>
