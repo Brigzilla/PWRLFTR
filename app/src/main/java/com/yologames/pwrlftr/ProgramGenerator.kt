@@ -210,6 +210,7 @@ private fun updateRecyclerView() {
                              saveThroughMain()
                 }
             }
+            reloadFragment()
 
         }
 
