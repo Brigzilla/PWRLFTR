@@ -6,4 +6,6 @@
         <item name="cornerSize">8dp</item>
     </style>
 
+    <style name="AlertDialogStyle"></style>
+
 </resources>

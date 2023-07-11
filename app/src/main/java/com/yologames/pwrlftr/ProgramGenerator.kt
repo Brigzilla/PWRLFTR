@@ -2,12 +2,17 @@ package com.yologames.pwrlftr
 
 import PCardAdapter
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -54,8 +59,7 @@ class ProgramGenerator : Fragment() {
         queryDatabaseSize()
         loadFromMain()
         can_init = true
-        generateNextWeek()
-        hideInitialElements()
+
     }
 
     //for reference check https://appdevnotes.com/android-room-db-tutorial-for-beginners-in-kotlin/
@@ -157,6 +161,15 @@ private fun updateRecyclerView() {
 
                 updateRecyclerView() // Update the RecyclerView here
             }
+        if (sessionDao.getAllSessions().isEmpty()) {
+//Do all tutorial stuff from here
+            while (tutorial_Progesssion < tutorial_String.size)
+            {
+                showPopup(requireContext(), tutorial_String[tutorial_Progesssion])
+                tutorial_Progesssion++
+            }
+        }
+
         setOnClickListeners()
     }
 
@@ -387,8 +400,24 @@ private fun updateRecyclerView() {
             reloadFragment()
         }
 
+    }
 
+    fun showPopup(context: Context, message: String) {
+        val builder = AlertDialog.Builder(context)
+        val textView = TextView(context).apply {
+            text = message
+            gravity= Gravity.CENTER
 
+            setTextColor(ContextCompat.getColor(context, android.R.color.black))
+
+        }
+        builder.setView(textView)
+            .setPositiveButton("NEXT") { dialog, _ ->
+
+                dialog.dismiss()
+            }
+        val dialog = builder.create()
+        dialog.show()
     }
 
 
