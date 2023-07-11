@@ -9,16 +9,19 @@
     tools:context=".ProgramGenerator">
 
     <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_width="80dp"
+        android:layout_height="@dimen/button_height"
         style="@style/RoundedButton"
         android:id="@+id/add_test_button"
+        app:iconSize="48dp"
         app:iconGravity="textEnd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/roboto"
+        app:cornerRadius="-1dp"
+        android:background="@android:color/transparent"
         app:icon="@drawable/ic_baseline_create_24">
 
     </com.google.android.material.button.MaterialButton>
