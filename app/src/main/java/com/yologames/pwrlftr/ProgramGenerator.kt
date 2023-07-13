@@ -117,6 +117,7 @@ private fun updateRecyclerView() {
             }
 
             binding.recyclerView.adapter?.notifyDataSetChanged()
+
         }
     }
 }
@@ -139,14 +140,11 @@ private fun updateRecyclerView() {
     }
 
     private val listener = object : PCardAdapter.MyCallback {
-        override fun onItemClicked() {
-            // Handle item click event
-//            Log.d("FATAL", "Item clicked")
+        override fun onItemClicked(boolean: Boolean) {
+
+            if (boolean) showPopup(requireContext(), tutorial_String[2])
             saveThroughMain()
-//            val trueCount = countTrueElements(_session_feedback_left)
-//            if (trueCount >= _session_feedback_left.size && sessionDao.getAllSessions().isNotEmpty()) {
                 generateNextWeek()
-//            }
         }
     }
 
@@ -162,12 +160,7 @@ private fun updateRecyclerView() {
                 updateRecyclerView() // Update the RecyclerView here
             }
         if (sessionDao.getAllSessions().isEmpty()) {
-//Do all tutorial stuff from here
-            while (tutorial_Progesssion < tutorial_String.size)
-            {
-                showPopup(requireContext(), tutorial_String[tutorial_Progesssion])
-                tutorial_Progesssion++
-            }
+                showPopup(requireContext(), tutorial_String[0])
         }
 
         setOnClickListeners()
@@ -190,7 +183,10 @@ private fun updateRecyclerView() {
     }
     @SuppressLint("SuspiciousIndentation")
     fun setOnClickListeners(){
+
         binding.addTestButton.setOnClickListener {
+            showPopup(requireContext(), tutorial_String[1])
+            tutorial_Progesssion ++
             if (sessionDao.getAllSessions().isEmpty()) {
                 _1rms[0] = binding.enter1rmSquat.text.toString().toFloat()
                 _1rms[1] = binding.enter1rmBench.text.toString().toFloat()

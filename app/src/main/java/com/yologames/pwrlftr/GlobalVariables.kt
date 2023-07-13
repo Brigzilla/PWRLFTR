@@ -30,8 +30,7 @@ val s_fbo_d = "feedbackoffset_d"
 
 var tutorial_Progesssion = 0
 val tutorial_String = listOf(
-
-    "Once you've reviewed the whole session, click the tick button\nNote, your response can't be edited once you've submitted it\nWhen you've finished giving feedback for the week, the next week will be generated",
-    "Once you've finished a session, click the feedback button\nLeft is easy, Right is hard, but try not to use extremes\nMove the slider to adjust how difficult you found the set\nEach set has a slider which lets you rate the set out of 10",
-    "Hello, and welcome to PWRLFTR\nEnter your current one rep maxes above\nIf in doubt, undershoot slightly\nOnce you're happy, click the pen below\nNext time you open the app, you'll go straight to your program"
+    "Welcome to PWRLFTR.\nEnter your current one rep maxes above.\nIf in doubt, undershoot slightly.\nOnce you're happy, click the pen below.\nNext time you open the app, you'll go straight to your program",
+    "When you've finished a session, click the feedback button.\nMove the slider to adjust how difficult you found the set.\nLeft is easy, Right is hard, but try not to use extremes.\nEach slider lets you rate the set out of 10.\nAfter everything for that week is reviewed, next week's program will be generated",
+    "Once you've reviewed the whole session, click the tick button.\nNote, your response can't be edited once you've submitted it.\nWhen you've finished giving feedback for the week, the next week will be generated",
     )

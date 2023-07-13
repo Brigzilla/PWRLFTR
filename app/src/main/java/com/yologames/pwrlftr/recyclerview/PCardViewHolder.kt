@@ -43,6 +43,7 @@ class PCardViewHolder(
                 cardCellBinding.reviewButton.visibility = View.VISIBLE
                 cardCellBinding.reviewButton.setOnClickListener {
                     if (pCard.canReview) {
+
                         pCard.reviewingSession = true
                     }
                     if (!pCard.canReview){
@@ -62,7 +63,7 @@ class PCardViewHolder(
                     _session_feedback_left[adapterPosition] = true
                     cardCellBinding.finishedMarker.visibility = View.VISIBLE
                     pCard.reviewingSession = false
-                    callback.onItemClicked()
+                    callback.onItemClicked(false)
                     bindCards(pCard)
                 }
 
@@ -202,8 +203,9 @@ class PCardViewHolder(
 
     init {
         cardCellBinding.commitReview.setOnClickListener {
-            callback?.onItemClicked()
+            callback?.onItemClicked(false)
         }
+
     }
 
 

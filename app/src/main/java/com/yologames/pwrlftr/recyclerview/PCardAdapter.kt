@@ -17,7 +17,7 @@ class PCardAdapter(
 
 
     interface MyCallback {
-        fun onItemClicked()
+        fun onItemClicked(b: Boolean)
     }
 
     interface ButtonClickListener {
